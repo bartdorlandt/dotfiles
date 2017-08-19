@@ -1,0 +1,11 @@
+aptitude "";
+aptitude::Keep-Unused-Pattern "";
+aptitude::Delete-Unused-Pattern "";
+aptitude::UI "";
+aptitude::UI::Prompt-On-Exit "false";
+aptitude::UI::Minibuf-Download-Bar "true";
+aptitude::UI::Advance-On-Action "true";
+aptitude::AutoClean-After-Update "true";
+aptitude::Forget-New-On-Update "false";
+aptitude::Forget-New-On-Install "false";
+

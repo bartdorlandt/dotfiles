@@ -1,0 +1,51 @@
+shell -$SHELL
+defscrollback 1024
+startup_message off
+hardstatus on
+hardstatus alwayslastline
+caption always "%{= kc}%H (system load: %l) %{= kw}%?%-Lw%?%{B}(%{W}%n*%f %t%?(%u)%?%{B})%{w}%?%+Lw%?%?%= %{= .m} %0c"
+#caption always "%{= kc}%H (system load: %l) %{= kw}%?%-Lw%?%{B}(%{W}%n*%f %t%?(%u)%?%{B})%{w}%?%+Lw%?%?%=    %-21=%{= .m}%D %d.%m.%Y %0c"
+# Don't block command output if the terminal stops responding
+# (like if the ssh connection times out for example).
+nonblock on
+
+# Allow editors etc. to restore display on exit
+# rather than leaving existing text in place
+altscreen on
+
+# terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+attrcolor b ".I"
+
+#http://www.chiark.greenend.org.uk/~sgtatham/putty/faq.html#faq-screen
+termcapinfo xterm ti@:te@
+term xterm
+
+################
+#
+# keybindings
+#
+# Bind F11 and F12 (NOT F1 and F2) to previous and next screen window
+bindkey -k F1 prev
+bindkey -k F2 next
+
+#remove some stupid / dangerous key bindings
+bind k
+bind ^k
+bind .
+bind ^\
+bind \\
+bind ^h
+bind h
+
+#make them better
+#bind 'K' kill
+#bind 'I' login on
+#bind 'O' login off
+#bind '}' history
+
+bind s split
+bind x remove
+
+#### SSH agent within screen
+setenv SSH_AUTH_SOCK "$SSH_AUTH_SOCK_LINK"

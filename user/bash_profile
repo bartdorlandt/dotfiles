@@ -1,0 +1,15 @@
+# .bash_profile is used for login shells (login, username/password)
+# include .bashrc if it exists
+if [ -f $HOME/.bashrc ]; then
+    . $HOME/.bashrc
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d $HOME/bin ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+# set PATH so it includes user's private scripts if it exists
+if [ -d $HOME/scripts ] ; then
+    PATH="$HOME/scripts:$PATH"
+fi
+

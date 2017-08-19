@@ -1,0 +1,67 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+export HISTCONTROL=ignoredups
+shopt -s histappend
+shopt -s checkwinsize
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# Alias definitions.
+if [ -f $HOME/.shell_aliases ]; then
+    . $HOME/.shell_aliases
+fi
+# ENV definitions.
+if [ -f $HOME/.bash_env ]; then
+    . $HOME/.bash_env
+fi
+# work alias definitions.
+if [ -f $HOME/.work_aliases ]; then
+    . $HOME/.work_aliases
+fi
+
+# enable color support of ls and also add handy aliases
+if [ "$TERM" != "dumb" ]; then
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto'
+fi
+
+PS1="\\[\\e[1;32m\\]\\u\\[\\e[1;37m\\]@\\[\\e[1;36m\\]\\h:\\[\\e[1;33m\\] \\w\\[\\e[1;36m\\] \\$\\[\\e[0m\\] "
+
+
+#if [ ! -f $HOME/.gpg-agent-info ] && [ -x /usr/bin/gpg-agent ]; then
+##if [ -x /usr/bin/gpg-agent ]; then
+#  while [ ! "`ps x | grep gpg-agent | grep ssh`" == "" ] ; do 
+#  #while [[ ! $(ps x | grep gpg-agent | grep ssh | grep -v grep) ]] && [[ $(ps x | grep gpg-agent | grep -v grep) ]]; do 
+#    echo "trying to kill the agent"
+#    killall gpg-agent > /dev/null 2>&1 
+#  done
+#  eval $(gpg-agent --daemon --enable-ssh-support > $HOME/.gpg-agent-info);
+#fi
+
+# Yubikey , GPG, SSH
+if [ -x /usr/bin/gpg-agent ]; then
+  echo "gpg-agent exists"
+  if [[ ! $(ps x | grep gpg-agent | grep ssh | grep -v grep) ]]; then
+    echo "no gpg-agent exists"
+    while [[ $(ps x | grep gpg-agent | grep -v grep) ]]; do
+      echo "trying to kill the agent"
+      killall gpg-agent > /dev/null 2>&1
+    done
+    #if [ ! -f $HOME/.gpg-agent-info ]; then
+    #  echo "filling .gpg-agent-info"
+      eval $(gpg-agent --daemon --enable-ssh-support > $HOME/.gpg-agent-info);
+    #fi
+  fi
+  # execute its contents, including the export
+  test -f $HOME/.gpg-agent-info && source $HOME/.gpg-agent-info
+fi
+
+# End yubikey settings

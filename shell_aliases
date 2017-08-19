@@ -1,0 +1,48 @@
+export PAGER="less"
+export EDITOR="vim"
+
+############### Local aliases & commands ################
+alias aptcache='aptitude search'
+alias bak='~/scripts/bak.sh'
+alias ll='ls -lhF'
+alias llt='ls -latrF'
+alias lr='ls -latrF'
+alias la='ls -ahF'
+alias lla='ls -lahF'
+alias l='ls -CF'
+alias p='ping'
+alias pst='ps axjf'
+alias psc='ps xawf -eo pid,user,cgroup,args'
+alias screen='screen -U'
+alias screen-r='screen -r'
+alias sudr='sudo -i'
+alias sud='sudo su'
+alias t='telnet'
+alias n='nslookup'
+alias dus='du -ks * | sort -n'
+alias o='less'
+if [ -x /usr/bin/vim ]; then
+  alias vi='vim'
+fi
+alias curlo='curl -# -C - -O -J -L'
+#alias curl='curl -O'
+alias CON='screen /dev/ttyUSB0 9600'
+alias gpg='gpg2'
+alias STACK='cd /mnt/home/bart/stack/'
+alias sshlog='$HOME/scripts/ssh-logging.sh'
+alias sno='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias alg='alias | grep'
+
+############### Docker ###############
+# Docker
+alias DOCKER='cd /var/lib/docker'
+alias Dps='docker ps'
+alias Dpsa='docker ps -a'
+alias Dpsl='docker ps -l'
+alias Dins='docker inspect'
+alias Drm='docker rm -v'
+alias Drma='docker rm -v $(docker ps -a -q)'
+alias Drml='docker rm -v $(docker ps -l -q)'
+alias Drmi='docker rmi'
+alias Dimg='docker images'
+alias Dimga='docker images -a'
