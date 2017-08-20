@@ -16,7 +16,7 @@ if [[ $(id -u) == 0 ]]; then
 	SUB=root
 fi
 
-#### Bash environment ####
+### Bash environment ###
 echo "Creating symlinks for BASH (alias, profile, bashrc)"
 if [[ -e $HOME/.shell_aliases ]]; then
 	rm $HOME/.shell_aliases
@@ -31,7 +31,7 @@ if [[ -e $HOME/.bashrc ]]; then
 fi
 ln -sf $PROFILEDIR/$SUB/bashrc $HOME/.bashrc 
 
-#### VIM environment ####
+### VIM environment ###
 echo "Creating the VIM environment"
 test -L $HOME/.vim && rm $HOME/.vim
 test -d $HOME/.vim || mkdir $HOME/.vim
@@ -43,7 +43,7 @@ if [[ ! -d $HOME/.vim/bundle ]] ; then
 	git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 fi
 
-#### Other environment ####
+### Other environment ###
 echo "Creating symlinks for screenrc, email forward"
 ln -sf $PROFILEDIR/screenrc $HOME/.screenrc
 
@@ -85,7 +85,9 @@ git config --global core.whitespace warn
 git config --global core.autocrlf input
 git config --global core.filemode true
 
+############################################################################
 ### User specific
+############################################################################
 if [[ ! $(id -u) == 0 ]]; then
 	echo "User specifics"
 	if [[ -e $HOME/.root_aliases ]]; then
@@ -135,7 +137,9 @@ EOF
 	fi
 fi
 
+############################################################################
 ### root specific
+############################################################################
 if [[ $(id -u) == 0 ]]; then
 	echo "Root specifics"
 	if [[ -e $HOME/.root_aliases ]]; then

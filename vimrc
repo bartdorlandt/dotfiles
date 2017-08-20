@@ -228,6 +228,7 @@ set smarttab
 " Shell - bash
 au         BufNewFile *.sh set fileformat=unix
 au BufRead,BufNewFile *.sh let b:comment_leader = '#'
+au BufRead,BufNewFile *.sh let b:comment_tail = ''
 
 " Perl
 au BufRead,BufNewFile *.pl set tabstop=2
@@ -241,6 +242,7 @@ au BufRead,BufNewFile *.pl set showmatch
 "au BufRead,BufNewFile *.pl match BadWhitespace /\s\+$/
 au         BufNewFile *.pl set fileformat=unix
 au BufRead,BufNewFile *.pl let b:comment_leader = '#'
+au BufRead,BufNewFile *.pl let b:comment_tail = ''
 
 " Python, PEP-008
 au BufRead,BufNewFile *.py,*.pyw set textwidth=79
@@ -256,6 +258,7 @@ au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
 au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
 au         BufNewFile *.py,*.pyw set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw let b:comment_leader = '#'
+au BufRead,BufNewFile *.py,*.pyw let b:comment_tail = ''
 
 " done by python-mode
 "autocmd BufWrite *.py :call DeleteTrailingWS()
@@ -442,12 +445,9 @@ map <leader>q :e ~/buffer<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
-noremap ,cc :sil s/^/=escape(b:comment_leader,'\/')
-\/:noh:sil s/$/=escape(b:comment_tail,'\/')/
-\:noh
-noremap ,cu :sil s/^\V=escape(b:comment_leader,'\/')
-\//e:noh:sil s/=escape(b:comment_tail,'\/')
-\$//e:noh
+noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
