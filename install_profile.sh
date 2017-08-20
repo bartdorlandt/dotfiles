@@ -134,6 +134,11 @@ fi
 ### root specific
 if [[ $(id -u) == 0 ]]; then
 	echo "Root specifics"
+	if [[ -e $HOME/.root_aliases ]]; then
+		rm $HOME/.root_aliases
+	fi
+	ln -sf $PROFILEDIR/$SUB/root_aliases $HOME/.root_aliases 
+	#
 	FILE="$PROFILEDIR/etc/udev/rules.d/99-yubikeys.rules"
 	test -f $FILE && ln -sf $FILE /etc/udev/rules.d/99-yubikeys.rules
 	FILE="$PROFILEDIR/etc/udev/rules.d/51-android.rules"
