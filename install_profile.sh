@@ -18,61 +18,62 @@ fi
 
 #### Bash environment ####
 echo "Creating symlinks for BASH (alias, profile, bashrc)"
-if [ ! -L $HOME/.shell_aliases ]; then
+if [[ -e $HOME/.shell_aliases ]]; then
+	rm $HOME/.shell_aliases
 	ln -sf $PROFILEDIR/$SUB/shell_aliases $HOME/.shell_aliases 
 fi
-if [ ! -L $HOME/.bash_profile ]; then
+if [[ -e $HOME/.bash_profile ]]; then
+	rm $HOME/.bash_profile
 	ln -sf $PROFILEDIR/$SUB/bash_profile $HOME/.bash_profile 
 fi
-if [ ! -L $HOME/.bashrc ]; then
+if [[ -e $HOME/.bashrc ]]; then
+	rm $HOME/.bashrc
 	ln -sf $PROFILEDIR/$SUB/bashrc $HOME/.bashrc 
 fi
-# Cleanup old symlink
-#if [ -L $HOME/.bash_aliases ]; then
-#	rm $HOME/.bash_aliases 
-#fi
 
 #### VIM environment ####
 echo "Creating the VIM environment"
 test -L $HOME/.vim && rm $HOME/.vim
 test -d $HOME/.vim || mkdir $HOME/.vim
-if [ ! -d $HOME/.vim/ftdetect ]; then rm $HOME/.vim/ftdetect; mkdir $HOME/.vim/ftdetect; fi
-if [ ! -d $HOME/.vim/syntax ]; then rm $HOME/.vim/syntax; mkdir $HOME/.vim/syntax; fi
+if [[ ! -d $HOME/.vim/ftdetect ]]; then rm $HOME/.vim/ftdetect; mkdir $HOME/.vim/ftdetect; fi
+if [[ ! -d $HOME/.vim/syntax ]]; then rm $HOME/.vim/syntax; mkdir $HOME/.vim/syntax; fi
 ln -sf $PROFILEDIR/vimrc $HOME/.vimrc
 # VIM bundle
-if [ ! -d $HOME/.vim/bundle ] ; then
+if [[ ! -d $HOME/.vim/bundle ]] ; then
 	git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 fi
 
 ### User specific
 if [[ ! $(id -u) == 0 ]]; then
 	### Openhab-vim
-	if [ ! -d $HOME/git/openhab-vim ] ; then
+	if [[ ! -d $HOME/git/openhab-vim ]] ; then
 		git clone git@github.com:bambam82/openhab-vim.git $HOME/git/openhab-vim
 	fi
-	if [ ! -L $HOME/.vim/syntax/openhab.vim ]; then
+	if [[ -e $HOME/.vim/syntax/openhab.vim ]]; then
+		rm $HOME/.vim/syntax/openhab.vim
 		ln -sf $HOME/git/openhab-vim/syntax/openhab.vim $HOME/.vim/syntax/openhab.vim
 	fi
-	if [ ! -L $HOME/.vim/ftdetect/openhab.vim ]; then
+	if [[ -e $HOME/.vim/ftdetect/openhab.vim ]]; then
+		rm $HOME/.vim/ftdetect/openhab.vim
 		ln -sf $HOME/git/openhab-vim/ftdetect/openhab.vim $HOME/.vim/ftdetect/openhab.vim
 	fi
 
 	echo "Downloading other directories"
 	echo "	Network scripts"
-	if [ ! -d $HOME/git/network_scripts ] ; then
+	if [[ ! -d $HOME/git/network_scripts ]] ; then
 		git clone git@github.com:bambam82/network_scripts.git $HOME/git/network_scripts
 	fi
 
 	### Python environment
-	if [ ! -e $HOME/.pypirc ] ; then 
+	if [[ ! -e $HOME/.pypirc ]] ; then 
 		echo -e "\nIn case you wish to create the ~/.pypirc config file for pypi, provide a username and then a password. If the username is empty, nothing is generated."
 		echo "Username:"
 		read USERNAME
-		if [ -n "$USERNAME" ] ; then
+		if [[ -n "$USERNAME" ]] ; then
 			echo "Password:"
 			read -s -r PASSWORD
 		fi
-		if [ -n "$USERNAME" ] && [ -n "$PASSWORD" ] ; then
+		if [[ -n "$USERNAME" ]] && [[ -n "$PASSWORD" ]] ; then
 			cat > $HOME/.pypirc << EOF
 [distutils]
 index-servers=pypi
@@ -95,13 +96,13 @@ if [[ $(id -u) == 0 ]]; then
 	test -f $FILE && ln -sf $FILE /etc/udev/rules.d/51-android.rules
 	#
 	echo "Creating symlink for sudoers"
-	if [ -d /etc/sudoers.d ]; then
+	if [[ -d /etc/sudoers.d ]]; then
 		ln $PROFILEDIR/etc/sudoers.d/global_sudo /etc/sudoers.d/globalsudo
 		chmod 440 /etc/sudoers.d/globalsudo
 	fi
 	#
 	# Aptitude
-	if [ ! -d $HOME/.aptitude ]; then
+	if [[ ! -d $HOME/.aptitude ]]; then
 			mkdir $HOME/.aptitude
 	fi
 	FILE="$PROFILEDIR/$SUB/aptitude-config"
@@ -112,11 +113,11 @@ fi
 echo "Creating symlinks for screenrc, email forward"
 ln -sf $PROFILEDIR/screenrc $HOME/.screenrc
 
-if [ ! -e $HOME/.forward ] ; then 
+if [[ ! -e $HOME/.forward ]] ; then 
 	echo "Do you want to create a .forward file. If so type your email, else enter"
 	read EMAIL
-	if [ -n "$EMAIL" ] ; then 
-		if [ -L $HOME/.forward ]; then 
+	if [[ -n "$EMAIL" ]] ; then 
+		if [[ -L $HOME/.forward ]]; then 
 			rm $HOME/.forward
 		fi
 		echo $EMAIL > $HOME/.forward 
@@ -124,13 +125,13 @@ if [ ! -e $HOME/.forward ] ; then
 fi
 
 echo "Creating zsh environment"
-if [ ! -d $HOME/git/oh-my-zsh-custom ] ; then
+if [[ ! -d $HOME/git/oh-my-zsh-custom ]] ; then
 	git clone git@github.com:bambam82/oh-my-zsh-custom.git $HOME/git/oh-my-zsh-custom
 fi
-if [ ! -L $HOME/.zshrc ]; then
+if [[ ! -L $HOME/.zshrc ]]; then
 	ln -sf $PROFILEDIR/$SUB/zshrc $HOME/.zshrc 
 fi
-if [ -d $HOME/.oh-my-zsh ] && [ ! -L $HOME/.oh-my-zsh/custom ] ; then
+if [[ -d $HOME/.oh-my-zsh ]] && [[ ! -L $HOME/.oh-my-zsh/custom ]] ; then
 	DIR="$HOME/git/oh-my-zsh-custom"
 	for x in $(ls -1 $DIR); do
 		# Variable path due to VM's
@@ -147,7 +148,7 @@ fi
 
 echo "Git settings"
 git config --global user.name "`whoami`@`hostname`"
-test -n $EMAIL && git config --global user.email $EMAIL
+test -n "$EMAIL" && git config --global user.email $EMAIL
 git config --global core.editor vim
 git config --global push.default simple
 git config --global core.excludesfile .gitignore
