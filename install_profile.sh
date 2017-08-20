@@ -20,16 +20,16 @@ fi
 echo "Creating symlinks for BASH (alias, profile, bashrc)"
 if [[ -e $HOME/.shell_aliases ]]; then
 	rm $HOME/.shell_aliases
-	ln -sf $PROFILEDIR/$SUB/shell_aliases $HOME/.shell_aliases 
 fi
+ln -sf $PROFILEDIR/shell_aliases $HOME/.shell_aliases 
 if [[ -e $HOME/.bash_profile ]]; then
 	rm $HOME/.bash_profile
-	ln -sf $PROFILEDIR/$SUB/bash_profile $HOME/.bash_profile 
 fi
+ln -sf $PROFILEDIR/$SUB/bash_profile $HOME/.bash_profile 
 if [[ -e $HOME/.bashrc ]]; then
 	rm $HOME/.bashrc
-	ln -sf $PROFILEDIR/$SUB/bashrc $HOME/.bashrc 
 fi
+ln -sf $PROFILEDIR/$SUB/bashrc $HOME/.bashrc 
 
 #### VIM environment ####
 echo "Creating the VIM environment"
@@ -43,20 +43,63 @@ if [[ ! -d $HOME/.vim/bundle ]] ; then
 	git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 fi
 
+#### Other environment ####
+echo "Creating symlinks for screenrc, email forward"
+ln -sf $PROFILEDIR/screenrc $HOME/.screenrc
+
+if [[ ! -e $HOME/.forward ]] ; then 
+	echo "Do you want to create a .forward file. If so type your email, else enter"
+	read EMAIL
+	if [[ -n "$EMAIL" ]] ; then 
+		if [[ -L $HOME/.forward ]]; then 
+			rm $HOME/.forward
+		fi
+		echo $EMAIL > $HOME/.forward 
+	fi
+fi
+
+echo "Creating zsh environment"
+if [[ ! -d $HOME/git/oh-my-zsh-custom ]] ; then
+	git clone git@github.com:bambam82/oh-my-zsh-custom.git $HOME/git/oh-my-zsh-custom
+fi
+if [[ ! -L $HOME/.zshrc ]]; then
+	ln -sf $PROFILEDIR/$SUB/zshrc $HOME/.zshrc 
+fi
+if [[ -d $HOME/.oh-my-zsh ]] && [[ ! -L $HOME/.oh-my-zsh/custom ]] ; then
+	DIR="$HOME/git/oh-my-zsh-custom"
+	for x in $(ls -1 $DIR); do
+		# Variable path due to VM's
+		#ln -sf ../../git/oh-my-zsh-custom/$x $HOME/.oh-my-zsh/custom/
+		ln -sf $DIR/$x $HOME/.oh-my-zsh/custom/
+	done
+fi
+
+echo "Git settings"
+git config --global user.name "`whoami`@`hostname`"
+test -n "$EMAIL" && git config --global user.email $EMAIL
+git config --global core.editor vim
+git config --global push.default simple
+git config --global core.excludesfile .gitignore
+git config --global branch.autosetuprebase always
+git config --global core.whitespace warn
+git config --global core.autocrlf input
+git config --global core.filemode true
+
 ### User specific
 if [[ ! $(id -u) == 0 ]]; then
+	echo "User specifics"
 	### Openhab-vim
 	if [[ ! -d $HOME/git/openhab-vim ]] ; then
 		git clone git@github.com:bambam82/openhab-vim.git $HOME/git/openhab-vim
 	fi
 	if [[ -e $HOME/.vim/syntax/openhab.vim ]]; then
 		rm $HOME/.vim/syntax/openhab.vim
-		ln -sf $HOME/git/openhab-vim/syntax/openhab.vim $HOME/.vim/syntax/openhab.vim
 	fi
+	ln -sf $HOME/git/openhab-vim/syntax/openhab.vim $HOME/.vim/syntax/openhab.vim
 	if [[ -e $HOME/.vim/ftdetect/openhab.vim ]]; then
 		rm $HOME/.vim/ftdetect/openhab.vim
-		ln -sf $HOME/git/openhab-vim/ftdetect/openhab.vim $HOME/.vim/ftdetect/openhab.vim
 	fi
+	ln -sf $HOME/git/openhab-vim/ftdetect/openhab.vim $HOME/.vim/ftdetect/openhab.vim
 
 	echo "Downloading other directories"
 	echo "	Network scripts"
@@ -90,15 +133,18 @@ fi
 
 ### root specific
 if [[ $(id -u) == 0 ]]; then
+	echo "Root specifics"
 	FILE="$PROFILEDIR/etc/udev/rules.d/99-yubikeys.rules"
 	test -f $FILE && ln -sf $FILE /etc/udev/rules.d/99-yubikeys.rules
 	FILE="$PROFILEDIR/etc/udev/rules.d/51-android.rules"
 	test -f $FILE && ln -sf $FILE /etc/udev/rules.d/51-android.rules
 	#
-	echo "Creating symlink for sudoers"
+	echo "  Creating symlink for sudoers"
 	if [[ -d /etc/sudoers.d ]]; then
 		ln $PROFILEDIR/etc/sudoers.d/global_sudo /etc/sudoers.d/globalsudo
 		chmod 440 /etc/sudoers.d/globalsudo
+	else
+		echo "  /etc/sudoers.d/ doesn't exists. Not applying globalsudo file."
 	fi
 	#
 	# Aptitude
@@ -109,53 +155,12 @@ if [[ $(id -u) == 0 ]]; then
 	test -f $FILE && ln -sf $FILE $HOME/.aptitude/config
 fi
 
-#### Other environment ####
-echo "Creating symlinks for screenrc, email forward"
-ln -sf $PROFILEDIR/screenrc $HOME/.screenrc
-
-if [[ ! -e $HOME/.forward ]] ; then 
-	echo "Do you want to create a .forward file. If so type your email, else enter"
-	read EMAIL
-	if [[ -n "$EMAIL" ]] ; then 
-		if [[ -L $HOME/.forward ]]; then 
-			rm $HOME/.forward
-		fi
-		echo $EMAIL > $HOME/.forward 
-	fi
-fi
-
-echo "Creating zsh environment"
-if [[ ! -d $HOME/git/oh-my-zsh-custom ]] ; then
-	git clone git@github.com:bambam82/oh-my-zsh-custom.git $HOME/git/oh-my-zsh-custom
-fi
-if [[ ! -L $HOME/.zshrc ]]; then
-	ln -sf $PROFILEDIR/$SUB/zshrc $HOME/.zshrc 
-fi
-if [[ -d $HOME/.oh-my-zsh ]] && [[ ! -L $HOME/.oh-my-zsh/custom ]] ; then
-	DIR="$HOME/git/oh-my-zsh-custom"
-	for x in $(ls -1 $DIR); do
-		# Variable path due to VM's
-		#ln -sf ../../git/oh-my-zsh-custom/$x $HOME/.oh-my-zsh/custom/
-		ln -sf $DIR/$x $HOME/.oh-my-zsh/custom/
-	done
-fi
 # Add an git pull to crontab if it doesn't exist yet
 # if [[ -z $(crontab -l | grep "oh-my-zsh" | grep "git pull") ]] ; then 
 #	 line="@reboot cd $HOME/.oh-my-zsh ; git pull > /dev/null 2>&1"
 #	 line2="0 6 1 * * cd $HOME/.oh-my-zsh ; git pull > /dev/null 2>&1"
 #	 (crontab -l; echo "$line" ; echo "$line2") | crontab -
 # fi
-
-echo "Git settings"
-git config --global user.name "`whoami`@`hostname`"
-test -n "$EMAIL" && git config --global user.email $EMAIL
-git config --global core.editor vim
-git config --global push.default simple
-git config --global core.excludesfile .gitignore
-git config --global branch.autosetuprebase always
-git config --global core.whitespace warn
-git config --global core.autocrlf input
-git config --global core.filemode true
 
 echo ""
 echo "you might want to add the following line to your crontab."
