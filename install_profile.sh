@@ -88,6 +88,10 @@ git config --global core.filemode true
 ### User specific
 if [[ ! $(id -u) == 0 ]]; then
 	echo "User specifics"
+	if [[ -e $HOME/.root_aliases ]]; then
+		rm $HOME/.root_aliases
+	fi
+	ln -sf $PROFILEDIR/$SUB/root_aliases $HOME/.root_aliases 
 	### Openhab-vim
 	if [[ ! -d $HOME/git/openhab-vim ]] ; then
 		git clone git@github.com:bambam82/openhab-vim.git $HOME/git/openhab-vim
