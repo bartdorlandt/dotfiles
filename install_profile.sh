@@ -147,7 +147,7 @@ fi
 
 echo "Git settings"
 git config --global user.name "`whoami`@`hostname`"
-test -n $EMAIL && git config --global user.email $EMAIL
+test -n "$EMAIL" && git config --global user.email $EMAIL
 git config --global core.editor vim
 git config --global push.default simple
 git config --global core.excludesfile .gitignore
