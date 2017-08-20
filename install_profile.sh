@@ -139,9 +139,9 @@ if [[ $(id -u) == 0 ]]; then
 	FILE="$PROFILEDIR/etc/udev/rules.d/51-android.rules"
 	test -f $FILE && ln -sf $FILE /etc/udev/rules.d/51-android.rules
 	#
-	echo "  Creating symlink for sudoers"
+	echo "	Creating symlink for sudoers"
 	if [[ -d /etc/sudoers.d ]]; then
-		ln $PROFILEDIR/etc/sudoers.d/global_sudo /etc/sudoers.d/globalsudo
+		ln -f $PROFILEDIR/etc/sudoers.d/global_sudo /etc/sudoers.d/globalsudo
 		chmod 440 /etc/sudoers.d/globalsudo
 	else
 		echo "  /etc/sudoers.d/ doesn't exists. Not applying globalsudo file."
