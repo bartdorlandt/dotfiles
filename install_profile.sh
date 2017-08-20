@@ -57,6 +57,12 @@ if [[ ! $(id -u) == 0 ]]; then
 		ln -sf $HOME/git/openhab-vim/ftdetect/openhab.vim $HOME/.vim/ftdetect/openhab.vim
 	fi
 
+	echo "Downloading other directories"
+	echo "	Network scripts"
+	if [ ! -d $HOME/git/network_scripts ] ; then
+		git clone git@github.com:bambam82/network_scripts.git $HOME/git/network_scripts
+	fi
+
 	### Python environment
 	if [ ! -e $HOME/.pypirc ] ; then 
 		echo -e "\nIn case you wish to create the ~/.pypirc config file for pypi, provide a username and then a password. If the username is empty, nothing is generated."
@@ -138,12 +144,6 @@ fi
 #	 line2="0 6 1 * * cd $HOME/.oh-my-zsh ; git pull > /dev/null 2>&1"
 #	 (crontab -l; echo "$line" ; echo "$line2") | crontab -
 # fi
-
-echo "Downloading other directories"
-echo "	Network scripts"
-if [ ! -d $HOME/git/network_scripts ] ; then
-	git clone git@github.com:bambam82/network_scripts.git $HOME/git/network_scripts
-fi
 
 echo "Git settings"
 git config --global user.name "`whoami`@`hostname`"
