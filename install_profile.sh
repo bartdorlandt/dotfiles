@@ -3,7 +3,7 @@
 if [[ -n "$1" ]] ; then
 	PROFILEDIR=$1
 else
-	PROFILEDIR=$HOME/git/shell_profile
+	PROFILEDIR=$HOME/git/linux_profile
 fi
 
 test -d $PROFILEDIR || (echo "Provide the location behind this script." && exit 1)
@@ -62,9 +62,10 @@ echo "Creating zsh environment"
 if [[ ! -d $HOME/git/oh-my-zsh-custom ]] ; then
 	git clone git@github.com:bambam82/oh-my-zsh-custom.git $HOME/git/oh-my-zsh-custom
 fi
-if [[ ! -L $HOME/.zshrc ]]; then
-	ln -sf $PROFILEDIR/$SUB/zshrc $HOME/.zshrc 
+if [[ -e $HOME/.zshrc ]]; then
+	rm $HOME/.zshrc
 fi
+ln -sf $PROFILEDIR/zshrc $HOME/.zshrc 
 if [[ -d $HOME/.oh-my-zsh ]] && [[ ! -L $HOME/.oh-my-zsh/custom ]] ; then
 	DIR="$HOME/git/oh-my-zsh-custom"
 	for x in $(ls -1 $DIR); do
@@ -90,11 +91,6 @@ git config --global core.filemode true
 ############################################################################
 if [[ ! $(id -u) == 0 ]]; then
 	echo "User specifics"
-	if [[ -e $HOME/.root_aliases ]]; then
-		rm $HOME/.root_aliases
-	fi
-	ln -sf $PROFILEDIR/$SUB/root_aliases $HOME/.root_aliases 
-
 	### Python environment
 	if [[ ! -e $HOME/.pypirc ]] ; then 
 		echo -e "\nIn case you wish to create the ~/.pypirc config file for pypi, provide a username and then a password. If the username is empty, nothing is generated."
