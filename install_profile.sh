@@ -133,7 +133,9 @@ if [[ $(id -u) == 0 ]]; then
 	echo "	Creating symlink for sudoers"
 	if [[ -d /etc/sudoers.d ]]; then
 		ln -f $PROFILEDIR/etc/sudoers.d/global_sudo /etc/sudoers.d/globalsudo
-		chmod 440 /etc/sudoers.d/globalsudo
+		if [[ -e /etc/sudoers.d/globalsudo ]]; then
+			chmod 440 /etc/sudoers.d/globalsudo
+		fi
 	else
 		echo "  /etc/sudoers.d/ doesn't exists. Not applying globalsudo file."
 	fi
