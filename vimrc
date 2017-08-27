@@ -46,6 +46,11 @@ Plugin 'bling/vim-bufferline'
 " Perl plugin
 Plugin 'vim-perl/vim-perl'
 
+" Auto-pairs plugin
+Plugin 'jiangmiao/auto-pairs'
+
+" Multi-insert, just like sublime.
+Plugin 'terryma/vim-multiple-cursors'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
