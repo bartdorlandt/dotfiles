@@ -52,6 +52,9 @@ Plugin 'jiangmiao/auto-pairs'
 " Multi-insert, just like sublime.
 Plugin 'terryma/vim-multiple-cursors'
 
+" Vim surroundings 
+Plugin 'tpope/vim-surround'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
