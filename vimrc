@@ -126,6 +126,7 @@ set mat=2
 
 " Show linenumbers
 "set number
+set relativenumber
 
 " No annoying sound on errors
 set noerrorbells
@@ -195,15 +196,6 @@ set tabstop=4
 " Use spaces instead of tabs
 "set expandtab
 
-" Linebreak on 80 characters
-"set nolbr
-"set tw=80	"set it for specific filetypes
-"
-"set ai "Auto indent
-"set ci "Copy indent
-"set si "Smart indent
-"set wrap "Wrap lines
-
 " When using smart indent this will make sure the # doesn't go back beginning of the line
 " if you are using smartindent
 " http://vim.wikia.com/wiki/Restoring_indent_after_typing_hash
@@ -241,8 +233,8 @@ au BufRead,BufNewFile *.pl set tabstop=2
 au BufRead,BufNewFile *.pl set softtabstop=2
 au BufRead,BufNewFile *.pl set shiftwidth=2
 au BufRead,BufNewFile *.pl set nolbr
-au BufRead,BufNewFile *.pl set nonumber
-au BufRead,BufNewFile *.pl set cursorline
+"au BufRead,BufNewFile *.pl set nonumber
+"au BufRead,BufNewFile *.pl set cursorline
 au BufRead,BufNewFile *.pl set showmatch
 au         BufNewFile *.pl set fileformat=unix
 
@@ -252,8 +244,8 @@ au BufRead,BufNewFile *.py,*.pyw set tabstop=4
 au BufRead,BufNewFile *.py,*.pyw set softtabstop=4
 au BufRead,BufNewFile *.py,*.pyw set shiftwidth=4
 au BufRead,BufNewFile *.py,*.pyw set lbr
-au BufRead,BufNewFile *.py,*.pyw set nonumber
-au BufRead,BufNewFile *.py,*.pyw set cursorline
+"au BufRead,BufNewFile *.py,*.pyw set nonumber
+"au BufRead,BufNewFile *.py,*.pyw set cursorline
 au BufRead,BufNewFile *.py,*.pyw set showmatch
 au BufRead,BufNewFile *.py,*.pyw set expandtab
 au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
