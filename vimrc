@@ -46,14 +46,16 @@ Plugin 'bling/vim-bufferline'
 " Perl plugin
 Plugin 'vim-perl/vim-perl'
 
-" Auto-pairs plugin
-Plugin 'jiangmiao/auto-pairs'
-
 " Multi-insert, just like sublime.
 Plugin 'terryma/vim-multiple-cursors'
 
-" Vim surroundings 
-Plugin 'tpope/vim-surround'
+" Auto-pairs plugin
+Plugin 'jiangmiao/auto-pairs'
+
+" Markdown for Vim
+" https://github.com/plasticboy/vim-markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -126,7 +128,7 @@ set mat=2
 
 " Show linenumbers
 "set number
-set relativenumber
+"set relativenumber
 
 " No annoying sound on errors
 set noerrorbells
@@ -255,6 +257,10 @@ au         BufNewFile *.py,*.pyw set fileformat=unix
 " done by python-mode
 "autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.pl :call DeleteTrailingWS()
+
+autocmd FileType markdown setlocal textwidth=90
+autocmd FileType markdown setlocal expandtab
+autocmd FileType markdown setlocal lbr
 
 " Use the below highlight group when displaying bad whitespace is desired.
 "highlight BadWhitespace ctermbg=red guibg=red
@@ -589,11 +595,20 @@ let g:pymode_folding = 0
 "let g:jedi#completions_command = "<leader>c"
 "let g:jedi#rename_command = "<leader>r"
 
-
 """""""""""""""""""""""""""""""""
 " airline settings
 """""""""""""""""""""""""""""""""
 let g:airline#extensions#tabline#enabled = 1
+
+"""""""""""""""""""""""""""""""""
+" Vim Markdown settings
+"""""""""""""""""""""""""""""""""
+" https://github.com/plasticboy/vim-markdown
+let g:vim_markdown_folding_disabled = 1
+set conceallevel=1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_autowrite = 1
 
 " Additional settings for putty/windows
 if $TERM == "linux"
@@ -602,3 +617,4 @@ if $TERM == "linux"
   set guioptions+=e
   set guitablabel=%M\ %t
 endif
+
