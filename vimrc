@@ -46,16 +46,18 @@ Plugin 'bling/vim-bufferline'
 " Perl plugin
 Plugin 'vim-perl/vim-perl'
 
-" Multi-insert, just like sublime.
-Plugin 'terryma/vim-multiple-cursors'
-
-" Auto-pairs plugin
-Plugin 'jiangmiao/auto-pairs'
-
 " Markdown for Vim
 " https://github.com/plasticboy/vim-markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+" Auto-pairs plugin. "",'',``. Quite annoying sometimes.
+"Plugin 'jiangmiao/auto-pairs'
+
+" Multi-insert, just like sublime.
+Plugin 'terryma/vim-multiple-cursors'
+
+" Vim surroundings {}[](). quite annoying sometimes.
+"Plugin 'tpope/vim-surround'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
