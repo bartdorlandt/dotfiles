@@ -14,6 +14,8 @@ fi
 alias aptpurge='$APT purge'
 alias aptinst='$APT install'
 #
+alias updeditor='update-alternatives --config editor'
+#
 alias sy='systemctl'
 alias proxy='export http_proxy="http://192.168.2.1:3128"'
 

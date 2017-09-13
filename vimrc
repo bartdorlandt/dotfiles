@@ -4,63 +4,16 @@
 " Vundle, Python, etc https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/
 " https://amix.dk/vim/vimrc.html
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" general and Vundle
+" general 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible        " Use Vim defaults (much better!)
-filetype off            " required for Vundle
+"filetype off            " required for Vundle
 
-" Vundle settings
-" set the runtime path to include Vundle and initialize
-" first setup Vundle:
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Load up all of our plugins
+if filereadable(expand("~/.vimrc.bundles"))
+	source ~/.vimrc.bundles
+endif
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-" https://github.com/<variable>
-Plugin 'gmarik/Vundle.vim'
-" python-mode should already do this
-Plugin 'tmhedberg/SimpylFold'
-"Plugin 'vim-scripts/indentpython.vim'
-
-" Syntax checking / highlighting
-"Plugin 'scrooloose/syntastic'
-Plugin 'nvie/vim-flake8'
-Bundle 'klen/python-mode'
-" Bundle 'ervandew/supertab'
-" Bundle 'davidhalter/jedi-vim'
-
-" Vim paste easy
-Plugin 'roxma/vim-paste-easy'
-
-" Filebrowsing
-" Status line + buffer
-Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
-Plugin 'bling/vim-bufferline'
-"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-
-" Perl plugin
-Plugin 'vim-perl/vim-perl'
-
-" Markdown for Vim
-" https://github.com/plasticboy/vim-markdown
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-" Auto-pairs plugin. "",'',``. Quite annoying sometimes.
-"Plugin 'jiangmiao/auto-pairs'
-
-" Multi-insert, just like sublime.
-Plugin 'terryma/vim-multiple-cursors'
-
-" Vim surroundings {}[](). quite annoying sometimes.
-"Plugin 'tpope/vim-surround'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
 filetype plugin indent on    " required
 " http://vim.wikia.com/wiki/Disable_automatic_comment_insertion
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -72,7 +25,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set history=999
 
 " Set to auto read when a file is changed from the outside
-set autoread " doesn't seem to work very well
+set autoread
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -180,9 +133,9 @@ set ffs=unix,dos,mac
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
-"set nobackup
+set nobackup
 "set nowb
-"set noswapfile
+set noswapfile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -190,6 +143,13 @@ set ffs=unix,dos,mac
 "set nocompatible        " Use Vim defaults (much better!)
 "set paste               #" to be able to paste text without worrying about " or # in front of lines
 set pastetoggle=<F2>
+"Copy paste to/from clipboard
+" Requires +xterm_clipboard support. test via:
+" vim --version | grep xterm
+" apt install vim-gnome for support e.g.
+vnoremap <C-c> "*y
+map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
+map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
 
 " Be smart when using tabs ;)
 set smarttab
@@ -210,8 +170,6 @@ set foldmethod=indent
 set foldlevel=99
 " Enable folding with the spacebar
 nnoremap <space> za
-" Fold docstring by default
-let g:SimpylFold_docstring_preview=1
 
 " File Specific Settings
 " ------------------------------------------------------------
@@ -228,6 +186,10 @@ set autoindent
 set copyindent
 set smartindent
 set smarttab
+set textwidth=100
+set formatoptions=qrn1
+set wrapmargin=0
+set colorcolumn=+1
 
 " Shell - bash
 au         BufNewFile *.sh set fileformat=unix
@@ -282,21 +244,21 @@ autocmd BufRead *.pl set cinwords=if,elsif,else,foreach,while,sub,for,bless,meth
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
+" Always use vertical diffs
+set diffopt+=vertical
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
-
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-"map <space> /
-"map <c-space> ?
+" Navigate properly when lines are wrapped
+nnoremap j gj
+nnoremap k gk
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
-" Smart way to move between windows
+" Smart way/quicker to move between windows
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-h> <C-W>h
@@ -426,7 +388,7 @@ set laststatus=2
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
-" Shortcuts using <eader>
+" Shortcuts using <leader>
 map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
@@ -520,97 +482,6 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Python settings
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Python-mode
-" Activate rope
-" Keys:
-" K             Show python docs
-" <Ctrl-Space>  Rope autocomplete
-" <Ctrl-c>g     Rope goto definition
-" <Ctrl-c>d     Rope show documentation
-" <Ctrl-c>f     Rope find occurrences
-" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
-" [[            Jump on previous class or function (normal, visual, operator modes)
-" ]]            Jump on next class or function (normal, visual, operator modes)
-" [M            Jump on previous class or method (normal, visual, operator modes)
-" ]M            Jump on next class or method (normal, visual, operator modes)
-" Defaults are commented.
-let g:pymode = 1
-let g:pymode_python = 'python3'
-
-" Documentation
-let g:pymode_doc = 0
-"let g:pymode_doc_key = 'K'
-
-"Linting
-let g:pymode_lint = 1
-let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
-" " Values may be chosen from: `pylint`, `pep8`, `mccabe`, `pep257`, `pyflakes`.
-" Auto check on save
-let g:pymode_lint_write = 1
-
-" Mccabe complexity setting
-"let g:pymode_lint_options_mccabe = { 'complexity': 12 }
-
-"let g:pymode_rope = 1
-" added additionally.
-let g:pymode_rope_completion = 1
-let g:pymode_rope_complete_on_dot = 1
-let g:pymode_rope_completion_bind = '<leader>c'
-let g:pymode_rope_autoimport_modules = ['os', 're', 'argparse', 'datetime']
-
-" Enable breakpoints plugin
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_bind = '<leader>b'
-
-" syntax highlighting
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_print_as_function = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-let g:pymode_syntax_highlight_self = g:pymode_syntax_all
-
-" If you prefer the Omni-Completion tip window to close when a selection is
-" made, these lines close it on movement in insert mode or when leaving
-" insert mode
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-
-" Don't autofold code
-let g:pymode_folding = 0
-
-" Python3 highlight code
-"let python_highlight_all = 1
-
-""" jedi-vim """
-" https://github.com/davidhalter/jedi-vim
-"let g:jedi#goto_command = "<leader>d"
-"let g:jedi#goto_assignments_command = "<leader>g"
-"let g:jedi#goto_definitions_command = ""
-"let g:jedi#documentation_command = "K"
-"let g:jedi#usages_command = "<leader>n"
-""let g:jedi#completions_command = "<C-Space>"
-"let g:jedi#completions_command = "<leader>c"
-"let g:jedi#rename_command = "<leader>r"
-
-"""""""""""""""""""""""""""""""""
-" airline settings
-"""""""""""""""""""""""""""""""""
-let g:airline#extensions#tabline#enabled = 1
-
-"""""""""""""""""""""""""""""""""
-" Vim Markdown settings
-"""""""""""""""""""""""""""""""""
-" https://github.com/plasticboy/vim-markdown
-let g:vim_markdown_folding_disabled = 1
-set conceallevel=1
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_json_frontmatter = 1
-let g:vim_markdown_autowrite = 1
 
 " Additional settings for putty/windows
 if $TERM == "linux"

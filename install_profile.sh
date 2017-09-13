@@ -38,6 +38,7 @@ test -d $HOME/.vim || mkdir $HOME/.vim
 if [[ ! -d $HOME/.vim/ftdetect ]]; then rm $HOME/.vim/ftdetect; mkdir $HOME/.vim/ftdetect; fi
 if [[ ! -d $HOME/.vim/syntax ]]; then rm $HOME/.vim/syntax; mkdir $HOME/.vim/syntax; fi
 ln -sf $PROFILEDIR/vimrc $HOME/.vimrc
+ln -sf $PROFILEDIR/vimrc.bundles $HOME/.vimrc.bundles
 # VIM bundle
 if [[ ! -d $HOME/.vim/bundle ]] ; then
 	git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
