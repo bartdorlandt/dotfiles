@@ -20,17 +20,15 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 " https://github.com/<variable>
 Plugin 'gmarik/Vundle.vim'
-" python-mode should already do this
-Plugin 'tmhedberg/SimpylFold'
-"Plugin 'vim-scripts/indentpython.vim'
+" Plugin 'vim-scripts/indentpython.vim'
 
 " Syntax checking / highlighting
-"Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
 Bundle 'klen/python-mode'
 " Bundle 'ervandew/supertab'
@@ -42,9 +40,9 @@ Plugin 'roxma/vim-paste-easy'
 " Filebrowsing
 " Status line + buffer
 Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-bufferline'
-"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " Perl plugin
 Plugin 'vim-perl/vim-perl'
@@ -54,7 +52,7 @@ Plugin 'vim-perl/vim-perl'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " Auto-pairs plugin. "",'',``. Quite annoying sometimes.
-"Plugin 'jiangmiao/auto-pairs'
+" Plugin 'jiangmiao/auto-pairs'
 
 " Multi-insert, just like sublime.
 Plugin 'terryma/vim-multiple-cursors'
@@ -107,9 +105,9 @@ let g:pymode_python = 'python3'
 
 " Documentation
 let g:pymode_doc = 0
-"let g:pymode_doc_key = 'K'
+" let g:pymode_doc_key = 'K'
 
-"Linting
+" Linting
 let g:pymode_lint = 1
 let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
 " " Values may be chosen from: `pylint`, `pep8`, `mccabe`, `pep257`, `pyflakes`.
@@ -117,9 +115,9 @@ let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
 let g:pymode_lint_write = 1
 
 " Mccabe complexity setting
-"let g:pymode_lint_options_mccabe = { 'complexity': 12 }
+" let g:pymode_lint_options_mccabe = { 'complexity': 12 }
 
-"let g:pymode_rope = 1
+" let g:pymode_rope = 1
 " added additionally.
 let g:pymode_rope_completion = 1
 let g:pymode_rope_complete_on_dot = 1
@@ -148,18 +146,18 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 let g:pymode_folding = 0
 
 " Python3 highlight code
-"let python_highlight_all = 1
+" let python_highlight_all = 1
 
 """ jedi-vim """
 " https://github.com/davidhalter/jedi-vim
-"let g:jedi#goto_command = "<leader>d"
-"let g:jedi#goto_assignments_command = "<leader>g"
-"let g:jedi#goto_definitions_command = ""
-"let g:jedi#documentation_command = "K"
-"let g:jedi#usages_command = "<leader>n"
-""let g:jedi#completions_command = "<C-Space>"
-"let g:jedi#completions_command = "<leader>c"
-"let g:jedi#rename_command = "<leader>r"
+" let g:jedi#goto_command = "<leader>d"
+" let g:jedi#goto_assignments_command = "<leader>g"
+" let g:jedi#goto_definitions_command = ""
+" let g:jedi#documentation_command = " K"
+" let g:jedi#usages_command = "<leader>n"
+" let g:jedi#completions_command = "<C-Space>"
+" let g:jedi#completions_command = "<leader>c"
+" let g:jedi#rename_command = "<leader>r"
 
 """""""""""""""""""""""""""""""""
 " airline settings
@@ -176,5 +174,3 @@ let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_autowrite = 1
 
-" Fold docstring by default
-let g:SimpylFold_docstring_preview=1

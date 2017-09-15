@@ -1,10 +1,11 @@
 " URLs used:
 " http://www.apaulodesign.com/vimrc.html
 " splits: https://robots.thoughtbot.com/vim-splits-move-faster-and-more-naturally
-" Vundle, Python, etc https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/
+" Vundle, Python, etc
+" https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/
 " https://amix.dk/vim/vimrc.html
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" general 
+" general
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible        " Use Vim defaults (much better!)
 "filetype off            " required for Vundle
@@ -15,9 +16,6 @@ if filereadable(expand("~/.vimrc.bundles"))
 endif
 
 filetype plugin indent on    " required
-
-" http://vim.wikia.com/wiki/Disable_automatic_comment_insertion
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " general
@@ -32,7 +30,7 @@ set autoread
 " like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
-"default mapleader = \
+"let maplocalleader = "<space>"
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -61,7 +59,7 @@ set whichwrap+=<,>,h,l
 
 " Ignore case when searching
 set ignorecase
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 " Highlight search results
 set hlsearch
@@ -95,7 +93,7 @@ set tm=500
 " Using it with :sp (horizontal split) or :vsp (vertical)
 set splitbelow
 set splitright
-" Navigate splits with 
+" Navigate splits with
 " ctrl + [jk] : for up and down)
 " ctrl + [lh] : for left and right)
 " :help splits
@@ -128,6 +126,13 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+" Additional settings for putty/windows
+if $TERM == "linux"
+  set t_Co=256
+  set guioptions-=T
+  set guioptions+=e
+  set guitablabel=%M\ %t
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -140,8 +145,37 @@ set noswapfile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set nocompatible        " Use Vim defaults (much better!)
-"set paste               #" to be able to paste text without worrying about " or # in front of lines
+" http://vim.wikia.com/wiki/Disable_automatic_comment_insertion
+" r       Automatically insert the current comment leader after hitting
+"         <Enter> in Insert mode.
+" c       Auto-wrap comments using textwidth, inserting the current comment
+"         leader automatically.
+" o       Automatically insert the current comment leader after hitting 'o' or
+"         'O' in Normal mode.
+" t       Auto-wrap text using textwidth
+" 1       Don't break a line after a one-letter word.  It's broken before it
+"         instead (if possible).
+" q       Allow formatting of comments with "gq".
+"         Note that formatting will not change blank lines or lines containing
+"         only the comment leader.  A new paragraph starts after such a line,
+"         or when the comment leader changes.
+" n       When formatting text, recognize numbered lists.  This actually uses
+"         the 'formatlistpat' option, thus any kind of list can be used.  The
+"         indent of the text after the number is used for the next line.  The
+"         default is to find a number, optionally followed by '.', ':', ')',
+"         ']' or '}'.  Note that 'autoindent' must be set too.  Doesn't work
+"         well together with "2".
+"         Example:
+"                 1. the first item
+"                    wraps
+"                 2. the second item
+"
+autocmd FileType * set formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType * set formatoptions+=1 formatoptions+=t formatoptions+=q
+" set default fileformat
+autocmd Bufnewfile * set fileformat=unix
+
+" set nopaste
 set pastetoggle=<F2>
 "Copy paste to/from clipboard
 " Requires +xterm_clipboard support. test via:
@@ -154,14 +188,14 @@ map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
 " Be smart when using tabs ;)
 set smarttab
 
-" 1 tab == 2 spaces
+" 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
 " Use spaces instead of tabs
-"set expandtab
+" set expandtab
 
-" When using smart indent this will make sure the # doesn't go back beginning of the line
-" if you are using smartindent
+" When using smart indent this will make sure the # doesn't go back beginning
+" of the line if you are using smartindent
 " http://vim.wikia.com/wiki/Restoring_indent_after_typing_hash
 :inoremap # X<BS>#
 
@@ -174,12 +208,6 @@ nnoremap <space> za
 " File Specific Settings
 " ------------------------------------------------------------
 au FileType xhtml,html,htm,php,xml setlocal nolbr softtabstop=2
-"au FileType xhtml,html,htm,php,xml setlocal expandtab      " (et) expand tabs to spaces (use :retab to redo entire file)
-
-"au FileType c,h,java,js setlocal mps+==:;                   " allow the match pairs operation (%) to work with '=' and ';'
-
-"au FileType c,h setlocal cindent                            " enable the intelligent cindent (cin) feature for the following files
-"au FileType java,js setlocal smartindent                    " enable the smartindenting (si) feature for the following files
 
 " Defaults
 set autoindent
@@ -187,54 +215,53 @@ set copyindent
 set smartindent
 set smarttab
 set textwidth=100
-set formatoptions=qrn1
 set wrapmargin=0
 set colorcolumn=+1
 
-" Shell - bash
-au         BufNewFile *.sh set fileformat=unix
+" Vim
+autocmd FileType vim setlocal textwidth=100
+autocmd FileType vim nnoremap <buffer> <leader>c I" <esc>
+autocmd FileType vim match BadWhitespace /^\t\+/
+autocmd FileType vim match BadWhitespace /\s\+$/
 
 " Perl
-au BufRead,BufNewFile *.pl set tabstop=2
-au BufRead,BufNewFile *.pl set softtabstop=2
-au BufRead,BufNewFile *.pl set shiftwidth=2
-au BufRead,BufNewFile *.pl set nolbr
-"au BufRead,BufNewFile *.pl set nonumber
-"au BufRead,BufNewFile *.pl set cursorline
-au BufRead,BufNewFile *.pl set showmatch
-au         BufNewFile *.pl set fileformat=unix
+autocmd FileType perl setlocal tabstop=2
+autocmd FileType perl setlocal softtabstop=2
+autocmd FileType perl setlocal shiftwidth=2
+autocmd FileType perl setlocal showmatch
+autocmd FileType perl setlocal formatoptions-=t
+autocmd FileType perl autocmd BufWritePre <buffer> :call DeleteTrailingWS()
+autocmd FileType perl nnoremap <buffer> <leader>c I# <esc>
 
 " Python, PEP-008
-au BufRead,BufNewFile *.py,*.pyw set textwidth=79
-au BufRead,BufNewFile *.py,*.pyw set tabstop=4
-au BufRead,BufNewFile *.py,*.pyw set softtabstop=4
-au BufRead,BufNewFile *.py,*.pyw set shiftwidth=4
-au BufRead,BufNewFile *.py,*.pyw set lbr
-"au BufRead,BufNewFile *.py,*.pyw set nonumber
-"au BufRead,BufNewFile *.py,*.pyw set cursorline
-au BufRead,BufNewFile *.py,*.pyw set showmatch
-au BufRead,BufNewFile *.py,*.pyw set expandtab
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
-au         BufNewFile *.py,*.pyw set fileformat=unix
+"autocmd FileType python setlocal nonumber
+"autocmd FileType python setlocal cursorline
+autocmd FileType python setlocal textwidth=79
+autocmd FileType python setlocal tabstop=4
+autocmd FileType python setlocal softtabstop=4
+autocmd FileType python setlocal shiftwidth=4
+autocmd FileType python setlocal showmatch
+autocmd FileType python setlocal expandtab
+autocmd FileType python match BadWhitespace /^\t\+/
+autocmd FileType python match BadWhitespace /\s\+$/
+" autocmd FileType python autocmd BufWritePre <buffer> :call DeleteTrailingWS()
+autocmd FileType python setlocal formatoptions-=t
+autocmd FileType python nnoremap <buffer> <leader>c I# <esc>
 
-" done by python-mode
-"autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.pl :call DeleteTrailingWS()
-
+" Markdown
 autocmd FileType markdown setlocal textwidth=90
 autocmd FileType markdown setlocal expandtab
 autocmd FileType markdown setlocal lbr
+autocmd FileType markdown setlocal fo+=n
+autocmd FileType markdown autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 
-" Use the below highlight group when displaying bad whitespace is desired.
-"highlight BadWhitespace ctermbg=red guibg=red
-"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" sql
+autocmd FileType sql nnoremap <buffer> <leader>c I-- <esc>
+autocmd FileType sql autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 
-au FileType txt setlocal fo+=tn
-
-" Other settings related to filetype
-"autocmd BufRead *.py set cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd BufRead *.pl set cinwords=if,elsif,else,foreach,while,sub,for,bless,method
+" txt
+autocmd FileType txt setlocal fo+=n
+autocmd FileType txt autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -278,13 +305,7 @@ set hidden
 " To open a new empty buffer
 " This replaces :tabnew which I used to bind to this mapping
 nmap <leader>T :enew<cr>
-
-" Move to the next buffer
-"nmap <leader>l :bnext<CR>
-
-" Move to the previous buffer
-"nmap <leader>h :bprevious<CR>
-
+" Move between buffers using the F-keys
 nmap <F3> :bprevious<CR>
 nmap <F4> :bnext<CR>
 
@@ -314,7 +335,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
 	set switchbuf=useopen,usetab,newtab
 	set stal=2
@@ -370,7 +391,7 @@ set laststatus=2
 "map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
 "
 "" Vimgreps in the current file
-"map <leader><space> :vimgrep // <C-R>%<C-A><right><right><right><right><right><right><right><right><right> 
+"map <leader><space> :vimgrep // <C-R>%<C-A><right><right><right><right><right><right><right><right><right>
 "" When you press <leader>r you can search and replace the selected text
 "vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
 
@@ -407,7 +428,7 @@ map <leader>s? z=
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
 "noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-noremap <Leader>m :call RemoveM()<cr>
+noremap <leader>m :call RemoveM()<cr>
 
 " Quickly open a buffer for scripbble
 map <leader>q :e ~/buffer<cr>
@@ -475,24 +496,10 @@ function! RemoveM()
   :%s///g
 endfunction
 
-"function! RemoveWhiteSpace()
-"  :%s/\s*$//g
-"  :'^
-"  "`.
-"endfunction
-"
 "" Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
-
-" Additional settings for putty/windows
-if $TERM == "linux"
-  set t_Co=256
-  set guioptions-=T
-  set guioptions+=e
-  set guitablabel=%M\ %t
-endif
 
