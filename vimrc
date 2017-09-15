@@ -15,6 +15,7 @@ if filereadable(expand("~/.vimrc.bundles"))
 endif
 
 filetype plugin indent on    " required
+
 " http://vim.wikia.com/wiki/Disable_automatic_comment_insertion
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -35,7 +36,6 @@ let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -255,6 +255,14 @@ set diffopt+=vertical
 nnoremap j gj
 nnoremap k gk
 
+" To jump to the most outer or bracket, accolades, parantheses.
+nmap <leader>{ 10[{
+nmap <leader>} 10]}
+nmap <leader>[ 10[[
+nmap <leader>] 10]]
+nmap <leader>( 10[(
+nmap <leader>) 10])
+
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
@@ -403,9 +411,6 @@ noremap <Leader>m :call RemoveM()<cr>
 
 " Quickly open a buffer for scripbble
 map <leader>q :e ~/buffer<cr>
-
-" Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
