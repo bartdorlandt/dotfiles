@@ -1,7 +1,8 @@
 "
 " :so % to refresh .vimrc after making changes
-" :PlugInstall to install new stuff
-" :PlugUpdate to update to latest versions
+" :VundleInstall to install new stuff
+" :VundleUpdate to update to latest versions
+" :VundleClean to remove packages no longer used.
 "
 
 if &compatible
