@@ -217,6 +217,9 @@ set smarttab
 set textwidth=100
 set wrapmargin=0
 set colorcolumn=+1
+" Setting the default comment insertion with a leader.
+" It may be overrulled by language specific settings
+nmap <leader>c I# <esc>
 
 " Vim
 autocmd FileType vim setlocal textwidth=100
@@ -231,7 +234,7 @@ autocmd FileType perl setlocal shiftwidth=2
 autocmd FileType perl setlocal showmatch
 autocmd FileType perl setlocal formatoptions-=t
 autocmd FileType perl autocmd BufWritePre <buffer> :call DeleteTrailingWS()
-autocmd FileType perl nnoremap <buffer> <leader>c I# <esc>
+" autocmd FileType perl nnoremap <buffer> <leader>c I# <esc>
 
 " Python, PEP-008
 "autocmd FileType python setlocal nonumber
@@ -246,7 +249,7 @@ autocmd FileType python match BadWhitespace /^\t\+/
 autocmd FileType python match BadWhitespace /\s\+$/
 " autocmd FileType python autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 autocmd FileType python setlocal formatoptions-=t
-autocmd FileType python nnoremap <buffer> <leader>c I# <esc>
+" autocmd FileType python nnoremap <buffer> <leader>c I# <esc>
 
 " Markdown
 autocmd FileType markdown setlocal textwidth=90
@@ -428,7 +431,7 @@ map <leader>s? z=
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
 "noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-noremap <leader>m :call RemoveM()<cr>
+map <leader>m :call RemoveM()<cr>
 
 " Quickly open a buffer for scripbble
 map <leader>q :e ~/buffer<cr>
@@ -467,7 +470,7 @@ endfunction
 function! HasPaste()
 	if &paste
 		return 'PASTE MODE  '
-	en
+	endif
 	return ''
 endfunction
 
@@ -496,7 +499,7 @@ function! RemoveM()
   :%s///g
 endfunction
 
-"" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+"" Delete trailing white space on save, useful for Python.
 func! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
