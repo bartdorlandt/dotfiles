@@ -216,7 +216,7 @@ set smartindent
 set smarttab
 set textwidth=100
 set wrapmargin=0
-set colorcolumn=+1
+" set colorcolumn=+1
 " Setting the default comment insertion with a leader.
 " It may be overrulled by language specific settings
 nmap <leader>c I# <esc>
