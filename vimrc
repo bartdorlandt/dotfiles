@@ -187,10 +187,10 @@ map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
 
 " Be smart when using tabs ;)
 set smarttab
-
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
+set softtabstop=4
 " Use spaces instead of tabs
 " set expandtab
 
@@ -207,32 +207,30 @@ nnoremap <space> za
 
 " File Specific Settings
 " ------------------------------------------------------------
-au FileType xhtml,html,htm,php,xml setlocal nolbr softtabstop=2
 
 " Defaults
 set autoindent
 set copyindent
 set smartindent
-set smarttab
-set textwidth=100
-set wrapmargin=0
+set indentkeys-=0#
+set nolbr
+" set textwidth=100
+" set wrapmargin=0
 " set colorcolumn=+1
 " Setting the default comment insertion with a leader.
 " It may be overrulled by language specific settings
 nmap <leader>c I# <esc>
 
 " Vim
-autocmd FileType vim setlocal textwidth=100
+" autocmd FileType vim setlocal textwidth=100
 autocmd FileType vim nnoremap <buffer> <leader>c I" <esc>
 autocmd FileType vim match BadWhitespace /^\t\+/
 autocmd FileType vim match BadWhitespace /\s\+$/
 
 " Perl
-autocmd FileType perl setlocal tabstop=2
-autocmd FileType perl setlocal softtabstop=2
-autocmd FileType perl setlocal shiftwidth=2
+" au BufNewFile,BufRead *.conf set filetype=perl
 autocmd FileType perl setlocal showmatch
-autocmd FileType perl setlocal formatoptions-=t
+" autocmd FileType perl setlocal formatoptions-=t
 autocmd FileType perl autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 " autocmd FileType perl nnoremap <buffer> <leader>c I# <esc>
 
@@ -240,9 +238,9 @@ autocmd FileType perl autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 "autocmd FileType python setlocal nonumber
 "autocmd FileType python setlocal cursorline
 autocmd FileType python setlocal textwidth=79
-autocmd FileType python setlocal tabstop=4
-autocmd FileType python setlocal softtabstop=4
-autocmd FileType python setlocal shiftwidth=4
+" autocmd FileType python setlocal tabstop=4
+" autocmd FileType python setlocal softtabstop=4
+" autocmd FileType python setlocal shiftwidth=4
 autocmd FileType python setlocal showmatch
 autocmd FileType python setlocal expandtab
 autocmd FileType python match BadWhitespace /^\t\+/
@@ -252,8 +250,8 @@ autocmd FileType python setlocal formatoptions-=t
 " autocmd FileType python nnoremap <buffer> <leader>c I# <esc>
 
 " Markdown
-autocmd FileType markdown setlocal textwidth=90
-autocmd FileType markdown setlocal expandtab
+" autocmd FileType markdown setlocal textwidth=90
+" autocmd FileType markdown setlocal expandtab
 autocmd FileType markdown setlocal lbr
 autocmd FileType markdown setlocal fo+=n
 autocmd FileType markdown autocmd BufWritePre <buffer> :call DeleteTrailingWS()
