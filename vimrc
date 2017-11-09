@@ -185,8 +185,6 @@ vnoremap <C-c> "*y
 map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
 map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
 
-" Be smart when using tabs ;)
-set smarttab
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
@@ -212,7 +210,9 @@ nnoremap <space> za
 set autoindent
 set copyindent
 set smartindent
-set indentkeys-=0#
+" Be smart when using tabs ;)
+set smarttab
+" set indentkeys-=0#
 set nolbr
 " set textwidth=100
 " set wrapmargin=0
