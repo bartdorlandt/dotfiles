@@ -15,7 +15,7 @@ if filereadable(expand("~/.vimrc.bundles"))
 	source ~/.vimrc.bundles
 endif
 
-filetype plugin indent on    " required
+filetype plugin indent on		" required
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " general
