@@ -235,12 +235,9 @@ autocmd FileType perl autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 " autocmd FileType perl nnoremap <buffer> <leader>c I# <esc>
 
 " Python, PEP-008
-"autocmd FileType python setlocal nonumber
+autocmd FileType python setlocal nonumber
 "autocmd FileType python setlocal cursorline
 autocmd FileType python setlocal textwidth=79
-" autocmd FileType python setlocal tabstop=4
-" autocmd FileType python setlocal softtabstop=4
-" autocmd FileType python setlocal shiftwidth=4
 autocmd FileType python setlocal showmatch
 autocmd FileType python setlocal expandtab
 autocmd FileType python match BadWhitespace /^\t\+/
