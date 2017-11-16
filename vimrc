@@ -142,6 +142,16 @@ set nobackup
 "set nowb
 set noswapfile
 
+" undo
+if !isdirectory($HOME.'/.vim/undodir')
+    call mkdir($HOME.'/.vim/undodir', 'p')
+endif
+
+set undofile
+set undodir=~/.vim/undodir
+set undolevels=1000
+set undoreload=1000
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
