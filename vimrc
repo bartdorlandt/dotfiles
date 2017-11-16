@@ -242,7 +242,7 @@ autocmd FileType python setlocal showmatch
 autocmd FileType python setlocal expandtab
 autocmd FileType python match BadWhitespace /^\t\+/
 autocmd FileType python match BadWhitespace /\s\+$/
-" autocmd FileType python autocmd BufWritePre <buffer> :call DeleteTrailingWS()
+autocmd FileType python autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 autocmd FileType python setlocal formatoptions-=t
 " autocmd FileType python nnoremap <buffer> <leader>c I# <esc>
 

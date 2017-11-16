@@ -31,9 +31,9 @@ Plugin 'gmarik/Vundle.vim'
 " Syntax checking / highlighting
 " Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
-Bundle 'klen/python-mode'
-" Bundle 'ervandew/supertab'
-" Bundle 'davidhalter/jedi-vim'
+" Bundle 'klen/python-mode'
+Bundle 'ervandew/supertab'
+Bundle 'davidhalter/jedi-vim'
 
 " Vim paste easy
 Plugin 'roxma/vim-paste-easy'
@@ -101,64 +101,65 @@ call vundle#end()            " required
 " [M            Jump on previous class or method (normal, visual, operator modes)
 " ]M            Jump on next class or method (normal, visual, operator modes)
 " Defaults are commented.
-let g:pymode = 1
-let g:pymode_python = 'python3'
-
-" Documentation
-let g:pymode_doc = 0
-" let g:pymode_doc_key = 'K'
-
-" Linting
-let g:pymode_lint = 1
-let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
-" " Values may be chosen from: `pylint`, `pep8`, `mccabe`, `pep257`, `pyflakes`.
-" Auto check on save
-let g:pymode_lint_write = 1
-
-" Mccabe complexity setting
-" let g:pymode_lint_options_mccabe = { 'complexity': 12 }
-
-" let g:pymode_rope = 1
-" added additionally.
-let g:pymode_rope_completion = 1
-let g:pymode_rope_complete_on_dot = 1
-let g:pymode_rope_completion_bind = '<leader>d'
-let g:pymode_rope_autoimport_modules = ['os', 're', 'argparse', 'datetime']
-
-" Enable breakpoints plugin
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_bind = '<leader>b'
-
-" syntax highlighting
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_print_as_function = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-let g:pymode_syntax_highlight_self = g:pymode_syntax_all
-
-" If you prefer the Omni-Completion tip window to close when a selection is
-" made, these lines close it on movement in insert mode or when leaving
-" insert mode
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-
-" Don't autofold code
-let g:pymode_folding = 0
+" let g:pymode = 0
+" let g:pymode_python = 'python3'
+" 
+" " Documentation
+" let g:pymode_doc = 0
+" " let g:pymode_doc_key = 'K'
+" 
+" " Linting
+" let g:pymode_lint = 1
+" let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+" " " Values may be chosen from: `pylint`, `pep8`, `mccabe`, `pep257`, `pyflakes`.
+" " Auto check on save
+" let g:pymode_lint_write = 1
+" 
+" " Mccabe complexity setting
+" " let g:pymode_lint_options_mccabe = { 'complexity': 12 }
+" 
+" " let g:pymode_rope = 1
+" " added additionally.
+" let g:pymode_rope_completion = 1
+" let g:pymode_rope_complete_on_dot = 1
+" let g:pymode_rope_completion_bind = '<leader>d'
+" let g:pymode_rope_autoimport_modules = ['os', 're', 'argparse', 'datetime']
+" 
+" " Enable breakpoints plugin
+" let g:pymode_breakpoint = 1
+" let g:pymode_breakpoint_bind = '<leader>b'
+" 
+" " syntax highlighting
+" let g:pymode_syntax = 1
+" let g:pymode_syntax_all = 1
+" let g:pymode_syntax_print_as_function = 1
+" let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+" let g:pymode_syntax_space_errors = g:pymode_syntax_all
+" let g:pymode_syntax_highlight_self = g:pymode_syntax_all
+" 
+" " If you prefer the Omni-Completion tip window to close when a selection is
+" " made, these lines close it on movement in insert mode or when leaving
+" " insert mode
+" autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" 
+" " Don't autofold code
+" let g:pymode_folding = 0
 
 " Python3 highlight code
 " let python_highlight_all = 1
 
 """ jedi-vim """
 " https://github.com/davidhalter/jedi-vim
-" let g:jedi#goto_command = "<leader>d"
-" let g:jedi#goto_assignments_command = "<leader>g"
-" let g:jedi#goto_definitions_command = ""
-" let g:jedi#documentation_command = " K"
-" let g:jedi#usages_command = "<leader>n"
-" let g:jedi#completions_command = "<C-Space>"
-" let g:jedi#completions_command = "<leader>c"
-" let g:jedi#rename_command = "<leader>r"
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+" let g:jedi#goto_definitions_command = "<leader>d"
+let g:jedi#documentation_command = " K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+" Additional settings
+let g:jedi#popup_on_dot = 0
 
 """""""""""""""""""""""""""""""""
 " airline settings
