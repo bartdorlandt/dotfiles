@@ -45,8 +45,9 @@ if [[ ! -d $HOME/.vim/bundle ]] ; then
 fi
 
 ### Other environment ###
-echo "Creating symlinks for screenrc, email forward"
+echo "Creating symlinks for screenrc, tmux, email forward"
 ln -sf $PROFILEDIR/screenrc $HOME/.screenrc
+ln -sf $PROFILEDIR/tmux.conf $HOME/.tmux.conf
 
 if [[ ! -e $HOME/.forward ]] ; then 
 	echo "Do you want to create a .forward file. If so type your email, else enter"
