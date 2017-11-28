@@ -10,11 +10,6 @@
 set nocompatible        " Use Vim defaults (much better!)
 "filetype off            " required for Vundle
 
-" Load up all of our plugins
-if filereadable(expand("~/.vimrc.bundles"))
-	source ~/.vimrc.bundles
-endif
-
 filetype plugin indent on		" required
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -33,7 +28,7 @@ let g:mapleader = ","
 "let maplocalleader = "<space>"
 
 " Fast saving
-nmap <leader>w :w!<cr>
+nmap <leader>, :w!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -191,6 +186,9 @@ set pastetoggle=<F2>
 " Requires +xterm_clipboard support. test via:
 " vim --version | grep xterm
 " apt install vim-gnome for support e.g.
+
+set clipboard=unnamed
+
 vnoremap <C-c> "*y
 map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
 map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
@@ -510,4 +508,9 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
+
+" Load up all of our plugins
+if filereadable(expand("~/.vimrc.bundles"))
+	source ~/.vimrc.bundles
+endif
 

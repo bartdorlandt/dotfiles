@@ -1,4 +1,4 @@
-"
+
 " :so % to refresh .vimrc after making changes
 " :VundleInstall to install new stuff
 " :VundleUpdate to update to latest versions
@@ -23,45 +23,29 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 " call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
-" https://github.com/<variable>
-Plugin 'gmarik/Vundle.vim'
-" Plugin 'vim-scripts/indentpython.vim'
+Plugin 'gmarik/Vundle.vim' " Vundle to manage plugin Vundle
 
 " Syntax checking / highlighting
-" Plugin 'nvie/vim-flake8'
-Bundle 'klen/python-mode'
-Bundle 'ervandew/supertab'
-" Bundle 'davidhalter/jedi-vim'
-
-" Vim paste easy
-Plugin 'roxma/vim-paste-easy'
-
-" Filebrowsing
-" Status line + buffer
-Plugin 'vim-airline/vim-airline'
+Plugin 'vim-syntastic/syntastic' " Syntax highlighting
+" Pymode, big plugin for Python
+" Bundle 'klen/python-mode'
+" Bundle 'davidhalter/jedi-vim' " Jedi for python, especially rename is good!
+"Supertab, to make tab work everywhere
+" Bundle 'ervandew/supertab'
+Plugin 'ervandew/supertab'
+Plugin 'roxma/vim-paste-easy' " Vim paste easy
+Plugin 'scrooloose/nerdtree' " file drawer, open with :NERDTreeToggle
+Plugin 'kien/ctrlp.vim' " fuzzy find files
+Plugin 'vim-airline/vim-airline' " Status line + buffer
 " Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-bufferline'
-" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-
-" Perl plugin
-Plugin 'vim-perl/vim-perl'
-
-" Markdown for Vim
-" https://github.com/plasticboy/vim-markdown
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-" Auto-pairs plugin. "",'',``. Quite annoying sometimes.
-" Plugin 'jiangmiao/auto-pairs'
-
-" Multi-insert, just like sublime.
-Plugin 'terryma/vim-multiple-cursors'
-
-" Vim surroundings {}[](). quite annoying sometimes.
-Plugin 'tpope/vim-surround'
-
-" Vim repeat for plugins, to be able to use . with them.
-Plugin 'tpope/vim-repeat'
+Plugin 'vim-perl/vim-perl' " Perl plugin
+" Plugin 'godlygeek/tabular' " Aliging output
+Plugin 'plasticboy/vim-markdown' " Markdown for Vim
+Plugin 'terryma/vim-multiple-cursors' " Multi-insert, just like sublime.
+Plugin 'tpope/vim-surround' " Vim surroundings {}[](). quite annoying sometimes.
+Plugin 'tpope/vim-repeat' " Vim repeat for plugins, to be able to use . with them.
+Plugin 'christoomey/vim-tmux-navigator' " Tmux
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -83,59 +67,59 @@ call vundle#end()            " required
 "  my $str = *whee!;         vllllS'     my $str = 'whee!';
 " with visual, use S" to surround with ".
 
-""""""""""""""""""
-" Python settings
-""""""""""""""""""
-" Python-mode
-" Activate rope
-" Keys:
-" K             Show python docs
-" <Ctrl-Space>  Rope autocomplete
-" <Ctrl-c>g     Rope goto definition
-" <Ctrl-c>d     Rope show documentation
-" <Ctrl-c>f     Rope find occurrences
-" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
-" [[            Jump on previous class or function (normal, visual, operator modes)
-" ]]            Jump on next class or function (normal, visual, operator modes)
-" [M            Jump on previous class or method (normal, visual, operator modes)
-" ]M            Jump on next class or method (normal, visual, operator modes)
-" Defaults are commented.
-" let g:pymode = 1
-let g:pymode_python = 'python3'
-let g:pymode_trim_whitespaces = 1
-let g:pymode_options = 0
-let g:pymode_options_max_line_length = 79
-let g:pymode_options_colorcolumn = 0
-let g:pymode_indent = 1
-let g:pymode_folding = 1
-let g:pymode_run = 0
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_bind = '<leader>b'
-" Documentation
-let g:pymode_doc = 0
-let g:pymode_doc_key = 'K'
-" " Linting
-let g:pymode_lint = 1
-" Auto check on save
-let g:pymode_lint_write = 1
-" let g:pymode_rope = 1
-" added additionally.
-let g:pymode_rope_completion = 1
-let g:pymode_rope_complete_on_dot = 0
-let g:pymode_rope_completion_bind = '<C-Space>'
-let g:pymode_rope_autoimport_modules = ['os', 're', 'argparse', 'datetime']
-" Rename under cursor
-let g:pymode_rope_rename_bind = '<Leader>rr'
-" let g:pymode_rope_rename_bind = '<C-c>rr'
-" let g:pymode_rope_rename_bind = '<leader>r'
-" syntax highlighting
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_print_as_function = 1
-" let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-" let g:pymode_syntax_space_errors = g:pymode_syntax_all
-" let g:pymode_syntax_highlight_self = g:pymode_syntax_all
-let g:pymode_lint_options_mccabe = { 'complexity': 15 }
+" """"""""""""""""""
+" " Python settings
+" """"""""""""""""""
+" " Python-mode
+" " Activate rope
+" " Keys:
+" " K             Show python docs
+" " <Ctrl-Space>  Rope autocomplete
+" " <Ctrl-c>g     Rope goto definition
+" " <Ctrl-c>d     Rope show documentation
+" " <Ctrl-c>f     Rope find occurrences
+" " <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
+" " [[            Jump on previous class or function (normal, visual, operator modes)
+" " ]]            Jump on next class or function (normal, visual, operator modes)
+" " [M            Jump on previous class or method (normal, visual, operator modes)
+" " ]M            Jump on next class or method (normal, visual, operator modes)
+" " Defaults are commented.
+" " let g:pymode = 1
+" let g:pymode_python = 'python3'
+" let g:pymode_trim_whitespaces = 1
+" let g:pymode_options = 0
+" let g:pymode_options_max_line_length = 79
+" let g:pymode_options_colorcolumn = 0
+" let g:pymode_indent = 1
+" let g:pymode_folding = 1
+" let g:pymode_run = 0
+" let g:pymode_breakpoint = 1
+" let g:pymode_breakpoint_bind = '<leader>b'
+" " Documentation
+" let g:pymode_doc = 0
+" let g:pymode_doc_key = 'K'
+" " " Linting
+" let g:pymode_lint = 1
+" " Auto check on save
+" let g:pymode_lint_write = 1
+" " let g:pymode_rope = 1
+" " added additionally.
+" let g:pymode_rope_completion = 1
+" let g:pymode_rope_complete_on_dot = 0
+" let g:pymode_rope_completion_bind = '<C-Space>'
+" let g:pymode_rope_autoimport_modules = ['os', 're', 'argparse', 'datetime']
+" " Rename under cursor
+" let g:pymode_rope_rename_bind = '<Leader>rr'
+" " let g:pymode_rope_rename_bind = '<C-c>rr'
+" " let g:pymode_rope_rename_bind = '<leader>r'
+" " syntax highlighting
+" let g:pymode_syntax = 1
+" let g:pymode_syntax_all = 1
+" let g:pymode_syntax_print_as_function = 1
+" " let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+" " let g:pymode_syntax_space_errors = g:pymode_syntax_all
+" " let g:pymode_syntax_highlight_self = g:pymode_syntax_all
+" let g:pymode_lint_options_mccabe = { 'complexity': 15 }
 
 
 " " If you prefer the Omni-Completion tip window to close when a selection is
@@ -160,6 +144,18 @@ let g:pymode_lint_options_mccabe = { 'complexity': 15 }
 " " Additional settings
 
 """""""""""""""""""""""""""""""""
+" Syntastic settings
+"""""""""""""""""""""""""""""""""
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"""""""""""""""""""""""""""""""""
 " airline settings
 """""""""""""""""""""""""""""""""
 let g:airline#extensions#tabline#enabled = 1
@@ -173,4 +169,38 @@ set conceallevel=1
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_autowrite = 1
+
+
+"""""""""""""""""""""""""""""""""
+" NERDtree settings
+"""""""""""""""""""""""""""""""""
+" close NERDTree after a file is opened
+let g:NERDTreeQuitOnOpen=1
+" show hidden files in NERDTree
+let NERDTreeShowHidden=1
+" Toggle NERDTree
+" nmap <silent><leader>f :NERDTreeToggle<cr>
+nmap <silent> <leader>k :NERDTreeToggle<cr>
+" expand to the path of the file in the current buffer
+nmap <silent><leader>y :NERDTreeFind<cr>
+
+"""""""""""""""""""""""""""""""""
+" CtrlP settings
+"""""""""""""""""""""""""""""""""
+" map fuzzyfinder (CtrlP) plugin
+" nmap <silent> <leader>t :CtrlP<cr>
+nmap <silent><Leader>r :CtrlPBuffer<cr>
+let g:ctrlp_map='<leader>t'
+let g:ctrlp_dotfiles=1
+let g:ctrlp_working_path_mode = 'ra'
+
+" CtrlP ignore patterns
+let g:ctrlp_custom_ignore = {
+            \ 'dir': '\.git$\|node_modules$\|\.hg$\|\.svn$',
+            \ 'file': '\.exe$\|\.so$'
+            \ }
+
+" search the nearest ancestor that contains .git, .hg, .svn
+let g:ctrlp_working_path_mode = 2
+
 
