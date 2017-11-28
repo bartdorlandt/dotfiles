@@ -48,6 +48,7 @@ fi
 echo "Creating symlinks for screenrc, tmux, email forward"
 ln -sf $PROFILEDIR/screenrc $HOME/.screenrc
 ln -sf $PROFILEDIR/tmux.conf $HOME/.tmux.conf
+ln -sf $PROFILEDIR/tmuxp $HOME/.tmuxp
 
 if [[ ! -e $HOME/.forward ]] ; then 
 	echo "Do you want to create a .forward file. If so type your email, else enter"

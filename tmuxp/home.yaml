@@ -1,0 +1,32 @@
+session_name: home
+windows:
+- focus: 'true'
+  layout: ffca,211x53,0,0[211x37,0,0,1,211x15,0,38{105x15,0,38,2,105x15,106,38,8}]
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command:
+    - cd $HOME/git
+  - shell_command:
+    - cd $HOME/git
+  - shell_command:
+    - cd $HOME/git/user_scripts_linux
+  window_name: Main
+- layout: b962,211x53,0,0,5
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command: 
+    - $HOME
+  window_name: Project
+- layout: 4116,211x53,0,0[211x26,0,0,6,211x26,0,27,7]
+  options:
+    automatic-rename: 'off'
+  panes:
+  - zsh
+  - focus: 'true'
+    shell_command: zsh
+  start_directory: /home/bart
+  window_name: Split
