@@ -21,6 +21,8 @@ alias t='telnet'
 alias n='nslookup'
 alias dus='du -ks * | sort -n'
 alias o='less'
+c() { cd $1; ls; }
+alias cd='c'
 if [ -x /usr/bin/vim ]; then
   alias vi='vim'
 fi
