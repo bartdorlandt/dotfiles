@@ -439,6 +439,8 @@ map <leader>m :call RemoveM()<cr>
 " Quickly open a buffer for scripbble
 map <leader>q :e ~/buffer<cr>
 
+" enable mouse
+set mouse=a
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
