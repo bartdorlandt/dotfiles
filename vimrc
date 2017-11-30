@@ -248,6 +248,7 @@ autocmd FileType python setlocal nonumber
 autocmd FileType python setlocal textwidth=79
 autocmd FileType python setlocal showmatch
 autocmd FileType python setlocal expandtab
+autocmd FileType python setlocal relativenumber
 autocmd FileType python match BadWhitespace /^\t\+/
 autocmd FileType python match BadWhitespace /\s\+$/
 autocmd FileType python autocmd BufWritePre <buffer> :call DeleteTrailingWS()
@@ -439,8 +440,13 @@ map <leader>m :call RemoveM()<cr>
 " Quickly open a buffer for scripbble
 map <leader>q :e ~/buffer<cr>
 
-" enable mouse
+" enable mouse, mainly used for inside tmux
 set mouse=a
+" disable pointer selection (quite annoying, when selecting the pane in tmux
+nmap <LeftMouse> <nop>
+imap <LeftMouse> <nop>
+vmap <LeftMouse> <nop>
+nmap <2-LeftMouse> <nop>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

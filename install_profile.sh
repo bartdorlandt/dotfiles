@@ -44,11 +44,18 @@ if [[ ! -d $HOME/.vim/bundle ]] ; then
 	git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 fi
 
-### Other environment ###
-echo "Creating symlinks for screenrc, tmux, email forward"
-ln -sf $PROFILEDIR/screenrc $HOME/.screenrc
+### Tmux ###
+echo "Creating the TMUX environment"
 ln -sf $PROFILEDIR/tmux.conf $HOME/.tmux.conf
-ln -sf $PROFILEDIR/tmuxp $HOME/.tmuxp
+ln -sf $PROFILEDIR/tmuxp $HOME/.tmuxp		# will need pip3 --user install tmuxp
+
+if [[ ! -d $HOME/.tmux/plugins/tpm ]] ; then
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
+### Other environment ###
+echo "Creating symlinks for screenrc, email forward"
+ln -sf $PROFILEDIR/screenrc $HOME/.screenrc
 
 if [[ ! -e $HOME/.forward ]] ; then 
 	echo "Do you want to create a .forward file. If so type your email, else enter"
