@@ -3,7 +3,7 @@
 if [[ -n "$1" ]] ; then
 	PROFILEDIR=$1
 else
-	PROFILEDIR=$HOME/git/linux_profile
+	PROFILEDIR=$HOME/git/dotfiles
 fi
 
 test -d $PROFILEDIR || (echo "Provide the location behind this script." && exit 1)
