@@ -76,8 +76,11 @@ if [[ ! -d $HOME/git/zsh-autosuggestions ]] ; then
 	git clone git://github.com/zsh-users/zsh-autosuggestions.git $HOME/git/zsh-autosuggestions
 fi
 if [[ ! -d $HOME/git/zsh-syntax-highlighting ]] ; then
-	git clone git@github.com:zsh-users/zsh-syntax-highlighting.git  $HOME/git/zsh-syntax-highlighting
+	git clone git@github.com:zsh-users/zsh-syntax-highlighting.git $HOME/git/zsh-syntax-highlighting
 fi
+ln -sf $HOME/git/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting 
+ln -sf $HOME/git/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
 if [[ -e $HOME/.zshrc ]]; then
 	rm $HOME/.zshrc
 fi
