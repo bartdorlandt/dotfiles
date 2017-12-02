@@ -72,6 +72,12 @@ echo "Creating zsh environment"
 if [[ ! -d $HOME/git/oh-my-zsh-custom ]] ; then
 	git clone git@github.com:bambam82/oh-my-zsh-custom.git $HOME/git/oh-my-zsh-custom
 fi
+if [[ ! -d $HOME/git/zsh-autosuggestions ]] ; then
+	git clone git://github.com/zsh-users/zsh-autosuggestions.git $HOME/git/zsh-autosuggestions
+fi
+if [[ ! -d $HOME/git/zsh-syntax-highlighting ]] ; then
+	git clone git@github.com:zsh-users/zsh-syntax-highlighting.git  $HOME/git/zsh-syntax-highlighting
+fi
 if [[ -e $HOME/.zshrc ]]; then
 	rm $HOME/.zshrc
 fi
