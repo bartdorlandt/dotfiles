@@ -47,7 +47,7 @@ fi
 ### Tmux ###
 echo "Creating the TMUX environment"
 ln -sf $PROFILEDIR/tmux.conf $HOME/.tmux.conf
-ln -sf $PROFILEDIR/tmuxp $HOME/.tmuxp		# will need pip3 --user install tmuxp
+ln -sf $PROFILEDIR/tmuxp $HOME/		# will need pip3 --user install tmuxp
 
 if [[ ! -d $HOME/.tmux/plugins/tpm ]] ; then
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
