@@ -61,6 +61,9 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
+# Adjusting default behavior for wildcards
+unsetopt nomatch
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
