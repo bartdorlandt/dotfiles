@@ -1,2 +1,2 @@
 Defaults        env_reset,!lecture,!tty_tickets,!fqdn,insults,timestamp_timeout=10
-Defaults env_keep = "http_proxy https_proxy ftp_proxy"
+Defaults env_keep += "http_proxy https_proxy ftp_proxy SSH_AUTH_SOCK"
