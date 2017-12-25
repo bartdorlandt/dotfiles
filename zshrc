@@ -64,6 +64,9 @@ source $ZSH/oh-my-zsh.sh
 # Adjusting default behavior for wildcards
 unsetopt nomatch
 
+setopt auto_cd
+cdpath=($HOME/git)
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
