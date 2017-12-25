@@ -125,7 +125,7 @@ if [[ ! $(id -u) == 0 ]]; then
 index-servers=pypi
 
 [pypi]
-repository = https://pypi.python.org/pypi
+repository = https://upload.python.org/legacy/
 username = $USERNAME
 password = $PASSWORD
 EOF
