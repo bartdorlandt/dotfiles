@@ -26,12 +26,6 @@ alias cd='c'
 if [ -x /usr/bin/vim ]; then
   alias vi='vim'
 fi
-if [ -x /usr/bin/pip3 ]; then
-  alias pip='pip3'
-fi
-if [ -x /usr/bin/python3 ]; then
-  alias python='python3'
-fi
 alias curlo='curl -# -C - -O -J -L'
 #alias curl='curl -O'
 alias CON='screen /dev/ttyUSB0 9600'
