@@ -42,6 +42,7 @@ Plugin 'bling/vim-bufferline'
 Plugin 'vim-perl/vim-perl' " Perl plugin
 " Plugin 'godlygeek/tabular' " Aliging output
 Plugin 'plasticboy/vim-markdown' " Markdown for Vim
+Plugin 'Rykka/riv.vim' " reStructuredText for Vim
 Plugin 'terryma/vim-multiple-cursors' " Multi-insert, just like sublime.
 Plugin 'tpope/vim-surround' " Vim surroundings {}[](). quite annoying sometimes.
 Plugin 'tpope/vim-repeat' " Vim repeat for plugins, to be able to use . with them.
@@ -174,7 +175,6 @@ set conceallevel=1
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_autowrite = 1
-
 
 """""""""""""""""""""""""""""""""
 " NERDtree settings

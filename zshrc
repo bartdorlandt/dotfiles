@@ -56,7 +56,7 @@ plugins=(git debian extract zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+# export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -82,6 +82,13 @@ cdpath=($HOME/git)
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# python, virtual environments
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export WORKON_HOME=~/.virtualenvs
+export PROJECT_HOME=$HOME/devel
+source /usr/local/bin/virtualenvwrapper.sh
+
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
