@@ -81,11 +81,13 @@ unsetopt nomatch
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# python, virtual environments
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export WORKON_HOME=~/.virtualenvs
-export PROJECT_HOME=$HOME/devel
-source /usr/local/bin/virtualenvwrapper.sh
+if [[ -d $HOME/.virtualenvs ]] && [[ -x /usr/local/bin/virtualenvwrapper.sh ]] ; then
+	# python, virtual environments
+	export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+	export WORKON_HOME=~/.virtualenvs
+	export PROJECT_HOME=$HOME/git
+	source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
