@@ -151,15 +151,29 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height = 5
 
 " let g:syntastic_python_checkers = ['flake8', 'pep8', 'pylint', 'python']
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args='--ignore=W391'
+let g:syntastic_python_flake8_args='--ignore=E722'
 let g:syntastic_python_flake8_args = "--max-line-length=96"
+
+" Able to use :q in the location list to close it
+function! QuitOrLclose()
+	if &buftype == 'quickfix'
+		lclose
+		lclose
+	else
+		quit
+	endif
+endfunction
+
+cabbrev q call QuitOrLclose()
 
 """""""""""""""""""""""""""""""""
 " airline settings
