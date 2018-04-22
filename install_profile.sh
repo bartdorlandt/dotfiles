@@ -87,10 +87,20 @@ fi
 ln -sf $PROFILEDIR/zshrc $HOME/.zshrc 
 if [[ -d $HOME/.oh-my-zsh ]] && [[ ! -L $HOME/.oh-my-zsh/custom ]] ; then
 	DIR="$HOME/git/oh-my-zsh-custom"
-	for x in $(ls -1 $DIR); do
+	for x in $(ls -1 $DIR/*.zsh); do
 		# Variable path due to VM's
 		#ln -sf ../../git/oh-my-zsh-custom/$x $HOME/.oh-my-zsh/custom/
 		ln -sf $DIR/$x $HOME/.oh-my-zsh/custom/
+	done
+fi
+
+# ZSH Themes
+if [[ -d $HOME/.oh-my-zsh/themes ]] && [[ ! -L $HOME/.oh-my-zsh/custom/themes ]] ; then
+	DIR="$HOME/git/oh-my-zsh-custom/themes"
+	for x in $(ls -1 $DIR/*.zsh-theme); do
+		# Variable path due to VM's
+		#ln -sf ../../git/oh-my-zsh-custom/$x $HOME/.oh-my-zsh/custom/
+		ln -sf $DIR/$x $HOME/.oh-my-zsh/custom/themes
 	done
 fi
 
