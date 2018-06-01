@@ -36,6 +36,9 @@ alias sno='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias alg='alias | grep'
 alias dns='nmcli device show | grep -e DNS -e GENERAL.DEVICE'
 alias bart='export BART=1'
+alias ip='ip --color'
+alias ip4='ip -4 --color --brief addr | grep -v UNKNOWN'
+alias ip6='ip -6 --color --brief addr | grep -v UNKNOWN'
 
 ############### Docker ###############
 # Docker
