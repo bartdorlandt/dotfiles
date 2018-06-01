@@ -6,3 +6,5 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="4ee7", MODE="0666", 
 # Fastboot Nexus5x
 #SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666", OWNER="bart"
 
+# Huawei Mate10 pro
+SUBSYSTEM=="usb", ATTR{idVendor}=="12d1", ATTR{idProduct}=="107e", MODE="0666", OWNER="bart"
