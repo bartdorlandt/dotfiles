@@ -152,8 +152,8 @@ if [[ $(id -u) == 0 ]]; then
 	fi
 	ln -sf $PROFILEDIR/$SUB/root_aliases $HOME/.root_aliases 
 	#
-	FILE="$PROFILEDIR/etc/udev/rules.d/99-yubikeys.rules"
-	test -f $FILE && ln -sf $FILE /etc/udev/rules.d/99-yubikeys.rules
+	# FILE="$PROFILEDIR/etc/udev/rules.d/99-yubikeys.rules"
+	# test -f $FILE && ln -sf $FILE /etc/udev/rules.d/99-yubikeys.rules
 	FILE="$PROFILEDIR/etc/udev/rules.d/51-android.rules"
 	test -f $FILE && ln -sf $FILE /etc/udev/rules.d/51-android.rules
 	#
