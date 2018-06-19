@@ -102,6 +102,7 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Yubikey
+# http://www.engineerbetter.com/blog/yubikey-ssh/
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye
 unset SSH_AGENT_PID
