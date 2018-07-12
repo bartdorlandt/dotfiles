@@ -42,6 +42,11 @@ alias ipb='ip --color --brief'
 alias ip4='ip -4 --color --brief addr | grep -v UNKNOWN'
 alias ip6='ip -6 --color --brief addr | grep -v UNKNOWN'
 
+### certbot ###
+if [ -x /opt/certbot/certbot-auto ]; then
+  alias certbot='/opt/certbot/certbot-auto'
+fi
+
 ############### Docker ###############
 # Docker
 alias DOCKER='cd /var/lib/docker'
