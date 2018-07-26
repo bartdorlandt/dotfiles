@@ -248,7 +248,7 @@ autocmd FileType python setlocal nonumber
 autocmd FileType python setlocal textwidth=79
 autocmd FileType python setlocal showmatch
 autocmd FileType python setlocal expandtab
-autocmd FileType python setlocal relativenumber
+"autocmd FileType python setlocal relativenumber
 autocmd FileType python match BadWhitespace /^\t\+/
 autocmd FileType python match BadWhitespace /\s\+$/
 autocmd FileType python autocmd BufWritePre <buffer> :call DeleteTrailingWS()
