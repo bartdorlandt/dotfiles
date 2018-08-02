@@ -176,6 +176,7 @@ if [[ $(id -u) == 0 ]]; then
 
 	# Test if tilix is installed and execute the necessary steps 
 	# /etc/profile.d/vte.sh
+	# https://gnunn1.github.io/tilix-web/manual/vteconfig/
 	if [[ $(dpkg -l tilix | grep ^ii) ]] ; then
 		if [[ -e /etc/profile.d/vte.sh ]]; then
 			exit
