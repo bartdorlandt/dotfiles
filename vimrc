@@ -270,6 +270,13 @@ autocmd FileType sql autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 autocmd FileType txt setlocal fo+=n
 autocmd FileType txt autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 
+" yaml
+autocmd FileType yaml setlocal ts=2
+autocmd FileType yaml setlocal sts=2
+autocmd FileType yaml setlocal sw=2
+autocmd FileType yaml setlocal expandtab
+autocmd FileType yaml setlocal fo+=n
+
 """"""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""
