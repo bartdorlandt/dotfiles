@@ -173,6 +173,17 @@ if [[ $(id -u) == 0 ]]; then
 	fi
 	FILE="$PROFILEDIR/$SUB/aptitude-config"
 	test -f $FILE && ln -sf $FILE $HOME/.aptitude/config
+
+	# Test if tilix is installed and execute the necessary steps 
+	# /etc/profile.d/vte.sh
+	# https://gnunn1.github.io/tilix-web/manual/vteconfig/
+	if [[ $(dpkg -l tilix | grep ^ii) ]] ; then
+		if [[ -e /etc/profile.d/vte.sh ]]; then
+			exit
+		else
+			ln -s $(ls -1tr /etc/profile.d/vte* | tail -n1) /etc/profile.d/vte.sh
+		fi
+	fi
 fi
 
 # Add an git pull to crontab if it doesn't exist yet
