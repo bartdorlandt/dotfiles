@@ -115,3 +115,9 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
 	source /etc/profile.d/vte.sh
 	__vte_osc7
 fi
+
+# Verify if the server specific file is there, 
+# which would have been linked to the dotfiles-git and execute it
+if [[ -e .zshrc.server ]]; then
+	source .zshrc.server
+fi
