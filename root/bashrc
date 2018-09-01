@@ -16,3 +16,5 @@ if [ -f ~/.root_aliases ]; then
 fi
 
 PS1="\\[\\e[1;31m\\]\\u\\[\\e[1;37m\\]@\\[\\e[1;36m\\]\\h:\\[\\e[1;33m\\] \\w\\[\\e[1;36m\\] \\$\\[\\e[0m\\] "
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

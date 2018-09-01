@@ -113,10 +113,8 @@ echo "** Other applications and tools **"
 echo "**** Overruling ctrl+r with fzf"
 if [[ ! -d $HOME/git/fzf ]] ; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/git/fzf
-	FZF="YES"
-	#$HOME/git/fzf/install
+	$HOME/git/fzf/install --all 1>/dev/null
 fi
-ln -sf $HOME/git/fzf $HOME/.fzf
 
 echo "**** Adding Diff-so-fancy"
 # https://github.com/so-fancy/diff-so-fancy
@@ -218,9 +216,7 @@ if [[ $(id -u) == 0 ]]; then
 	# /etc/profile.d/vte.sh
 	# https://gnunn1.github.io/tilix-web/manual/vteconfig/
 	hash tilix 2>/dev/null && { 
-		if [[ -e /etc/profile.d/vte.sh ]]; then
-			exit
-		else
+		if [[ ! -e /etc/profile.d/vte.sh ]]; then
 			ln -s $(ls -1tr /etc/profile.d/vte* | tail -n1) /etc/profile.d/vte.sh
 		fi
 	}
@@ -235,15 +231,11 @@ fi
 
 echo ""
 echo "** Manual modifications:"
-if [[ "$FZF" == "YES" ]]; then
-	echo "  Install fzf using $HOME/git/fzf/install"
-fi
-
-echo "  Downloading other applications, not part of the repo"
-echo "  - bat > cat:        https://github.com/sharkdp/bat/releases/latest"
-echo "  - ripgrep > grep:   https://github.com/BurntSushi/ripgrep/releases/latest"
+echo " Downloading other applications, not part of the repo"
+echo " - bat > cat:        https://github.com/sharkdp/bat/releases/latest"
+echo " - ripgrep > grep:   https://github.com/BurntSushi/ripgrep/releases/latest"
 echo ""
-echo "  Crontab:"
-echo "    NOTE: only if no password is required"
-echo "    0 5 * * *	git pull $PROFILEDIR > /dev/null 2>&1"
+echo " Crontab:"
+echo "   NOTE: only if no password is required"
+echo "   0 5 * * *	git pull $PROFILEDIR > /dev/null 2>&1"
 echo ""
