@@ -139,7 +139,6 @@ git config --global core.filemode true
 # using diff-so-fancy and git color update
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 git config --global color.ui true
-
 git config --global color.diff-highlight.oldNormal    "red bold"
 git config --global color.diff-highlight.oldHighlight "red bold 52"
 git config --global color.diff-highlight.newNormal    "green bold"
@@ -233,14 +232,16 @@ fi
 # fi
 
 echo ""
+echo "** Manual modifications:"
 if [[ "$FZF" == "YES" ]]; then
-	echo "Enabling user depending stuff"
-	echo "Install fzf using $HOME/git/fzf/install"
-	echo ""
-	echo ""
+	echo "  Install fzf using $HOME/git/fzf/install"
 fi
 
+echo "  Downloading other applications, not part of the repo"
+echo "  - bat > cat:        https://github.com/sharkdp/bat/releases/latest"
+echo "  - ripgrep > grep:   https://github.com/BurntSushi/ripgrep/releases/latest"
 echo ""
-echo "you might want to add the following line to your crontab."
-echo "	only if no password is required"
-echo "0 5 * * *	git pull $PROFILEDIR > /dev/null 2>&1"
+echo "  Crontab:"
+echo "    NOTE: only if no password is required"
+echo "    0 5 * * *	git pull $PROFILEDIR > /dev/null 2>&1"
+echo ""
