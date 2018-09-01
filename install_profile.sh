@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# test for dependencies
+hash curl 2>/dev/null || { echo >&2 "I require 'curl' but it's not installed. Aborting."; exit 1; }
+hash git 2>/dev/null || { echo >&2 "I require 'git' but it's not installed. Aborting."; exit 1; }
+
 if [[ -n "$1" ]] ; then
 	PROFILEDIR=$1
 else
@@ -103,7 +107,8 @@ if [[ -d $HOME/.oh-my-zsh/themes ]] && [[ ! -L $HOME/.oh-my-zsh/custom/themes ]]
 fi
 
 echo ""
-echo "Overruling ctrl+r with fzf"
+echo "** Other applications and tools **"
+echo "**** Overruling ctrl+r with fzf"
 if [[ ! -d $HOME/git/fzf ]] ; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/git/fzf
 	FZF="YES"
@@ -111,11 +116,15 @@ if [[ ! -d $HOME/git/fzf ]] ; then
 fi
 ln -sf $HOME/git/fzf $HOME/.fzf
 
-echo ""
-echo "Adding Diff-so-fancy"
+echo "**** Adding Diff-so-fancy"
 # https://github.com/so-fancy/diff-so-fancy
 curl -s https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy > $HOME/bin/diff-so-fancy
 chmod u+x $HOME/bin/diff-so-fancy
+
+echo "**** Adding prettyping"
+# https://github.com/denilsonsa/prettyping
+curl -s https://raw.githubusercontent.com/denilsonsa/prettyping/master/prettyping > $HOME/bin/prettyping
+chmod u+x $HOME/bin/prettyping
 
 echo "Git settings"
 git config --global user.name "`whoami`@`hostname`"
@@ -224,10 +233,13 @@ fi
 # fi
 
 echo ""
-echo "Enabling user depending stuff"
-echo "Install fzf using $HOME/git/fzf/install"
-echo ""
-echo ""
+if [[ "$FZF" == "YES" ]]; then
+	echo "Enabling user depending stuff"
+	echo "Install fzf using $HOME/git/fzf/install"
+	echo ""
+	echo ""
+fi
+
 echo ""
 echo "you might want to add the following line to your crontab."
 echo "	only if no password is required"
