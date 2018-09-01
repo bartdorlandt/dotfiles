@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# test for dependencies
+hash curl 2>/dev/null || { echo >&2 "I require 'curl' but it's not installed. Aborting."; exit 1; }
+hash git 2>/dev/null || { echo >&2 "I require 'git' but it's not installed. Aborting."; exit 1; }
+
 if [[ -n "$1" ]] ; then
 	PROFILEDIR=$1
 else
@@ -10,6 +14,8 @@ test -d $PROFILEDIR || (echo "Provide the location behind this script." && exit 
 
 # Making sure ~/git exists
 test -d $HOME/git/ || mkdir $HOME/git
+# Making sure ~/bin exists
+test -d $HOME/bin/ || mkdir $HOME/bin
 
 SUB=user
 if [[ $(id -u) == 0 ]]; then
@@ -102,6 +108,26 @@ if [[ -d $HOME/.oh-my-zsh/themes ]] && [[ ! -L $HOME/.oh-my-zsh/custom/themes ]]
 	done
 fi
 
+echo ""
+echo "** Other applications and tools **"
+echo "**** Overruling ctrl+r with fzf"
+if [[ ! -d $HOME/git/fzf ]] ; then
+	git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/git/fzf
+	FZF="YES"
+	#$HOME/git/fzf/install
+fi
+ln -sf $HOME/git/fzf $HOME/.fzf
+
+echo "**** Adding Diff-so-fancy"
+# https://github.com/so-fancy/diff-so-fancy
+curl -s https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy > $HOME/bin/diff-so-fancy
+chmod u+x $HOME/bin/diff-so-fancy
+
+echo "**** Adding prettyping"
+# https://github.com/denilsonsa/prettyping
+curl -s https://raw.githubusercontent.com/denilsonsa/prettyping/master/prettyping > $HOME/bin/prettyping
+chmod u+x $HOME/bin/prettyping
+
 echo "Git settings"
 git config --global user.name "`whoami`@`hostname`"
 test -n "$EMAIL" && git config --global user.email $EMAIL
@@ -112,6 +138,20 @@ git config --global branch.autosetuprebase always
 git config --global core.whitespace warn
 git config --global core.autocrlf input
 git config --global core.filemode true
+# using diff-so-fancy and git color update
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+git config --global color.ui true
+git config --global color.diff-highlight.oldNormal    "red bold"
+git config --global color.diff-highlight.oldHighlight "red bold 52"
+git config --global color.diff-highlight.newNormal    "green bold"
+git config --global color.diff-highlight.newHighlight "green bold 22"
+git config --global color.diff.meta       "yellow"
+git config --global color.diff.frag       "magenta bold"
+git config --global color.diff.commit     "yellow bold"
+git config --global color.diff.old        "red bold"
+git config --global color.diff.new        "green bold"
+git config --global color.diff.whitespace "red reverse"
+
 
 ############################################################################
 ### User specific
@@ -177,13 +217,13 @@ if [[ $(id -u) == 0 ]]; then
 	# Test if tilix is installed and execute the necessary steps 
 	# /etc/profile.d/vte.sh
 	# https://gnunn1.github.io/tilix-web/manual/vteconfig/
-	if [[ $(dpkg -l tilix | grep ^ii) ]] ; then
+	hash tilix 2>/dev/null && { 
 		if [[ -e /etc/profile.d/vte.sh ]]; then
 			exit
 		else
 			ln -s $(ls -1tr /etc/profile.d/vte* | tail -n1) /etc/profile.d/vte.sh
 		fi
-	fi
+	}
 fi
 
 # Add an git pull to crontab if it doesn't exist yet
@@ -194,6 +234,16 @@ fi
 # fi
 
 echo ""
-echo "you might want to add the following line to your crontab."
-echo "	only if no password is required"
-echo "0 5 * * *	git pull $PROFILEDIR > /dev/null 2>&1"
+echo "** Manual modifications:"
+if [[ "$FZF" == "YES" ]]; then
+	echo "  Install fzf using $HOME/git/fzf/install"
+fi
+
+echo "  Downloading other applications, not part of the repo"
+echo "  - bat > cat:        https://github.com/sharkdp/bat/releases/latest"
+echo "  - ripgrep > grep:   https://github.com/BurntSushi/ripgrep/releases/latest"
+echo ""
+echo "  Crontab:"
+echo "    NOTE: only if no password is required"
+echo "    0 5 * * *	git pull $PROFILEDIR > /dev/null 2>&1"
+echo ""
