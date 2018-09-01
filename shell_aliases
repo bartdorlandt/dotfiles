@@ -42,6 +42,28 @@ alias ipb='ip --color --brief'
 alias ip4='ip -4 --color --brief addr | grep -v UNKNOWN'
 alias ip6='ip -6 --color --brief addr | grep -v UNKNOWN'
 
+### bat overrules cat ###
+# https://github.com/sharkdp/bat
+if [[ -x /usr/bin/bat ]]; then
+	alias cat='/usr/bin/bat -p'
+fi
+
+### prettyping overrules ping ###
+# https://github.com/denilsonsa/prettyping
+if [[ -x $HOME/bin/prettyping ]]; then
+	alias ping='$HOME/bin/prettyping --nolegend'
+fi
+
+### htop overrules top ###
+if [[ -x /usr/bin/htop ]]; then
+	alias top='/usr/bin/htop'
+fi
+
+### ripgrep overrules grep ###
+if [[ -x /usr/bin/rg ]]; then
+	alias grep='/usr/bin/rg'
+fi
+
 ### certbot ###
 if [ -x /opt/certbot/certbot-auto ]; then
   alias certbot='/opt/certbot/certbot-auto'

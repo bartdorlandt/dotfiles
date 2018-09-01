@@ -121,3 +121,6 @@ fi
 if [[ -e .zshrc.server ]]; then
 	source .zshrc.server
 fi
+
+# using fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

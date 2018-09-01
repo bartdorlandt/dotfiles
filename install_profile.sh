@@ -102,6 +102,21 @@ if [[ -d $HOME/.oh-my-zsh/themes ]] && [[ ! -L $HOME/.oh-my-zsh/custom/themes ]]
 	done
 fi
 
+echo ""
+echo "Overruling ctrl+r with fzf"
+if [[ ! -d $HOME/git/fzf ]] ; then
+	git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/git/fzf
+	FZF="YES"
+	#$HOME/git/fzf/install
+fi
+ln -sf $HOME/git/fzf $HOME/.fzf
+
+echo ""
+echo "Adding Diff-so-fancy"
+# https://github.com/so-fancy/diff-so-fancy
+curl -s https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy > $HOME/bin/diff-so-fancy
+chmod u+x $HOME/bin/diff-so-fancy
+
 echo "Git settings"
 git config --global user.name "`whoami`@`hostname`"
 test -n "$EMAIL" && git config --global user.email $EMAIL
@@ -112,6 +127,21 @@ git config --global branch.autosetuprebase always
 git config --global core.whitespace warn
 git config --global core.autocrlf input
 git config --global core.filemode true
+# using diff-so-fancy and git color update
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+git config --global color.ui true
+
+git config --global color.diff-highlight.oldNormal    "red bold"
+git config --global color.diff-highlight.oldHighlight "red bold 52"
+git config --global color.diff-highlight.newNormal    "green bold"
+git config --global color.diff-highlight.newHighlight "green bold 22"
+git config --global color.diff.meta       "yellow"
+git config --global color.diff.frag       "magenta bold"
+git config --global color.diff.commit     "yellow bold"
+git config --global color.diff.old        "red bold"
+git config --global color.diff.new        "green bold"
+git config --global color.diff.whitespace "red reverse"
+
 
 ############################################################################
 ### User specific
@@ -193,6 +223,11 @@ fi
 #	 (crontab -l; echo "$line" ; echo "$line2") | crontab -
 # fi
 
+echo ""
+echo "Enabling user depending stuff"
+echo "Install fzf using $HOME/git/fzf/install"
+echo ""
+echo ""
 echo ""
 echo "you might want to add the following line to your crontab."
 echo "	only if no password is required"
