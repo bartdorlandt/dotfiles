@@ -14,6 +14,8 @@ test -d $PROFILEDIR || (echo "Provide the location behind this script." && exit 
 
 # Making sure ~/git exists
 test -d $HOME/git/ || mkdir $HOME/git
+# Making sure ~/bin exists
+test -d $HOME/bin/ || mkdir $HOME/bin
 
 SUB=user
 if [[ $(id -u) == 0 ]]; then
