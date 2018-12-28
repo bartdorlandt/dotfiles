@@ -1,4 +1,5 @@
 export PAGER="less"
+export BAT_PAGER=""
 export EDITOR="vim"
 
 ############### Local aliases & commands ################
