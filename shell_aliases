@@ -84,3 +84,9 @@ alias Drml='docker rm -v $(docker ps -l -q)'
 alias Drmi='docker rmi'
 alias Dimg='docker images'
 alias Dimga='docker images -a'
+
+############### VirtualBox ###############
+VBheadless() { 
+	HOST=$1
+	VBoxManage modifyvm "$HOST" --defaultfrontend headless
+}
