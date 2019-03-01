@@ -23,8 +23,9 @@ set autoread
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+" default leader = \
+" let mapleader = ","
+" let g:mapleader = ","
 "let maplocalleader = "<space>"
 
 " Fast saving
