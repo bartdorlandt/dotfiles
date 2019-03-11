@@ -53,9 +53,9 @@ fi
 
 ### prettyping overrules ping ###
 # https://github.com/denilsonsa/prettyping
-if [[ -x $HOME/bin/prettyping ]]; then
-	alias ping='$HOME/bin/prettyping --nolegend'
-fi
+# if [[ -x $HOME/bin/prettyping ]]; then
+# 	alias ping='$HOME/bin/prettyping --nolegend'
+# fi
 
 ### htop overrules top ###
 if [[ -x /usr/bin/htop ]]; then
