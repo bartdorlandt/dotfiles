@@ -261,7 +261,7 @@ autocmd FileType python setlocal formatoptions-=t
 " autocmd FileType markdown setlocal expandtab
 autocmd FileType markdown setlocal lbr
 autocmd FileType markdown setlocal fo+=n
-autocmd FileType markdown autocmd BufWritePre <buffer> :call DeleteTrailingWS()
+"autocmd FileType markdown autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 
 " sql
 autocmd FileType sql nnoremap <buffer> <leader>c I-- <esc>
