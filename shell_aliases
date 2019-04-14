@@ -63,9 +63,9 @@ if [[ -x /usr/bin/htop ]]; then
 fi
 
 ### ripgrep overrules grep ###
-if [[ -x /usr/bin/rg ]]; then
-	alias grep='/usr/bin/rg'
-fi
+# if [[ -x /usr/bin/rg ]]; then
+# 	alias grep='/usr/bin/rg'
+# fi
 
 ### certbot ###
 # if [ -x /opt/certbot/certbot-auto ]; then
