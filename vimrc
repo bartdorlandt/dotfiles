@@ -525,6 +525,11 @@ func! DeleteTrailingWS()
   exe "normal `z"
 endfunc
 
+" Vimdiff colorscheme
+if &diff
+	colorscheme blue
+endif
+
 " Load up all of our plugins
 if filereadable(expand("~/.vimrc.bundles"))
 	source ~/.vimrc.bundles
