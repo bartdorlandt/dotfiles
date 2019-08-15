@@ -527,7 +527,7 @@ endfunc
 
 " Vimdiff colorscheme
 if &diff
-	colorscheme blue
+	colorscheme darkblue
 endif
 
 " Load up all of our plugins
