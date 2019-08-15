@@ -92,3 +92,9 @@ VBheadless() {
 	HOST=$1
 	VBoxManage modifyvm "$HOST" --defaultfrontend headless
 }
+
+############### KVM ###############
+alias qls='virsh list --all'
+alias qstart='virsh start'
+alias qstop='virsh destroy'
+
