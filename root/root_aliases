@@ -47,3 +47,6 @@ function Dexec() { docker exec -it $1 bash ;}
 function Drun() { docker run -it $1 /bin/bash;}
 function Drunt() { docker run --rm -it $1 /bin/bash;}
 #function nsenter() { /usr/local/bin/nsenter --target $(docker inspect --format {{.State.Pid}} $1) --mount --uts --ipc --net --pid ;}
+
+############### Ansible ###############
+alias ansible-docker='/root/git/create_docker/ansible.sh'
