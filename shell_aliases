@@ -86,6 +86,7 @@ alias Drml='docker rm -v $(docker ps -l -q)'
 alias Drmi='docker rmi'
 alias Dimg='docker images'
 alias Dimga='docker images -a'
+alias Dip="docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'"
 
 ############### VirtualBox ###############
 VBheadless() { 
