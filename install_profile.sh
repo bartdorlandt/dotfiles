@@ -90,7 +90,11 @@ ln -sf $HOME/git/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosug
 if [[ -e $HOME/.zshrc ]]; then
 	rm $HOME/.zshrc
 fi
+if [[ -e $HOME/.zprofile ]]; then
+	rm $HOME/.zprofile
+fi
 ln -sf $PROFILEDIR/zshrc $HOME/.zshrc 
+ln -sf $PROFILEDIR/zprofile $HOME/.zprofile 
 if [[ -d $HOME/.oh-my-zsh ]] && [[ ! -L $HOME/.oh-my-zsh/custom ]] ; then
 	DIR="$HOME/git/oh-my-zsh-custom"
 	for x in $(ls -1 $DIR/*.zsh); do

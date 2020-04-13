@@ -60,7 +60,6 @@ plugins=(git debian extract zsh-autosuggestions zsh-syntax-highlighting virtuale
 
 # export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH="$HOME/.local/bin:$PATH:/snap/bin"
 
 source $ZSH/oh-my-zsh.sh
 
