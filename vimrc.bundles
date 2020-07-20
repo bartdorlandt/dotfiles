@@ -39,12 +39,9 @@ Plugin 'kien/ctrlp.vim' " fuzzy find files
 Plugin 'vim-airline/vim-airline' " Status line + buffer
 " Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-bufferline'
-Plugin 'vim-perl/vim-perl' " Perl plugin
 " Plugin 'godlygeek/tabular' " Aliging output
 Plugin 'plasticboy/vim-markdown' " Markdown for Vim
 Plugin 'Rykka/riv.vim' " reStructuredText for Vim
-Plugin 'terryma/vim-multiple-cursors' " Multi-insert, just like sublime.
-Plugin 'tpope/vim-surround' " Vim surroundings {}[](). quite annoying sometimes.
 Plugin 'tpope/vim-repeat' " Vim repeat for plugins, to be able to use . with them.
 Plugin 'christoomey/vim-tmux-navigator' " Tmux
 
