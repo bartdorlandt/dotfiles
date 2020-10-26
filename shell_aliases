@@ -34,6 +34,7 @@ alias CON='screen /dev/ttyUSB0 9600'
 if [ -x /usr/bin/gpg2 ]; then
 	alias gpg='gpg2'
 fi
+alias myipext='dig @resolver1.opendns.com ANY myip.opendns.com +short'
 alias ssh='TERM=xterm ssh'
 alias sshlog='$HOME/scripts/ssh-logging.sh'
 alias sno='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
