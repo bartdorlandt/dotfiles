@@ -365,6 +365,8 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
+" Save the file using sudo, when you forgot it
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 """"""""""""""""""""""""""""""
 " => Status line
