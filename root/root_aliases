@@ -19,12 +19,14 @@ alias updeditor='update-alternatives --config editor'
 alias sy='systemctl'
 alias proxy='export http_proxy="http://192.168.2.1:3128"'
 alias clearpac='paccache -rk 1'
+function get_serial () { udevadm info --query=all --name=$1 | grep ID_SERIAL;}
 
 ############### Virtual Machine ################
 alias VM='cd /VM/container/'
 alias LXC='cd /var/lib/lxc'
 alias lf='lxc-ls --fancy'
-alias lff='lxc-ls -f -F name,state,interfaces,ipv4,memory,ram'
+# alias lff='lxc-ls -f -F name,state,interfaces,ipv4,memory,ram'
+alias lff='lxc-ls -f -F NAME,STATE,INTERFACE,IPV4,IPV6,RAM,SWAP,AUTOSTART'
 alias lfa='lxc-ls --fancy --active'
 alias lat='lxc-attach -n'
 alias Qls='virsh -c qemu:///system list --all'
@@ -42,6 +44,7 @@ function kvmbackup() { qemu-img convert -p -f qcow2 $1 -O qcow2 $1.$(date +%Y%M%
 ############### Docker ###############
 alias Dstart='docker start' 
 alias Dstop='docker stop' 
+alias Dstopall='docker stop $(docker ps -aq)' 
 alias Dprune='docker image prune'
 function Dexec() { docker exec -it $1 bash ;}
 function Drun() { docker run -it $1 /bin/bash;}
