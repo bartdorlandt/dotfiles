@@ -34,8 +34,8 @@ Plugin 'vim-syntastic/syntastic' " Syntax highlighting
 " Bundle 'ervandew/supertab'
 Plugin 'ervandew/supertab'
 Plugin 'roxma/vim-paste-easy' " Vim paste easy
-Plugin 'scrooloose/nerdtree' " file drawer, open with :NERDTreeToggle
-Plugin 'kien/ctrlp.vim' " fuzzy find files
+"Plugin 'scrooloose/nerdtree' " file drawer, open with :NERDTreeToggle
+"Plugin 'kien/ctrlp.vim' " fuzzy find files
 Plugin 'vim-airline/vim-airline' " Status line + buffer
 " Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-bufferline'
