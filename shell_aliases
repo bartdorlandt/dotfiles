@@ -47,6 +47,8 @@ alias ipb='ip --color --brief'
 alias ip4='ip -4 --color --brief addr | grep -v UNKNOWN'
 alias ip6='ip -6 --color --brief addr | grep -v UNKNOWN'
 alias awscli='python3 -m awscli'
+alias venvcreate='python3 -m venv .venv; source .venv/bin/activate'
+alias venv='source .venv/bin/activate'
 
 ### bat overrules cat ###
 # https://github.com/sharkdp/bat
@@ -93,7 +95,7 @@ alias Dimga='docker images -a'
 alias Dip="docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'"
 
 ############### VirtualBox ###############
-VBheadless() { 
+VBheadless() {
 	HOST=$1
 	VBoxManage modifyvm "$HOST" --defaultfrontend headless
 }
