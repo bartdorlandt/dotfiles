@@ -6,7 +6,7 @@
 #umask 022
 
 # adding sbin
-PATH="${PATH}:/sbin:/bin:/usr/sbin:/usr/sbin"
+PATH="${PATH}:/sbin:/bin:/usr/sbin:/usr/sbin:/snap/bin"
 
 # include .bashrc if it exists
 if [ -f $HOME/.bashrc ]; then
