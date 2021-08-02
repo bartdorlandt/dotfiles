@@ -125,4 +125,3 @@ fi
 
 # using fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export DOCKER_HOST=unix:///run/user/1000/docker.sock
