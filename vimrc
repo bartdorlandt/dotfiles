@@ -271,6 +271,9 @@ autocmd FileType sql autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 autocmd FileType txt setlocal fo+=n
 autocmd FileType txt autocmd BufWritePre <buffer> :call DeleteTrailingWS()
 
+" json
+autocmd FileType json setlocal conceallevel=0
+
 " yaml
 autocmd FileType yaml setlocal ts=2
 autocmd FileType yaml setlocal sts=2
@@ -517,7 +520,8 @@ function! <SID>BufcloseCloseIt()
 endfunction
 
 function! RemoveM()
-  :%s///g
+  :%s/
+//g
 endfunction
 
 "" Delete trailing white space on save, useful for Python.
