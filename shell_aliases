@@ -93,6 +93,13 @@ alias Drmv='docker volume rm'
 alias Dimg='docker images'
 alias Dimga='docker images -a'
 alias Dip="docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'"
+alias Dstart='docker start'
+alias Dstop='docker stop'
+alias Dstopall='docker stop $(docker ps -aq)'
+alias Dprune='docker image prune'
+function Dexec() { docker exec -it $1 bash ;}
+function Drun() { docker run -it $1 /bin/bash;}
+function Drunt() { docker run --rm -it $1 /bin/bash;}
 
 ############### VirtualBox ###############
 VBheadless() {
