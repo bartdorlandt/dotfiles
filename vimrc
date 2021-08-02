@@ -532,9 +532,9 @@ func! DeleteTrailingWS()
 endfunc
 
 " Vimdiff colorscheme
-if &diff
-	colorscheme darkblue
-endif
+" if &diff
+" 	colorscheme darkblue
+" endif
 
 " Load up all of our plugins
 if filereadable(expand("~/.vimrc.bundles"))
