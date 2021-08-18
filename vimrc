@@ -290,7 +290,7 @@ vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " Always use vertical diffs
-set diffopt+=vertical
+" set diffopt+=vertical
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
