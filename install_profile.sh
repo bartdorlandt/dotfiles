@@ -27,15 +27,15 @@ echo "Creating symlinks for BASH (alias, profile, bashrc)"
 if [[ -e $HOME/.shell_aliases ]]; then
 	rm $HOME/.shell_aliases
 fi
-ln -sf $PROFILEDIR/shell_aliases $HOME/.shell_aliases 
+ln -sf $PROFILEDIR/shell_aliases $HOME/.shell_aliases
 if [[ -e $HOME/.bash_profile ]]; then
 	rm $HOME/.bash_profile
 fi
-ln -sf $PROFILEDIR/$SUB/bash_profile $HOME/.bash_profile 
+ln -sf $PROFILEDIR/$SUB/bash_profile $HOME/.bash_profile
 if [[ -e $HOME/.bashrc ]]; then
 	rm $HOME/.bashrc
 fi
-ln -sf $PROFILEDIR/$SUB/bashrc $HOME/.bashrc 
+ln -sf $PROFILEDIR/$SUB/bashrc $HOME/.bashrc
 
 ### VIM environment ###
 echo "Creating the VIM environment"
@@ -63,14 +63,14 @@ fi
 echo "Creating symlinks for screenrc, email forward"
 ln -sf $PROFILEDIR/screenrc $HOME/.screenrc
 
-if [[ ! -e $HOME/.forward ]] ; then 
+if [[ ! -e $HOME/.forward ]] ; then
 	echo "Do you want to create a .forward file. If so type your email, else enter"
 	read EMAIL
-	if [[ -n "$EMAIL" ]] ; then 
-		if [[ -L $HOME/.forward ]]; then 
+	if [[ -n "$EMAIL" ]] ; then
+		if [[ -L $HOME/.forward ]]; then
 			rm $HOME/.forward
 		fi
-		echo $EMAIL > $HOME/.forward 
+		echo $EMAIL > $HOME/.forward
 	fi
 fi
 
@@ -84,7 +84,7 @@ fi
 if [[ ! -d $HOME/git/zsh-syntax-highlighting ]] ; then
 	git clone git@github.com:zsh-users/zsh-syntax-highlighting.git $HOME/git/zsh-syntax-highlighting
 fi
-ln -sf $HOME/git/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting 
+ln -sf $HOME/git/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 ln -sf $HOME/git/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 if [[ -e $HOME/.zshrc ]]; then
@@ -93,8 +93,8 @@ fi
 if [[ -e $HOME/.zprofile ]]; then
 	rm $HOME/.zprofile
 fi
-ln -sf $PROFILEDIR/zshrc $HOME/.zshrc 
-ln -sf $PROFILEDIR/zprofile $HOME/.zprofile 
+ln -sf $PROFILEDIR/zshrc $HOME/.zshrc
+ln -sf $PROFILEDIR/zprofile $HOME/.zprofile
 if [[ -d $HOME/.oh-my-zsh ]] && [[ ! -L $HOME/.oh-my-zsh/custom ]] ; then
 	DIR="$HOME/git/oh-my-zsh-custom"
 	for x in $(ls -1 $DIR/*.zsh); do
@@ -161,7 +161,7 @@ git config --global color.diff.whitespace "red reverse"
 if [[ ! $(id -u) == 0 ]]; then
 	echo "User specifics"
 	### Python environment
-	if [[ ! -e $HOME/.pypirc ]] ; then 
+	if [[ ! -e $HOME/.pypirc ]] ; then
 		echo -e "\nIn case you wish to create the ~/.pypirc config file for pypi, provide a username and then a password. If the username is empty, nothing is generated."
 		echo "Username:"
 		read USERNAME
@@ -192,7 +192,7 @@ if [[ $(id -u) == 0 ]]; then
 	if [[ -e $HOME/.root_aliases ]]; then
 		rm $HOME/.root_aliases
 	fi
-	ln -sf $PROFILEDIR/$SUB/root_aliases $HOME/.root_aliases 
+	ln -sf $PROFILEDIR/$SUB/root_aliases $HOME/.root_aliases
 	#
 	# FILE="$PROFILEDIR/etc/udev/rules.d/99-yubikeys.rules"
 	# test -f $FILE && ln -sf $FILE /etc/udev/rules.d/99-yubikeys.rules
@@ -216,10 +216,10 @@ if [[ $(id -u) == 0 ]]; then
 	FILE="$PROFILEDIR/$SUB/aptitude-config"
 	test -f $FILE && ln -sf $FILE $HOME/.aptitude/config
 
-	# Test if tilix is installed and execute the necessary steps 
+	# Test if tilix is installed and execute the necessary steps
 	# /etc/profile.d/vte.sh
 	# https://gnunn1.github.io/tilix-web/manual/vteconfig/
-	hash tilix 2>/dev/null && { 
+	hash tilix 2>/dev/null && {
 		if [[ ! -e /etc/profile.d/vte.sh ]]; then
 			ln -s $(ls -1tr /etc/profile.d/vte* | tail -n1) /etc/profile.d/vte.sh
 		fi
@@ -227,7 +227,7 @@ if [[ $(id -u) == 0 ]]; then
 fi
 
 # Add an git pull to crontab if it doesn't exist yet
-# if [[ -z $(crontab -l | grep "oh-my-zsh" | grep "git pull") ]] ; then 
+# if [[ -z $(crontab -l | grep "oh-my-zsh" | grep "git pull") ]] ; then
 #	 line="@reboot cd $HOME/.oh-my-zsh ; git pull > /dev/null 2>&1"
 #	 line2="0 6 1 * * cd $HOME/.oh-my-zsh ; git pull > /dev/null 2>&1"
 #	 (crontab -l; echo "$line" ; echo "$line2") | crontab -
