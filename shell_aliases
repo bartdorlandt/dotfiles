@@ -4,7 +4,7 @@ export EDITOR="vim"
 
 ############### Local aliases & commands ################
 alias aptcache='aptitude search'
-alias bak='~/scripts/bak.sh'
+alias bak='$HOME/scripts/bak.sh'
 alias ll='ls -lhF'
 alias llt='ls -latrFh'
 alias lr='ls -latrFh'
@@ -34,18 +34,22 @@ alias CON='screen /dev/ttyUSB0 9600'
 if [ -x /usr/bin/gpg2 ]; then
 	alias gpg='gpg2'
 fi
-# alias myipext='dig @resolver1.opendns.com ANY myip.opendns.com +short'
-alias myipext='curl ifconfig.co'
 alias ssh='TERM=xterm ssh'
 alias sshlog='$HOME/scripts/ssh-logging.sh'
 alias sno='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias alg='alias | grep'
 alias dns='nmcli device show | grep -e DNS -e GENERAL.DEVICE'
 alias bart='export BART=1'
-alias ip='ip --color'
-alias ipb='ip --color --brief'
-alias ip4='ip -4 --color --brief addr | grep -v UNKNOWN'
-alias ip6='ip -6 --color --brief addr | grep -v UNKNOWN'
+
+# ip section
+# alias myipext='dig @resolver1.opendns.com ANY myip.opendns.com +short'
+alias myipext='curl ifconfig.co'
+ip --color > /dev/null 2>&1 && IPCOLOR='--color'
+alias ip='ip $IPCOLOR'
+alias ipb='ip $IPCOLOR --brief'
+alias ip4='ip -4 $IPCOLOR --brief addr | grep -v UNKNOWN'
+alias ip6='ip -6 $IPCOLOR --brief addr | grep -v UNKNOWN'
+
 alias awscli='python3 -m awscli'
 alias venvcreate='python3 -m venv .venv; source .venv/bin/activate'
 alias venv='source .venv/bin/activate'
@@ -70,11 +74,6 @@ fi
 ### ripgrep overrules grep ###
 # if [[ -x /usr/bin/rg ]]; then
 # 	alias grep='/usr/bin/rg'
-# fi
-
-### certbot ###
-# if [ -x /opt/certbot/certbot-auto ]; then
-#   alias certbot='/opt/certbot/certbot-auto'
 # fi
 
 ############### Docker ###############
@@ -111,4 +110,3 @@ VBheadless() {
 alias qls='virsh list --all'
 alias qstart='virsh start'
 alias qstop='virsh destroy'
-

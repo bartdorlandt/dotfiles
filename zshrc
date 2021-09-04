@@ -51,10 +51,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git debian extract zsh-autosuggestions zsh-syntax-highlighting virtualenv)
-# plugins=(git debian extract zsh-autosuggestions zsh-syntax-highlighting virtualenv virtualenvwrapper)
-# plugins=(git debian extract zsh-autosuggestions zsh-syntax-highlighting)
-# plugins=(git)
+plugins=(git debian zsh-autosuggestions zsh-syntax-highlighting pyenv tmux)
 
 # User configuration
 
@@ -83,16 +80,6 @@ unsetopt nomatch
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# python, virtual environments
-if [[ -n $(whence virtualenv) ]] ; then
-	export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-	export WORKON_HOME=~/.virtualenvs
-	export PROJECT_HOME=$HOME/git
-	if [[ -x /usr/local/bin/virtualenvwrapper.sh ]] ; then
-		source /usr/local/bin/virtualenvwrapper.sh
-	fi
-fi
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -112,10 +99,10 @@ if [[ $UID -ne 0 ]]; then
 fi
 
 # When using Tilix
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-	source /etc/profile.d/vte.sh
-	__vte_osc7
-fi
+# if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+# 	source /etc/profile.d/vte.sh
+# 	__vte_osc7
+# fi
 
 # Verify if the server specific file is there,
 # which would have been linked to the dotfiles-git and execute it
