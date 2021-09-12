@@ -120,3 +120,7 @@ fi
 
 # using fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [[ -f $HOME/git/virtualenv-autodetect/virtualenv-autodetect.sh ]]; then
+	source $HOME/git/virtualenv-autodetect/virtualenv-autodetect.sh
+fi

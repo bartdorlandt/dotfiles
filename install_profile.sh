@@ -84,6 +84,11 @@ fi
 if [[ ! -d $HOME/git/zsh-syntax-highlighting ]] ; then
 	git clone git@github.com:zsh-users/zsh-syntax-highlighting.git $HOME/git/zsh-syntax-highlighting
 fi
+
+if [[ ! -d $HOME/git/virtualenv-autodetect ]] ; then
+	git clone git@github.com:RobertDeRose/virtualenv-autodetect.git $HOME/git/virtualenv-autodetect
+fi
+
 ln -sf $HOME/git/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 ln -sf $HOME/git/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
@@ -117,7 +122,7 @@ echo "** Other applications and tools **"
 echo "**** Overruling ctrl+r with fzf"
 if [[ ! -d $HOME/git/fzf ]] ; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/git/fzf
-	$HOME/git/fzf/install --all 1>/dev/null
+	$HOME/git/fzf/install --all>/dev/null
 fi
 
 echo "**** Adding Diff-so-fancy"
