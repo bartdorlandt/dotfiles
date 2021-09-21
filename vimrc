@@ -188,7 +188,7 @@ set pastetoggle=<F2>
 " vim --version | grep xterm
 " apt install vim-gnome for support e.g.
 
-set clipboard=unnamed
+" set clipboard=unnamed
 
 vnoremap <C-c> "*y
 map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
