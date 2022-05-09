@@ -4,8 +4,8 @@ if [ -x /usr/bin/apt ] ; then
   APT=apt
   alias aptsearch="apt search"
   alias upd='$APT update && $APT dist-upgrade'
-  elif [ -x /usr/bin/pacman ] ; then
-    alias upd='pacman -Syu'
+elif [ -x /usr/bin/pacman ] ; then
+  alias upd='pacman -Syu'
 else
   APT=apt-get
   alias aptsearch="apt-cache search"
@@ -19,6 +19,8 @@ alias updeditor='update-alternatives --config editor'
 alias sy='systemctl'
 alias proxy='export http_proxy="http://192.168.2.1:3128"'
 alias clearpac='paccache -rk 1'
+alias pacShowLegacy='pacman -Qtdq'
+alias pacRemoveLegacy='pacman -Rcns $(pacman -Qtdq)'
 function get_serial () { udevadm info --query=all --name=$1 | grep ID_SERIAL;}
 
 ############### Virtual Machine ################
