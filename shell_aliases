@@ -44,6 +44,8 @@ alias bart='export BART=1'
 # ip section
 # alias myipext='dig @resolver1.opendns.com ANY myip.opendns.com +short'
 alias myipext='curl ifconfig.co'
+alias myipext4='curl -4 ifconfig.co'
+alias myipext6='curl -6 ifconfig.co'
 ip --color > /dev/null 2>&1 && IPCOLOR='--color'
 alias ip='ip $IPCOLOR'
 alias ipb='ip $IPCOLOR --brief'
