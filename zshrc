@@ -114,6 +114,10 @@ if [[ -e ~/.shell_aliases ]]; then
     source ~/.shell_aliases
 fi
 
+if [[ -e ~/.device_aliases ]]; then
+    source ~/.device_aliases
+fi
+
 if [[ -e ~/.work_aliases ]]; then
     source ~/.work_aliases
 fi
