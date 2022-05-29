@@ -128,3 +128,5 @@ fi
 if [[ -f $HOME/git/virtualenv-autodetect/virtualenv-autodetect.sh ]]; then
 	source $HOME/git/virtualenv-autodetect/virtualenv-autodetect.sh
 fi
+
+[ -d $HOME/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"

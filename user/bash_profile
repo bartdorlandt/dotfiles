@@ -13,3 +13,6 @@ if [ -d $HOME/scripts ] ; then
     PATH="$HOME/scripts:$PATH"
 fi
 
+if [ -d $HOME/.poetry/bin ] ; then
+    export PATH="$HOME/.poetry/bin:$PATH"
+fi
