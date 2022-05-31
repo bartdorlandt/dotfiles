@@ -79,18 +79,18 @@ if [[ ! -d $HOME/git/oh-my-zsh-custom ]] ; then
 	git clone git@github.com:bambam82/oh-my-zsh-custom.git $HOME/git/oh-my-zsh-custom
 fi
 if [[ ! -d $HOME/git/zsh-autosuggestions ]] ; then
-	git clone git://github.com/zsh-users/zsh-autosuggestions.git $HOME/git/zsh-autosuggestions
+	git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/git/zsh-autosuggestions
 fi
 if [[ ! -d $HOME/git/zsh-syntax-highlighting ]] ; then
-	git clone git@github.com:zsh-users/zsh-syntax-highlighting.git $HOME/git/zsh-syntax-highlighting
+	git clone https@github.com:zsh-users/zsh-syntax-highlighting.git $HOME/git/zsh-syntax-highlighting
 fi
 
 if [[ ! -d $HOME/git/virtualenv-autodetect ]] ; then
-	git clone git@github.com:RobertDeRose/virtualenv-autodetect.git $HOME/git/virtualenv-autodetect
+	git clone https://github.com/RobertDeRose/virtualenv-autodetect.git $HOME/git/virtualenv-autodetect
 fi
 
-ln -sf $HOME/git/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-ln -sf $HOME/git/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+ln -sf $HOME/git/zsh-syntax-highlighting/ $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+ln -sf $HOME/git/zsh-autosuggestions/ $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 if [[ -e $HOME/.zshrc ]]; then
 	rm $HOME/.zshrc
