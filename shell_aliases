@@ -56,12 +56,6 @@ alias awscli='python3 -m awscli'
 alias venvcreate='python3 -m venv venv --upgrade-deps; source ./venv/bin/activate'
 alias venv='source ./venv/bin/activate'
 
-### bat overrules cat ###
-# https://github.com/sharkdp/bat
-if [[ -x /usr/bin/bat ]]; then
-	alias cat='/usr/bin/bat --style=plain'
-fi
-
 ### prettyping overrules ping ###
 # https://github.com/denilsonsa/prettyping
 # if [[ -x $HOME/bin/prettyping ]]; then
