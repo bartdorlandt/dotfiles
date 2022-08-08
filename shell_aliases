@@ -53,8 +53,15 @@ alias ip4='ip -4 $IPCOLOR --brief addr | grep -v UNKNOWN'
 alias ip6='ip -6 $IPCOLOR --brief addr | grep -v UNKNOWN'
 
 alias awscli='python3 -m awscli'
-alias venvcreate='python3 -m venv venv --upgrade-deps; source ./venv/bin/activate'
-alias venv='source ./venv/bin/activate'
+# alias venvcreate='python3 -m venv venv --upgrade-deps; source ./venv/bin/activate'
+alias venv='source ./.venv/bin/activate'
+_CMD() { echo $1; `echo $1`}
+venvcreate() {
+	if [[ -n $1 ]] ; then VER=$1 else VER=3 fi;
+	_CMD "python${VER} -m venv .venv $EXTRA";
+	_CMD "source ./.venv/bin/activate";
+	_CMD "pip install pip setuptools -U"
+}
 
 ### prettyping overrules ping ###
 # https://github.com/denilsonsa/prettyping
