@@ -82,6 +82,5 @@ unsetopt nomatch
 [ -e $HOME/.device_aliases ] && source $HOME/.device_aliases
 [ -e $HOME/.work_aliases ] && source $HOME/.work_aliases
 # using fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-[ -f $HOME/git/virtualenv-autodetect/virtualenv-autodetect.sh ] && source $HOME/git/virtualenv-autodetect/virtualenv-autodetect.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -d $HOME/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
