@@ -9,13 +9,12 @@ elif [ -x /usr/bin/pacman ] ; then
 else
   APT=apt-get
   alias aptsearch="apt-cache search"
-  alias upd='apt-get update && apt-get dist-upgrade'
+  alias upd='$APT update && $APT dist-upgrade'
 fi
 alias aptpurge='$APT purge'
 alias aptinst='$APT install'
-#
+
 alias updeditor='update-alternatives --config editor'
-#
 alias sy='systemctl'
 alias proxy='export http_proxy="http://192.168.2.1:3128"'
 alias clearpac='paccache -rk 1'

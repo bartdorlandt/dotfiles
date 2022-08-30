@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -51,7 +51,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git debian zsh-autosuggestions zsh-syntax-highlighting tmux)
+plugins=(git debian zsh-autosuggestions zsh-syntax-highlighting tmux virtualenv-autodetect poetry)
 
 # User configuration
 
@@ -77,56 +77,11 @@ unsetopt nomatch
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Yubikey
-# http://www.engineerbetter.com/blog/yubikey-ssh/
-# if [[ $UID -ne 0 ]]; then
-# 	export GPG_TTY=$(tty)
-# 	gpg-connect-agent updatestartuptty /bye
-# 	unset SSH_AGENT_PID
-# 	export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-# fi
-
-# When using Tilix
-# if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-# 	source /etc/profile.d/vte.sh
-# 	__vte_osc7
-# fi
-
-# Verify if the server specific file is there,
-# which would have been linked to the dotfiles-git and execute it
-if [[ -e .zshrc.server ]]; then
-	source .zshrc.server
-fi
-
-if [[ -e ~/.shell_aliases ]]; then
-    source ~/.shell_aliases
-fi
-
-if [[ -e ~/.device_aliases ]]; then
-    source ~/.device_aliases
-fi
-
-if [[ -e ~/.work_aliases ]]; then
-    source ~/.work_aliases
-fi
-
+[ -e $HOME/.zshrc.server ] && source $HOME/.zshrc.server
+[ -e $HOME/.shell_aliases ] && source $HOME/.shell_aliases
+[ -e $HOME/.device_aliases ] && source $HOME/.device_aliases
+[ -e $HOME/.work_aliases ] && source $HOME/.work_aliases
 # using fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-if [[ -f $HOME/git/virtualenv-autodetect/virtualenv-autodetect.sh ]]; then
-	source $HOME/git/virtualenv-autodetect/virtualenv-autodetect.sh
-fi
-
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f $HOME/git/virtualenv-autodetect/virtualenv-autodetect.sh ] && source $HOME/git/virtualenv-autodetect/virtualenv-autodetect.sh
 [ -d $HOME/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"

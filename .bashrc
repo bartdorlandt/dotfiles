@@ -15,17 +15,10 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 # Alias definitions.
-if [ -f $HOME/.shell_aliases ]; then
-    . $HOME/.shell_aliases
-fi
-# ENV definitions.
-if [ -f $HOME/.bash_env ]; then
-    . $HOME/.bash_env
-fi
-# work alias definitions.
-if [ -f $HOME/.work_aliases ]; then
-    . $HOME/.work_aliases
-fi
+[ -e $HOME/.shell_aliases ] && source $HOME/.shell_aliases
+[ -e $HOME/.work_aliases ] && source $HOME/.work_aliases
+[ -e $HOME/.device_aliases ] && source $HOME/.device_aliases
+[ -e $HOME/.bash_env ] && source $HOME/.bash_env
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
@@ -38,10 +31,10 @@ PS1="\\[\\e[1;32m\\]\\u\\[\\e[1;37m\\]@\\[\\e[1;36m\\]\\h:\\[\\e[1;33m\\] \\w\\[
 
 #if [ ! -f $HOME/.gpg-agent-info ] && [ -x /usr/bin/gpg-agent ]; then
 ##if [ -x /usr/bin/gpg-agent ]; then
-#  while [ ! "`ps x | grep gpg-agent | grep ssh`" == "" ] ; do 
-#  #while [[ ! $(ps x | grep gpg-agent | grep ssh | grep -v grep) ]] && [[ $(ps x | grep gpg-agent | grep -v grep) ]]; do 
+#  while [ ! "`ps x | grep gpg-agent | grep ssh`" == "" ] ; do
+#  #while [[ ! $(ps x | grep gpg-agent | grep ssh | grep -v grep) ]] && [[ $(ps x | grep gpg-agent | grep -v grep) ]]; do
 #    echo "trying to kill the agent"
-#    killall gpg-agent > /dev/null 2>&1 
+#    killall gpg-agent > /dev/null 2>&1
 #  done
 #  eval $(gpg-agent --daemon --enable-ssh-support > $HOME/.gpg-agent-info);
 #fi

@@ -25,24 +25,18 @@ alias dud='du -sch .[^.]* * |sort -h'
 alias o='less'
 # c() { cd $1; ls; }
 # alias cd='c'
-if [ -x /usr/bin/vim ]; then
-  alias vi='vim'
-fi
+[ -x /usr/bin/vim ] && alias vi='vim'
+# [ -x /usr/bin/gpg2 ] && alias gpg='gpg2'
+
 alias curlo='curl -# -C - -O -J -L'
-#alias curl='curl -O'
 alias CON='screen /dev/ttyUSB0 9600'
-if [ -x /usr/bin/gpg2 ]; then
-	alias gpg='gpg2'
-fi
 alias ssh='TERM=xterm ssh'
 alias sshlog='$HOME/scripts/ssh-logging.sh'
 alias sno='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias alg='alias | grep'
 alias dns='nmcli device show | grep -e DNS -e GENERAL.DEVICE'
-alias bart='export BART=1'
 
-# ip section
-# alias myipext='dig @resolver1.opendns.com ANY myip.opendns.com +short'
+############### ip section ###############
 alias myipext='curl ifconfig.co'
 alias myipext4='curl -4 ifconfig.co'
 alias myipext6='curl -6 ifconfig.co'
@@ -53,7 +47,8 @@ alias ip4='ip -4 $IPCOLOR --brief addr | grep -v UNKNOWN'
 alias ip6='ip -6 $IPCOLOR --brief addr | grep -v UNKNOWN'
 
 alias awscli='python3 -m awscli'
-# alias venvcreate='python3 -m venv venv --upgrade-deps; source ./venv/bin/activate'
+
+############### python venv ###############
 alias venv='source ./.venv/bin/activate'
 _CMD() { echo $1; `echo $1`}
 venvcreate() {
@@ -63,24 +58,7 @@ venvcreate() {
 	_CMD "pip install pip setuptools -U"
 }
 
-### prettyping overrules ping ###
-# https://github.com/denilsonsa/prettyping
-# if [[ -x $HOME/bin/prettyping ]]; then
-# 	alias ping='$HOME/bin/prettyping --nolegend'
-# fi
-
-### htop overrules top ###
-if [[ -x /usr/bin/htop ]]; then
-	alias top='/usr/bin/htop'
-fi
-
-### ripgrep overrules grep ###
-# if [[ -x /usr/bin/rg ]]; then
-# 	alias grep='/usr/bin/rg'
-# fi
-
 ############### Docker ###############
-# Docker
 alias DOCKER='cd /var/lib/docker'
 alias Dps='docker ps'
 alias Dpshort='docker ps --format "{{.Names}}"'
