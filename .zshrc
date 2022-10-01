@@ -51,7 +51,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git debian zsh-autosuggestions zsh-syntax-highlighting tmux virtualenv-autodetect poetry)
+plugins=(git debian zsh-autosuggestions zsh-syntax-highlighting tmux poetry)
 
 # User configuration
 
@@ -77,10 +77,12 @@ unsetopt nomatch
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-[ -e $HOME/.zshrc.server ] && source $HOME/.zshrc.server
-[ -e $HOME/.shell_aliases ] && source $HOME/.shell_aliases
-[ -e $HOME/.device_aliases ] && source $HOME/.device_aliases
-[ -e $HOME/.work_aliases ] && source $HOME/.work_aliases
-# using fzf
+[ -e ~/.zshrc.server ] && source ~/.zshrc.server
+[ -e ~/.shell_aliases ] && source ~/.shell_aliases
+[ -e ~/.device_aliases ] && source ~/.device_aliases
+[ -e ~/.work_aliases ] && source ~/.work_aliases
+
+# using virtualenv-autodetect, but not as ohmyzsh plugin since it clashes with vscode
+[ -f ~/git/virtualenv-autodetect/virtualenv-autodetect.sh ] && source ~/git/virtualenv-autodetect/virtualenv-autodetect.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -d $HOME/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
+[ -d ~/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
