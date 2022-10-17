@@ -85,4 +85,10 @@ unsetopt nomatch
 # using virtualenv-autodetect, but not as ohmyzsh plugin since it clashes with vscode
 [ -f ~/git/virtualenv-autodetect/virtualenv-autodetect.sh ] && source ~/git/virtualenv-autodetect/virtualenv-autodetect.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [[ -d $HOME/.pyenv ]]; then
+    # pyenv
+    export pyenv_root="$HOME/.pyenv"
+    export PATH="$pyenv_root/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
 [ -d ~/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
