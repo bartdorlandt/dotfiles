@@ -23,14 +23,11 @@ alias n="nslookup"
 alias dus="du -ks * | sort -n"
 alias dud="du -sch .[^.]* * |sort -h"
 alias o="less"
-# c() { cd $1; ls; }
-# alias cd="c"
 [ -x /usr/bin/vim ] && alias vi="vim"
-# [ -x /usr/bin/gpg2 ] && alias gpg="gpg2"
 
 alias curlo="curl -# -C - -O -J -L"
 alias CON="screen /dev/ttyUSB0 9600"
-alias ssh="TERM=xterm ssh"
+# alias ssh="TERM=xterm ssh"
 alias sshlog="$HOME/scripts/ssh-logging.sh"
 alias sno="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias alg="alias | grep"
@@ -50,8 +47,8 @@ alias awscli="python3 -m awscli"
 
 ############### python venv ###############
 alias venv="source ./.venv/bin/activate"
-_CMD() { echo $1; `echo $1`}
-venvcreate() {
+function _CMD() { echo $1; `echo $1`}
+function venvcreate() {
 	if [[ -n $1 ]] ; then VER=$1 else VER=3 fi;
 	_CMD "python${VER} -m venv .venv $EXTRA";
 	_CMD "source ./.venv/bin/activate";
@@ -83,7 +80,7 @@ function Drun() { docker run -it $1 /bin/bash;}
 function Drunt() { docker run --rm -it $1 /bin/bash;}
 
 ############### VirtualBox ###############
-VBheadless() {
+function VBheadless() {
 	HOST=$1
 	VBoxManage modifyvm "$HOST" --defaultfrontend headless
 }

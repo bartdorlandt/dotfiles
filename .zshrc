@@ -51,13 +51,16 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git debian zsh-autosuggestions zsh-syntax-highlighting tmux poetry)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
 # export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH="$HOME/.local/bin:/usr/local/sbin:$PATH"
+
+# Able to specify host specific configuration in the .zshrc_local file
+[ -e ~/.zshrc_local ] && source ~/.zshrc_local
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,6 +89,8 @@ unsetopt nomatch
 # using virtualenv-autodetect, but not as ohmyzsh plugin since it clashes with vscode
 [ -f ~/git/virtualenv-autodetect/virtualenv-autodetect.sh ] && source ~/git/virtualenv-autodetect/virtualenv-autodetect.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -d ~/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
+
 if [[ -x $HOME/.pyenv/bin/pyenv ]]; then
     # pyenv
     export PYENV_ROOT="$HOME/.pyenv"
@@ -94,4 +99,3 @@ if [[ -x $HOME/.pyenv/bin/pyenv ]]; then
     # for now using virtualenv-autodetect
     # eval "$(pyenv virtualenv-init -)"
 fi
-[ -d ~/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
