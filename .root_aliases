@@ -3,44 +3,44 @@
 if [ -x /usr/bin/apt ] ; then
   APT=apt
   alias aptsearch="apt search"
-  alias upd='$APT update && $APT dist-upgrade'
+  alias upd="$APT update && $APT dist-upgrade"
 elif [ -x /usr/bin/pacman ] ; then
-  alias upd='pacman -Syu'
+  alias upd="pacman -Syu"
 else
   APT=apt-get
   alias aptsearch="apt-cache search"
-  alias upd='$APT update && $APT dist-upgrade'
+  alias upd="$APT update && $APT dist-upgrade"
 fi
-alias aptpurge='$APT purge'
-alias aptinst='$APT install'
+alias aptpurge="$APT purge"
+alias aptinst="$APT install"
 
-alias updeditor='update-alternatives --config editor'
-alias sy='systemctl'
-alias proxy='export http_proxy="http://192.168.2.1:3128"'
-alias clearpac='paccache -rk 1'
-alias pacShowLegacy='pacman -Qtdq'
-alias pacRemoveLegacy='pacman -Rcns $(pacman -Qtdq)'
+alias updeditor="update-alternatives --config editor"
+alias sy="systemctl"
+alias proxy="export http_proxy=\"http://192.168.2.1:3128\""
+alias clearpac="paccache -rk 1"
+alias pacShowLegacy="pacman -Qtdq"
+alias pacRemoveLegacy="pacman -Rcns $(pacman -Qtdq)"
 function get_serial () { udevadm info --query=all --name=$1 | grep ID_SERIAL;}
 
 ############### Virtual Machine ################
-alias VM='cd /VM/container/'
-alias LXC='cd /var/lib/lxc'
-alias lf='lxc-ls --fancy'
-# alias lff='lxc-ls -f -F name,state,interfaces,ipv4,memory,ram'
-alias lff='lxc-ls -f -F NAME,STATE,INTERFACE,IPV4,IPV6,RAM,SWAP,AUTOSTART'
-alias lfa='lxc-ls --fancy --active'
-alias lat='lxc-attach -n'
-alias Qls='virsh -c qemu:///system list --all'
-alias Qconnect='virsh'
-alias Qstart='virsh start '
-alias Qinfo='virsh dominfo '
-alias Qstop='virsh shutdown '
-alias Qdestroy='virsh destroy '
-alias Qundefine='virsh undefine '
-alias Qview='virt-viewer '
-alias KVM='~/scripts/kvm/kvm.sh'
+alias VM="cd /VM/container/"
+alias LXC="cd /var/lib/lxc"
+alias lf="lxc-ls --fancy"
+# alias lff="lxc-ls -f -F name,state,interfaces,ipv4,memory,ram"
+alias lff="lxc-ls -f -F NAME,STATE,INTERFACE,IPV4,IPV6,RAM,SWAP,AUTOSTART"
+alias lfa="lxc-ls --fancy --active"
+alias lat="lxc-attach -n"
+alias Qls="virsh -c qemu:///system list --all"
+alias Qconnect="virsh"
+alias Qstart="virsh start "
+alias Qinfo="virsh dominfo "
+alias Qstop="virsh shutdown "
+alias Qdestroy="virsh destroy "
+alias Qundefine="virsh undefine "
+alias Qview="virt-viewer "
+alias KVM="~/scripts/kvm/kvm.sh"
 function lxcln() { ln -s /var/lib/lxc/$1/config /etc/lxc/auto/$1 ;}
 function kvmbackup() { qemu-img convert -p -f qcow2 $1 -O qcow2 $1.$(date +%Y%M%d) ;}
 
 ############### Ansible ###############
-alias ansible-docker='/root/git/create_docker/ansible.sh'
+alias ansible-docker="/root/git/create_docker/ansible.sh"

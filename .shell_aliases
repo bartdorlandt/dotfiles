@@ -3,53 +3,53 @@ export BAT_PAGER=""
 export EDITOR="vim"
 
 ############### Local aliases & commands ################
-alias aptcache='aptitude search'
-alias bak='$HOME/scripts/bak.sh'
-alias ll='ls -lhF --color'
-alias llt='ls -latrFh --color'
-alias lr='ls -latrFh --color'
-alias la='ls -ahF --color'
-alias lla='ls -lahF --color'
-alias l='ls -CF --color'
-alias p='ping'
-alias pst='ps axjf'
-alias psc='ps xawf -eo pid,user,cgroup,args'
-alias screen='screen -U'
-alias screen-r='screen -r'
-alias sudr='sudo -i'
-alias sud='sudo su'
-alias t='telnet'
-alias n='nslookup'
-alias dus='du -ks * | sort -n'
-alias dud='du -sch .[^.]* * |sort -h'
-alias o='less'
+alias aptcache="aptitude search"
+alias bak="$HOME/scripts/bak.sh"
+alias ll="ls -lhF --color"
+alias llt="ls -latrFh --color"
+alias lr="ls -latrFh --color"
+alias la="ls -ahF --color"
+alias lla="ls -lahF --color"
+alias l="ls -CF --color"
+alias p="ping"
+alias pst="ps axjf"
+alias psc="ps xawf -eo pid,user,cgroup,args"
+alias screen="screen -U"
+alias screen-r="screen -r"
+alias sudr="sudo -i"
+alias sud="sudo su"
+alias t="telnet"
+alias n="nslookup"
+alias dus="du -ks * | sort -n"
+alias dud="du -sch .[^.]* * |sort -h"
+alias o="less"
 # c() { cd $1; ls; }
-# alias cd='c'
-[ -x /usr/bin/vim ] && alias vi='vim'
-# [ -x /usr/bin/gpg2 ] && alias gpg='gpg2'
+# alias cd="c"
+[ -x /usr/bin/vim ] && alias vi="vim"
+# [ -x /usr/bin/gpg2 ] && alias gpg="gpg2"
 
-alias curlo='curl -# -C - -O -J -L'
-alias CON='screen /dev/ttyUSB0 9600'
-alias ssh='TERM=xterm ssh'
-alias sshlog='$HOME/scripts/ssh-logging.sh'
-alias sno='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-alias alg='alias | grep'
-alias dns='nmcli device show | grep -e DNS -e GENERAL.DEVICE'
+alias curlo="curl -# -C - -O -J -L"
+alias CON="screen /dev/ttyUSB0 9600"
+alias ssh="TERM=xterm ssh"
+alias sshlog="$HOME/scripts/ssh-logging.sh"
+alias sno="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+alias alg="alias | grep"
+alias dns="nmcli device show | grep -e DNS -e GENERAL.DEVICE"
 
 ############### ip section ###############
-alias myipext='curl ifconfig.co'
-alias myipext4='curl -4 ifconfig.co'
-alias myipext6='curl -6 ifconfig.co'
-ip --color > /dev/null 2>&1 && IPCOLOR='--color'
-alias ip='ip $IPCOLOR'
-alias ipb='ip $IPCOLOR --brief'
-alias ip4='ip -4 $IPCOLOR --brief addr | grep -v UNKNOWN'
-alias ip6='ip -6 $IPCOLOR --brief addr | grep -v UNKNOWN'
+alias myipext="curl ifconfig.co"
+alias myipext4="curl -4 ifconfig.co"
+alias myipext6="curl -6 ifconfig.co"
+ip --color > /dev/null 2>&1 && IPCOLOR="--color"
+alias ip="ip $IPCOLOR"
+alias ipb="ip $IPCOLOR --brief"
+alias ip4="ip -4 $IPCOLOR --brief addr | grep -v UNKNOWN"
+alias ip6="ip -6 $IPCOLOR --brief addr | grep -v UNKNOWN"
 
-alias awscli='python3 -m awscli'
+alias awscli="python3 -m awscli"
 
 ############### python venv ###############
-alias venv='source ./.venv/bin/activate'
+alias venv="source ./.venv/bin/activate"
 _CMD() { echo $1; `echo $1`}
 venvcreate() {
 	if [[ -n $1 ]] ; then VER=$1 else VER=3 fi;
@@ -60,24 +60,24 @@ venvcreate() {
 }
 
 ############### Docker ###############
-alias DOCKER='cd /var/lib/docker'
-alias Dps='docker ps'
-alias Dpshort='docker ps --format "{{.Names}}"'
-alias Dpsa='docker ps -a'
-alias Dpsl='docker ps -l'
-alias Dins='docker inspect'
-alias Drm='docker rm -v'
-alias Drma='docker rm -v $(docker ps -a -q)'
-alias Drml='docker rm -v $(docker ps -l -q)'
-alias Drmi='docker rmi'
-alias Drmv='docker volume rm'
-alias Dimg='docker images'
-alias Dimga='docker images -a'
-alias Dip="docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'"
-alias Dstart='docker start'
-alias Dstop='docker stop'
-alias Dstopall='docker stop $(docker ps -aq)'
-alias Dprune='docker image prune'
+alias DOCKER="cd /var/lib/docker"
+alias Dps="docker ps"
+alias Dpshort="docker ps --format \"{{.Names}}\""
+alias Dpsa="docker ps -a"
+alias Dpsl="docker ps -l"
+alias Dins="docker inspect"
+alias Drm="docker rm -v"
+alias Drma="docker rm -v $(docker ps -a -q)"
+alias Drml="docker rm -v $(docker ps -l -q)"
+alias Drmi="docker rmi"
+alias Drmv="docker volume rm"
+alias Dimg="docker images"
+alias Dimga="docker images -a"
+alias Dip="docker ps -q | xargs -n 1 docker inspect --format \"{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}\" | sed "s/ \// /""
+alias Dstart="docker start"
+alias Dstop="docker stop"
+alias Dstopall="docker stop $(docker ps -aq)"
+alias Dprune="docker image prune"
 function Dexec() { docker exec -it $1 bash ;}
 function Drun() { docker run -it $1 /bin/bash;}
 function Drunt() { docker run --rm -it $1 /bin/bash;}
@@ -89,6 +89,6 @@ VBheadless() {
 }
 
 ############### KVM ###############
-alias qls='virsh list --all'
-alias qstart='virsh start'
-alias qstop='virsh destroy'
+alias qls="virsh list --all"
+alias qstart="virsh start"
+alias qstop="virsh destroy"
