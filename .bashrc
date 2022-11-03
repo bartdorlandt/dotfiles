@@ -40,10 +40,10 @@ PS1="\\[\\e[1;32m\\]\\u\\[\\e[1;37m\\]@\\[\\e[1;36m\\]\\h:\\[\\e[1;33m\\] \\w\\[
 #fi
 
 # Yubikey
-export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye
-unset SSH_AGENT_PID
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+# export GPG_TTY=$(tty)
+# gpg-connect-agent updatestartuptty /bye
+# unset SSH_AGENT_PID
+# export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
 
 # fzf; fuzzy file search
