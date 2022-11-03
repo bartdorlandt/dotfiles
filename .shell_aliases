@@ -56,7 +56,7 @@ venvcreate() {
 	_CMD "python${VER} -m venv .venv $EXTRA";
 	_CMD "source ./.venv/bin/activate";
 	_CMD "pip install pip -U";
-	_CMD "python3 -m ensurepip --upgrade"
+	_CMD "python3 -m ensurepip --upgrade";
 }
 
 ############### Docker ###############
