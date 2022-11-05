@@ -89,3 +89,7 @@ function VBheadless() {
 alias qls='virsh list --all'
 alias qstart='virsh start'
 alias qstop='virsh destroy'
+
+### Ansible ####
+function galaxyRoleImport() { ansible-galaxy role import --token $(cat ~/.ansible/galaxy_token) bartdorlandt ${PWD##*/}; }
+
