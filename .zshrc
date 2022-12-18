@@ -99,3 +99,9 @@ if [[ -x $HOME/.pyenv/bin/pyenv ]]; then
     # for now using virtualenv-autodetect
     # eval "$(pyenv virtualenv-init -)"
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+if [[ $(command -v brew) ]]; then
+    test -e "$(brew --prefix)/var/run/yubikey-agent.sock" && export SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
+    test -d "$(brew --prefix openssh)/bin" && export PATH=$(brew --prefix openssh)/bin:$PATH
+fi
