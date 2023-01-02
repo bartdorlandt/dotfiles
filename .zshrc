@@ -91,7 +91,7 @@ unsetopt nomatch
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -d ~/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
 
-if [[ -x $HOME/.pyenv/bin/pyenv ]]; then
+if [[ -e $HOME/.pyenv/bin/pyenv ]]; then
     # pyenv
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
