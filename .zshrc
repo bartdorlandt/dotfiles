@@ -106,3 +106,6 @@ if [[ $(command -v brew) ]]; then
     test -e "$(brew --prefix)/var/run/yubikey-agent.sock" && export SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
     test -d "$(brew --prefix openssh)/bin" && export PATH=$(brew --prefix openssh)/bin:$PATH
 fi
+
+# Starship.rs
+eval "$(starship init zsh)"
