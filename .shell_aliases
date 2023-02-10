@@ -59,7 +59,7 @@ function venvcreate() {
 ############### Docker ###############
 alias DOCKER='cd /var/lib/docker'
 alias Dps='docker ps'
-alias Dpshort='docker ps --format "{{.Names}}"'
+alias Dpshort='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
 alias Dpsa='docker ps -a'
 alias Dpsl='docker ps -l'
 alias Dins='docker inspect'
