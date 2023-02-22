@@ -87,7 +87,8 @@ unsetopt nomatch
 [ -d ~/bin ] && export PATH="$PATH:$HOME/bin"
 
 # using virtualenv-autodetect, but not as ohmyzsh plugin since it clashes with vscode
-[ -f ~/git/virtualenv-autodetect/virtualenv-autodetect.sh ] && source ~/git/virtualenv-autodetect/virtualenv-autodetect.sh
+# it clashes anyway with pycharm
+# [ -f ~/git/virtualenv-autodetect/virtualenv-autodetect.sh ] && source ~/git/virtualenv-autodetect/virtualenv-autodetect.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -d ~/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
 
