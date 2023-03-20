@@ -32,6 +32,7 @@ alias sshlog='$HOME/scripts/ssh-logging.sh'
 alias sno='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias alg='alias | grep'
 alias dns='nmcli device show | grep -e DNS -e GENERAL.DEVICE'
+alias run='./run'
 
 ############### ip section ###############
 alias myipext='curl ifconfig.co'
