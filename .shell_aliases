@@ -1,3 +1,4 @@
+# vim: ft=bash
 export PAGER='less'
 export BAT_PAGER=''
 export EDITOR='vim'
