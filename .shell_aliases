@@ -50,7 +50,7 @@ alias pycharm='$HOME/scripts/pycharm_alias.sh'
 
 ############### python venv ###############
 alias venv='source ./.venv/bin/activate'
-function _CMD() { echo $1; `echo $1`}
+function _CMD() { echo $1; `echo $1`;}
 function venvcreate() {
 	if [[ -n $1 ]] ; then VER=$1; else VER=3; fi;
 	_CMD "python${VER} -m venv .venv $EXTRA";
