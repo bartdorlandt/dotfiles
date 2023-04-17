@@ -230,6 +230,13 @@ set nolbr
 " It may be overrulled by language specific settings
 nmap <leader>c I# <esc>
 
+" Sh
+if has("autocmd")
+  augroup aliases
+    autocmd BufRead,BufNewFile *_aliases set filetype=bash
+  augroup END
+endif
+
 " Vim
 " autocmd FileType vim setlocal textwidth=100
 autocmd FileType vim nnoremap <buffer> <leader>c I" <esc>

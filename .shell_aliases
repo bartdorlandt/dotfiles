@@ -1,4 +1,4 @@
-# vim: ft=bash
+# vim: set filetype=bash:
 export PAGER='less'
 export BAT_PAGER=''
 export EDITOR='vim'
@@ -47,6 +47,7 @@ alias ip6='ip -6 $IPCOLOR --brief addr | grep -v UNKNOWN'
 
 alias awscli='python3 -m awscli'
 alias pycharm='$HOME/scripts/pycharm_alias.sh'
+export PATH="$PATH:/Applications/PyCharm\ CE.app/Contents/MacOS"
 
 ############### python venv ###############
 alias venv='source ./.venv/bin/activate'
