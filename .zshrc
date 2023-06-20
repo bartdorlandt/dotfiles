@@ -108,5 +108,12 @@ if [[ $(command -v brew) ]]; then
     test -d "$(brew --prefix openssh)/bin" && export PATH=$(brew --prefix openssh)/bin:$PATH
 fi
 
+# compiler
+if [[ -d /usr/local/opt/bzip2/bin && -d /usr/local/opt/bzip2/lib && -d /usr/local/opt/bzip2/include ]] ; then
+  export PATH="/usr/local/opt/bzip2/bin:$PATH"
+  export LDFLAGS="-L/usr/local/opt/bzip2/lib"
+  export CPPFLAGS="-I/usr/local/opt/bzip2/include"
+fi
+
 # Starship.rs
 eval "$(starship init zsh)"

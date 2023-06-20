@@ -35,6 +35,17 @@ alias alg='alias | grep'
 alias dns='nmcli device show | grep -e DNS -e GENERAL.DEVICE'
 alias run='./run'
 
+function yaml2json {
+    local FILENAME=$1
+    yq $FILENAME -o=json | perl -p -e "s/1$//mg"
+}
+
+function json2yaml {
+    local FILENAME=$1
+    cat $FILENAME | jq -S | yq -P "."
+}
+
+
 ############### ip section ###############
 alias myipext='curl ifconfig.co'
 alias myipext4='curl -4 ifconfig.co'
@@ -84,8 +95,8 @@ function Drunt() { docker run --rm -it $1 /bin/bash;}
 
 ############### VirtualBox ###############
 function VBheadless() {
-	HOST=$1
-	VBoxManage modifyvm '$HOST' --defaultfrontend headless
+	local HOST=$1
+	VBoxManage modifyvm "$HOST" --defaultfrontend headless;
 }
 
 ############### KVM ###############
