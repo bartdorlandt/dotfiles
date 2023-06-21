@@ -57,7 +57,7 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 # export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH="$HOME/.local/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
 
 # Able to specify host specific configuration in the .zshrc_local file
 [ -e ~/.zshrc_local ] && source ~/.zshrc_local
@@ -85,6 +85,8 @@ unsetopt nomatch
 [ -e ~/.device_aliases ] && source ~/.device_aliases
 [ -e ~/.work_aliases ] && source ~/.work_aliases
 [ -d ~/bin ] && export PATH="$PATH:$HOME/bin"
+[ -d ~/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
+[ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:$PATH"
 
 # using virtualenv-autodetect, but not as ohmyzsh plugin since it clashes with vscode
 # it clashes anyway with pycharm
@@ -106,10 +108,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 if [[ $(command -v brew) ]]; then
     test -e "$(brew --prefix)/var/run/yubikey-agent.sock" && export SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
     test -d "$(brew --prefix openssh)/bin" && export PATH=$(brew --prefix openssh)/bin:$PATH
-fi
-
-if [[ -d /opt/homebrew/bin ]]; then
-  export PATH="/opt/homebrew/bin:$PATH"
 fi
 
 # compiler
