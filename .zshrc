@@ -86,7 +86,7 @@ unsetopt nomatch
 [ -e ~/.work_aliases ] && source ~/.work_aliases
 [ -d ~/bin ] && export PATH="$PATH:$HOME/bin"
 [ -d ~/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
-[ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:$PATH"
+[ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
 # using virtualenv-autodetect, but not as ohmyzsh plugin since it clashes with vscode
 # it clashes anyway with pycharm
