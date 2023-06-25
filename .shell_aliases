@@ -58,6 +58,7 @@ alias ip6='ip -6 $IPCOLOR --brief addr | grep -v UNKNOWN'
 
 alias awscli='python3 -m awscli'
 alias pycharm='$HOME/scripts/pycharm_alias.sh'
+alias pc='$HOME/scripts/pycharm_alias.sh'
 
 ############### python venv ###############
 alias venv='source ./.venv/bin/activate'
