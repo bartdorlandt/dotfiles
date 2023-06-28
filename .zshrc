@@ -93,6 +93,7 @@ unsetopt nomatch
 # [ -f ~/git/virtualenv-autodetect/virtualenv-autodetect.sh ] && source ~/git/virtualenv-autodetect/virtualenv-autodetect.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -d ~/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
+[ -d ~/go/bin ] && export PATH="$HOME/go/bin:$PATH"
 
 if [[ -e /usr/local/bin/pyenv || -e $HOME/.pyenv/bin/pyenv || -e /opt/homebrew/bin/pyenv ]]; then
     # pyenv
