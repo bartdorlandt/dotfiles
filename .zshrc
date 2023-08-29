@@ -83,10 +83,8 @@ unsetopt nomatch
 [ -e ~/.zshrc.server ] && source ~/.zshrc.server
 [ -e ~/.shell_aliases ] && source ~/.shell_aliases
 [ -e ~/.device_aliases ] && source ~/.device_aliases
-[ -e ~/.work_aliases ] && source ~/.work_aliases
 [ -d ~/bin ] && export PATH="$PATH:$HOME/bin"
 [ -d ~/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
-[ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
 # using virtualenv-autodetect, but not as ohmyzsh plugin since it clashes with vscode
 # it clashes anyway with pycharm
@@ -95,20 +93,18 @@ unsetopt nomatch
 [ -d ~/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
 [ -d ~/go/bin ] && export PATH="$HOME/go/bin:$PATH"
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# [ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+if [[ $(command -v brew) ]]; then
+    test -e "$(brew --prefix)/var/run/yubikey-agent.sock" && export SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
+    test -d "$(brew --prefix openssh)/bin" && export PATH=$(brew --prefix openssh)/bin:$PATH
+fi
+
 if [[ -e /usr/local/bin/pyenv || -e $HOME/.pyenv/bin/pyenv || -e /opt/homebrew/bin/pyenv ]]; then
     # pyenv
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
-    # eval "$(pyenv init -)"
-    eval "$(pyenv init --path)"
-    # for now using virtualenv-autodetect
-    # eval "$(pyenv virtualenv-init -)"
-fi
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-if [[ $(command -v brew) ]]; then
-    test -e "$(brew --prefix)/var/run/yubikey-agent.sock" && export SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
-    test -d "$(brew --prefix openssh)/bin" && export PATH=$(brew --prefix openssh)/bin:$PATH
+    eval "$(pyenv init -)"
 fi
 
 # compiler
