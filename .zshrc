@@ -94,17 +94,11 @@ unsetopt nomatch
 [ -d ~/go/bin ] && export PATH="$HOME/go/bin:$PATH"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-# [ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+# brew
+[ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 if [[ $(command -v brew) ]]; then
     test -e "$(brew --prefix)/var/run/yubikey-agent.sock" && export SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
     test -d "$(brew --prefix openssh)/bin" && export PATH=$(brew --prefix openssh)/bin:$PATH
-fi
-
-if [[ -e /usr/local/bin/pyenv || -e $HOME/.pyenv/bin/pyenv || -e /opt/homebrew/bin/pyenv ]]; then
-    # pyenv
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
 fi
 
 # compiler
