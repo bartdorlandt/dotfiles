@@ -64,8 +64,7 @@ alias pc='$HOME/scripts/pycharm_alias.sh'
 alias venv='source ./.venv/bin/activate'
 function _CMD() { echo $1; `echo $1`;}
 function venvcreate() {
-	if [[ -n $1 ]] ; then VER=$1; else VER=3; fi;
-	_CMD "python${VER} -m venv .venv $EXTRA";
+	_CMD "python3 -m venv .venv $EXTRA";
 	_CMD "source ./.venv/bin/activate";
 	_CMD "pip install pip -U";
 	_CMD "python3 -m ensurepip --upgrade";

@@ -93,6 +93,14 @@ unsetopt nomatch
 [ -d ~/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
 [ -d ~/go/bin ] && export PATH="$HOME/go/bin:$PATH"
 
+if [[ -e /usr/local/bin/pyenv || -e $HOME/.pyenv/bin/pyenv || -e /opt/homebrew/bin/pyenv ]]; then
+    # pyenv
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"  # with shell integration
+    # eval "$(pyenv init --path)" # without shell integration
+fi
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 # brew
 [ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
