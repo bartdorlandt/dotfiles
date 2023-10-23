@@ -107,3 +107,5 @@ alias qstop='virsh destroy'
 ### Ansible ####
 function galaxyRoleImport() { ansible-galaxy role import --token $(cat ~/.ansible/galaxy_token) bartdorlandt ${PWD##*/}; }
 
+### Repo ###
+alias web='open -u https://$(cat .git/config | grep "url =" | cut -d@ -f2 | tr : / | sed -r "s/\.git//")'
