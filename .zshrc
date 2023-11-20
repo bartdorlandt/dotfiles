@@ -93,14 +93,14 @@ unsetopt nomatch
 [ -d ~/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
 [ -d ~/go/bin ] && export PATH="$HOME/go/bin:$PATH"
 
-# brew
-if [[ -e /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-if [[ $(command -v brew) ]]; then
-    test -e "$(brew --prefix)/var/run/yubikey-agent.sock" && export SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
-    test -d "$(brew --prefix openssh)/bin" && export PATH=$(brew --prefix openssh)/bin:$PATH
-fi
+# # brew
+# if [[ -e /opt/homebrew/bin/brew ]]; then
+#   eval "$(/opt/homebrew/bin/brew shellenv)"
+# fi
+# if [[ $(command -v brew) ]]; then
+#     test -e "$(brew --prefix)/var/run/yubikey-agent.sock" && export SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
+#     test -d "$(brew --prefix openssh)/bin" && export PATH=$(brew --prefix openssh)/bin:$PATH
+# fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
