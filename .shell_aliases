@@ -76,6 +76,7 @@ function venvcreate() {
 	_CMD "pip install pip -U";
 	_CMD "python3 -m ensurepip --upgrade";
 }
+alias venvupgrade='python3 -m venv --upgrade .venv'
 
 ############### Docker ###############
 alias DOCKER='cd /var/lib/docker'
