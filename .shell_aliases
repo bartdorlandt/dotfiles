@@ -2,6 +2,7 @@
 export PAGER='less'
 export BAT_PAGER=''
 export EDITOR='vim'
+export PYTHONSTARTUP=~/.pythonstartup
 
 ############### Local aliases & commands ################
 alias aptcache='aptitude search'
@@ -64,7 +65,13 @@ alias pc='$HOME/scripts/pycharm_alias.sh'
 alias venv='source ./.venv/bin/activate'
 function _CMD() { echo $1; `echo $1`;}
 function venvcreate() {
-	_CMD "python3 -m venv .venv $EXTRA";
+	if [[ -z "$1" ]]
+	then
+		version=3
+	else
+		version=$1
+	fi
+	_CMD "python${version} -m venv .venv $EXTRA";
 	_CMD "source ./.venv/bin/activate";
 	_CMD "pip install pip -U";
 	_CMD "python3 -m ensurepip --upgrade";
