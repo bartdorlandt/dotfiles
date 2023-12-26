@@ -3,6 +3,7 @@ export PAGER='less'
 export BAT_PAGER=''
 export EDITOR='vim'
 export PYTHONSTARTUP=~/.pythonstartup
+export LESS='--chop-long-lines --HILITE-UNREAD --ignore-case --incsearch --jump-target=4 --LONG-PROMPT --no-init --quit-if-one-screen --RAW-CONTROL-CHARS --use-color --window=-4'
 
 ############### Local aliases & commands ################
 alias aptcache='aptitude search'
