@@ -74,10 +74,23 @@ function venvcreate() {
 	fi
 	_CMD "python${version} -m venv .venv $EXTRA";
 	_CMD "source ./.venv/bin/activate";
-	_CMD "pip install pip -U";
+	# _CMD "pip install pip -U";
 	_CMD "python3 -m ensurepip --upgrade";
 }
 alias venvupgrade='python3 -m venv --upgrade .venv'
+function proj() {
+	project=$1
+	if [[ -z "$2" ]]; then
+		version=3
+	else
+		version=$2
+	fi
+	p=$HOME/ff/${project}
+	mkdir -p $p
+	echo "Created path: $p"
+	cd $p
+	venvcreate $version
+}
 
 ############### Docker ###############
 alias DOCKER='cd /var/lib/docker'
