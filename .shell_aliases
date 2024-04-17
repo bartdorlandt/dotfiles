@@ -21,7 +21,6 @@ alias screen='screen -U'
 alias screen-r='screen -r'
 alias sudr='sudo -i'
 alias sud='sudo su'
-alias t='telnet'
 alias n='nslookup'
 alias dus='du -ks * | sort -n'
 alias dud='du -sch .[^.]* * |sort -h'
@@ -130,4 +129,41 @@ alias qstop='virsh destroy'
 function galaxyRoleImport() { ansible-galaxy role import --token $(cat ~/.ansible/galaxy_token) bartdorlandt ${PWD##*/}; }
 
 ### Repo ###
-alias web='open -u https://$(cat .git/config | grep "url =" | cut -d@ -f2 | tr : / | sed -r "s/\.git//")'
+function gitupfind() {
+	# Start from the current directory
+	current_dir=$(pwd)
+	# Loop until we reach the root directory "/"
+	while [ "$current_dir" != "/" ]; do
+		# Check if the .git directory exists in the current directory
+		if [ -f "$current_dir/.git/config" ]; then
+			# If found, print the absolute path and exit
+			echo "$current_dir"
+		fi
+		# Move up one directory
+		current_dir=$(dirname "$current_dir")
+	done
+	# If we reached here, .git directory was not found
+	echo ""
+}
+
+function web() {
+	current_dir=$(pwd)
+	SPECIFIED_PATH=$1
+	local GITPATH=$(gitupfind)
+	if [ -z $GITPATH ]; then
+		echo "No .git directory found"
+		return 1
+	fi
+	local URL=$(cat $(gitupfind)/.git/config | grep "url =" | cut -d@ -f2 | tr : / | sed -r "s/\.git//")
+	if [ -z $1 ]; then
+		URL=$URL
+	else
+		# calculate path
+		FULLPATH=$(echo $current_dir | sed -r "s@$(gitupfind)@@")/$SPECIFIED_PATH
+		BRANCH=$(git branch --show-current)
+		URLPATH="/-/blob/${BRANCH}/${FULLPATH}?ref_type=heads"
+		URL=$URL$URLPATH
+		# echo $URL
+	fi
+	open -u https://$URL
+}
