@@ -84,10 +84,9 @@ function proj() {
 	else
 		version=$2
 	fi
-	p=$HOME/ff/${project}
-	mkdir -p $p
-	echo "Created path: $p"
-	cd $p
+	mkdir -p $project
+	echo "Created path: $project"
+	cd $project
 	venvcreate $version
 }
 
