@@ -8,9 +8,14 @@ if test -e /opt/homebrew/bin/brew
     end
 end
 
-# compiler
-if test -d /usr/local/opt/bzip2/bin && test -d /usr/local/opt/bzip2/lib && test -d /usr/local/opt/bzip2/include
+# compiler bzip2
+if test -d /opt/homebrew/opt/bzip2/bin && test -d /opt/homebrew/opt/bzip2/lib && test -d /opt/homebrew/opt/bzip2/include
     fish_add_path /usr/local/opt/bzip2/bin
     set -xg LDFLAGS -L/usr/local/opt/bzip2/lib
     set -xg CPPFLAGS -I/usr/local/opt/bzip2/include
+end
+# compiler zlib
+if test -d /opt/homebrew/opt/zlib/lib && test -d /opt/homebrew/opt/zlib/include
+    set -xg LDFLAGS -L/usr/local/opt/zlib/lib
+    set -xg CPPFLAGS -I/usr/local/opt/zlib/include
 end
