@@ -1,5 +1,6 @@
 # https://realpython.com/python-repl/#providing-a-startup-file
 from importlib import reload
+import json
 
 try:
     from rich import pretty, traceback
@@ -9,3 +10,7 @@ else:
     pretty.install()
     traceback.install(show_locals=False)
 
+
+def write_json(path, json_data):
+    with open(path, "w") as f:
+        json.dump(json_data, f, indent=4)
