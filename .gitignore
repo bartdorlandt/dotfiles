@@ -1,1 +1,5 @@
 .idea/
+fish_user/functions/update_incap.fish
+fish_user/functions/update_netops.fish
+fish_user/functions/update_platform.fish
+fish_user/functions/update_repos.fish
