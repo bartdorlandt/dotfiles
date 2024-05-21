@@ -25,3 +25,5 @@ abbr --add sno ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 # abbr --add alg alias | grep  # in fish this needs to be a function!
 abbr --add dns nmcli device show | grep -e DNS -e GENERAL.DEVICE
 abbr --add run ./run
+
+abbr --add venv source ./.venv/bin/activate.fish
