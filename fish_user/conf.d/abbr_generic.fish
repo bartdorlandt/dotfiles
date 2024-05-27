@@ -5,7 +5,6 @@ abbr --add - cd -
 abbr -a fish_reload_config 'source ~/.config/fish/**/*.fish'
 
 abbr --add awscli 'python3 -m awscli'
-abbr --add pc open -na 'PyCharm\ CE.app' --args $argv
 
 abbr --add FISH cd $__fish_config_dir
 
