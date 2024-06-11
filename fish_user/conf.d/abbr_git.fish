@@ -14,6 +14,7 @@ abbr --add grb 'git rebase'
 abbr --add gdct 'git describe --tags $(git rev-list --tags --max-count=1)'
 abbr --add gst 'git status'
 abbr --add gsu 'git submodule update'
+abbr --add gcm 'git checkout $git_main_branch'
 
 # log
 abbr --add glg 'git log --stat'
@@ -75,7 +76,6 @@ abbr --add glols 'git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s
 # abbr --add gcf 'git config --list'
 # abbr --add gcl 'git clone --recurse-submodules'
 # abbr --add gclean 'git clean --interactive -d'
-# abbr --add gcm 'git checkout $(git_main_branch)'
 # # abbr --add 'gcn '='git commit --verbose --no-edit --amend'
 # abbr --add gcor 'git checkout --recurse-submodules'
 # abbr --add gcount 'git shortlog --summary --numbered'

@@ -26,3 +26,5 @@ abbr --add dns nmcli device show | grep -e DNS -e GENERAL.DEVICE
 abbr --add run ./run
 
 abbr --add venv source ./.venv/bin/activate.fish
+
+abbr --add upd brew upgrade
