@@ -1,24 +1,21 @@
 function web
-    set current_dir (pwd)
-    set SPECIFIED_PATH $argv[1]
-    set GITPATH (gitupfind)
-    
+    set -l current_dir (pwd)
+    set -l SPECIFIED_PATH $argv[1]
+    set -l GITPATH (gitupfind)
+
     if test -z "$GITPATH"
         echo "No .git directory found"
         return 1
     end
 
-    set URL (cat "$GITPATH/.git/config" | grep "url =" | cut -d '@' -f2 | tr : / | sed -r "s/\.git//")
+    set -g URL (cat "$GITPATH/.git/config" | grep "url =" | cut -d '@' -f2 | tr : / | sed -r "s/\.git//")
     
-    if test -z "$SPECIFIED_PATH"
-        set URL $URL
-    else
+    if test -n "$SPECIFIED_PATH"
         # calculate path
-        set FULLPATH (echo $current_dir | sed -r "s@$GITPATH@@")/$SPECIFIED_PATH
-        set BRANCH (git branch --show-current)
-        set URLPATH /-/blob/$BRANCH/$FULLPATH?ref_type=heads
-        set URL $URL$URLPATH
-        # echo $URL
+        set -l FULLPATH (echo $current_dir | sed -r "s@$GITPATH@@")/$SPECIFIED_PATH
+        set -l BRANCH (git branch --show-current)
+        set -l URLPATH "/-/blob/$BRANCH/$FULLPATH?ref_type=heads"
+        set -g URL $URL$URLPATH
     end
     
     open -u https://$URL
