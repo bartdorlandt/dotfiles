@@ -14,7 +14,7 @@ abbr --add grb 'git rebase'
 abbr --add gdct 'git describe --tags $(git rev-list --tags --max-count=1)'
 abbr --add gst 'git status'
 abbr --add gsu 'git submodule update'
-abbr --add gcm 'git checkout $git_main_branch'
+abbr --add gcm 'git checkout (git_main_branch)'
 
 # log
 abbr --add glg 'git log --stat'
