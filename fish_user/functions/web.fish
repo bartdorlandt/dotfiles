@@ -8,8 +8,8 @@ function web
         return 1
     end
 
-    set -g URL (cat "$GITPATH/.git/config" | grep "url =" | cut -d '@' -f2 | tr : / | sed -r "s/\.git//")
-    
+    set -g URL (_gitconfigurl)
+
     if test -n "$SPECIFIED_PATH"
         # calculate path
         set -l FULLPATH (echo $current_dir | sed -r "s@$GITPATH@@")/$SPECIFIED_PATH
@@ -17,6 +17,6 @@ function web
         set -l URLPATH "/-/blob/$BRANCH/$FULLPATH?ref_type=heads"
         set -g URL $URL$URLPATH
     end
-    
+
     open -u https://$URL
 end

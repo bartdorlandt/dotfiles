@@ -7,7 +7,7 @@ function webmr
         return 1
     end
 
-    set -g URL (cat "$GITPATH/.git/config" | grep "url =" | cut -d '@' -f2 | tr : / | sed -r "s/\.git//")
+	set -g URL (_gitconfigurl)
 	set -l BRANCH (git branch --show-current)
 
 	if string match -q $BRANCH "master" "main"
