@@ -1,3 +1,3 @@
 function lsa
-	$lla $argv
+	lla $argv
 end

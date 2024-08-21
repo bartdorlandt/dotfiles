@@ -4,5 +4,4 @@ function vi
 	else
 		vi $argv
 	end
-	
 end

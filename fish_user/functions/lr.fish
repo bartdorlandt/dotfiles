@@ -1,3 +1,3 @@
 function lr
-	ls -latrFh --color $argv
+	llt $argv
 end

@@ -1,3 +1,7 @@
 function l
-	ls -CF --color $argv
+	if type -q eza
+		eza -F $argv
+	else
+		ls -CF --color $argv
+	end
 end

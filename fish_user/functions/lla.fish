@@ -1,3 +1,3 @@
 function lla
-	ls -lahF --color $argv
+	ll -a $argv
 end
