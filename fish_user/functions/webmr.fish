@@ -15,7 +15,15 @@ function webmr
 		return
 	end
 
-	set -l URLPATH "/-/merge_requests/new?merge_request%5Bsource_branch%5D=$BRANCH"
+	if string match -e github (_gitconfigurl)
+		set -g URLPATH "/compare/$BRANCH?expand=1"
+	else if string match -e gitlab (_gitconfigurl)
+		set -g URLPATH "/-/merge_requests/new?merge_request%5Bsource_branch%5D=$BRANCH"
+	else
+		echo "Git repository not implemented."
+		return
+	end
+
 	set -g URL $URL$URLPATH
 
     echo "Opening: https://$URL"
