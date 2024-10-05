@@ -14,7 +14,17 @@ function web
         # calculate path
         set -l FULLPATH (echo $current_dir | sed -r "s@$GITPATH@@")/$SPECIFIED_PATH
         set -l BRANCH (git branch --show-current)
-        set -l URLPATH "/-/blob/$BRANCH/$FULLPATH?ref_type=heads"
+
+        if string match -e github (_gitconfigurl)
+            set -g URLPATH "/blob/$BRANCH/$FULLPATH"
+        else if string match -e gitlab (_gitconfigurl)
+            set -g URLPATH "/-/blob/$BRANCH/$FULLPATH?ref_type=heads"
+        else
+            echo "Git repository not implemented."
+            return
+        end
+
+        # set -l URLPATH "/-/blob/$BRANCH/$FULLPATH?ref_type=heads"
         set -g URL $URL$URLPATH
     end
 
