@@ -28,3 +28,6 @@ abbr --add run ./run
 abbr --add venv source ./.venv/bin/activate.fish
 
 abbr --add upd brew upgrade
+
+# PIPX env vars
+set -xg PIPX_HOME $HOME/.local/share/pipx/venvs
