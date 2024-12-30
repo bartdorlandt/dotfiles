@@ -28,5 +28,5 @@ function web
         set -g URL $URL$URLPATH
     end
 
-    open -u https://$URL
+    open -u $URL
 end
