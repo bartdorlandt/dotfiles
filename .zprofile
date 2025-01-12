@@ -12,10 +12,10 @@ if [[ $(command -v brew) ]]; then
 fi
 
 # pyenv
-if [[ -e /usr/local/bin/pyenv || -e $HOME/.pyenv/bin/pyenv || -e /opt/homebrew/bin/pyenv ]]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"  # with shell integration
-    # eval "$(pyenv init --path)" # without shell integration
-fi
+# if [[ -e /usr/local/bin/pyenv || -e $HOME/.pyenv/bin/pyenv || -e /opt/homebrew/bin/pyenv ]]; then
+#     export PYENV_ROOT="$HOME/.pyenv"
+#     export PATH="$PYENV_ROOT/bin:$PATH"
+#     eval "$(pyenv init -)"  # with shell integration
+#     # eval "$(pyenv init --path)" # without shell integration
+# fi
 
