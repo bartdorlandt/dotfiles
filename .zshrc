@@ -84,7 +84,7 @@ unsetopt nomatch
 [ -e ~/.shell_aliases ] && source ~/.shell_aliases
 [ -e ~/.device_aliases ] && source ~/.device_aliases
 [ -d ~/bin ] && export PATH="$PATH:$HOME/bin"
-[ -d ~/.local/bin ] && export PATH="$PATH:$HOME/.local/bin"
+[ -d ~/.local/bin ] && export PATH="$HOME/.local/bin:$PATH"
 
 # using virtualenv-autodetect, but not as ohmyzsh plugin since it clashes with vscode
 # it clashes anyway with pycharm
