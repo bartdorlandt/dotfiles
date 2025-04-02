@@ -15,6 +15,7 @@ abbr --add gdct 'git describe --tags $(git rev-list --tags --max-count=1)'
 abbr --add gst 'git status'
 abbr --add gsu 'git submodule update'
 abbr --add gcm 'git checkout (git_main_branch)'
+abbr --add gcb 'git checkout -b'
 
 # log
 abbr --add glg 'git log --stat'
@@ -30,8 +31,6 @@ abbr --add gloga 'git log --oneline --decorate --graph --all'
 abbr --add glol 'git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
 abbr --add glola 'git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --all'
 abbr --add glols 'git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --stat'
-
-
 
 # abbr --add gaa 'git add --all'
 # abbr --add gam 'git am'
@@ -71,7 +70,6 @@ abbr --add glols 'git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s
 # # abbr --add 'gcans '='git commit --verbose --all --signoff --no-edit --amend'
 # abbr --add gcas 'git commit --all --signoff'
 # abbr --add gcasm 'git commit --all --signoff --message'
-# abbr --add gcb 'git checkout -b'
 # abbr --add gcd 'git checkout $(git_develop_branch)'
 # abbr --add gcf 'git config --list'
 # abbr --add gcl 'git clone --recurse-submodules'
