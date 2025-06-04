@@ -12,6 +12,10 @@ if status is-interactive
     if test -e $HOME/.device_aliases.fish
         source $HOME/.device_aliases.fish
     end
+
+    if type -q atuin
+        atuin init fish | source
+    end
 end
 
 # Added by OrbStack: command-line tools and integration
