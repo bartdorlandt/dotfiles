@@ -31,6 +31,3 @@ abbr --add upd brew upgrade
 
 # PIPX env vars
 set -xg PIPX_HOME $HOME/.local/share/pipx/venvs
-
-# uvx tools
-abbr --add poetry2uv uvx --from git+https://github.com/bartdorlandt/convert_poetry2uv convert-poetry2uv
