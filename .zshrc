@@ -5,7 +5,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="bartdorlandt"
+# ZSH_THEME="bartdorlandt"
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="false"
@@ -67,49 +68,35 @@ source $ZSH/oh-my-zsh.sh
 # Adjusting default behavior for wildcards
 unsetopt nomatch
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+### My own settings ###
+zsh_add_path() {
+    for dir in "$@"; do
+        if [ -d "$dir" ] && [[ ":$PATH:" != *":$dir:"* ]]; then
+            PATH="$dir:$PATH"
+        fi
+    done
+}
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+zsh_add_source() {
+    for file in "$@"; do
+        if [ -e "$file" ]; then
+            source "$file"
+        fi
+    done
+}
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-[ -e ~/.zshrc.server ] && source ~/.zshrc.server
-[ -e ~/.shell_aliases ] && source ~/.shell_aliases
-[ -e ~/.device_aliases ] && source ~/.device_aliases
-[ -d ~/bin ] && export PATH="$PATH:$HOME/bin"
-[ -d ~/.local/bin ] && export PATH="$HOME/.local/bin:$PATH"
-
-# using virtualenv-autodetect, but not as ohmyzsh plugin since it clashes with vscode
-# it clashes anyway with pycharm
-# [ -f ~/git/virtualenv-autodetect/virtualenv-autodetect.sh ] && source ~/git/virtualenv-autodetect/virtualenv-autodetect.sh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -d ~/.poetry/bin ] && export PATH="$HOME/.poetry/bin:$PATH"
-[ -d ~/go/bin ] && export PATH="$HOME/go/bin:$PATH"
-
-# # brew
-# if [[ -e /opt/homebrew/bin/brew ]]; then
-#   eval "$(/opt/homebrew/bin/brew shellenv)"
-# fi
-# if [[ $(command -v brew) ]]; then
-#     test -e "$(brew --prefix)/var/run/yubikey-agent.sock" && export SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
-#     test -d "$(brew --prefix openssh)/bin" && export PATH=$(brew --prefix openssh)/bin:$PATH
-# fi
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+zsh_add_source "$HOME/.zshrc.server" "$HOME/.shell_aliases" "$HOME/.device_aliases" "${HOME}/.iterm2_shell_integration.zsh" "~/.orbstack/shell/init2.zsh"
+zsh_add_path "$HOME/bin" "$HOME/.local/bin" "$HOME/.poetry/bin" "$HOME/go/bin" "/usr/local/go/bin"
 
 # compiler
 if [[ -d /usr/local/opt/bzip2/bin && -d /usr/local/opt/bzip2/lib && -d /usr/local/opt/bzip2/include ]] ; then
-  export PATH="/usr/local/opt/bzip2/bin:$PATH"
-  export LDFLAGS="-L/usr/local/opt/bzip2/lib"
-  export CPPFLAGS="-I/usr/local/opt/bzip2/include"
+    zsh_add_path "/usr/local/opt/bzip2/bin"
+    export LDFLAGS="-L/usr/local/opt/bzip2/lib"
+    export CPPFLAGS="-I/usr/local/opt/bzip2/include"
 fi
 
 # Starship.rs
 eval "$(starship init zsh)"
+eval "$(atuin init zsh --disable-up-arrow)"
+eval "$(direnv hook zsh)"
+eval "$(zoxide init --cmd cd zsh)"

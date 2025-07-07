@@ -4,16 +4,34 @@ export BAT_PAGER=''
 export EDITOR='vim'
 export PYTHONSTARTUP=~/.pythonstartup
 export LESS='--chop-long-lines --HILITE-UNREAD --ignore-case --incsearch --jump-target=4 --LONG-PROMPT --no-init --quit-if-one-screen --RAW-CONTROL-CHARS --use-color --window=-4'
+export DIRENV_LOG_FORMAT=''
 
 ############### Local aliases & commands ################
+# list aliases
+function _l() {
+	if command -v eza >/dev/null 2>&1; then
+		eza -F "$@"
+	else
+		ls -CF --color=auto "$@"
+	fi
+}
+alias l='_l'
+alias ll='l -l'
+alias lla='ll -aa'
+function _llt() {
+	if command -v eza >/dev/null 2>&1; then
+		lla -s created "$@"
+	else
+		lla -tr --color "$@"
+	fi
+}
+alias llt='_llt'
+alias lr='llt'
+alias lsa='lla'
+alias la='l -ahF'
+
 alias aptcache='aptitude search'
 alias bak='$HOME/scripts/bak.sh'
-alias ll='ls -lhF --color'
-alias llt='ls -latrFh --color'
-alias lr='ls -latrFh --color'
-alias la='ls -ahF --color'
-alias lla='ls -lahF --color'
-alias l='ls -CF --color'
 alias p='ping'
 alias pst='ps axjf'
 alias psc='ps xawf -eo pid,user,cgroup,args'
@@ -29,8 +47,8 @@ alias o='less'
 
 alias curlo='curl -# -C - -O -J -L'
 alias CON='screen /dev/ttyUSB0 9600'
-# alias ssh='TERM=xterm ssh'
-alias sshlog='$HOME/scripts/ssh-logging.sh'
+
+# alias sshlog='$HOME/scripts/ssh-logging.sh'
 alias sno='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias alg='alias | grep'
 alias dns='nmcli device show | grep -e DNS -e GENERAL.DEVICE'
@@ -57,12 +75,14 @@ alias ipb='ip $IPCOLOR --brief'
 alias ip4='ip -4 $IPCOLOR --brief addr | grep -v UNKNOWN'
 alias ip6='ip -6 $IPCOLOR --brief addr | grep -v UNKNOWN'
 
+# tools
 alias awscli='python3 -m awscli'
 alias pycharm='$HOME/scripts/pycharm_alias.sh'
 alias pc='$HOME/scripts/pycharm_alias.sh'
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
 
 ############### python venv ###############
-alias venv='source ./.venv/bin/activate'
+alias venv='source .venv/bin/activate'
 function _CMD() { echo $1; `echo $1`;}
 function venvcreate() {
 	if [[ -z "$1" ]]
@@ -72,9 +92,12 @@ function venvcreate() {
 		version=$1
 	fi
 	_CMD "python${version} -m venv .venv $EXTRA";
-	_CMD "source ./.venv/bin/activate";
-	# _CMD "pip install pip -U";
+	_CMD "source .venv/bin/activate";
 	_CMD "python3 -m ensurepip --upgrade";
+	if [[ ! -e .envrc ]]; then
+		echo "layout uv" | tee -a .envrc
+		direnv allow
+	fi
 }
 alias venvupgrade='python3 -m venv --upgrade .venv'
 function proj() {
@@ -127,9 +150,47 @@ alias qstop='virsh destroy'
 ### Ansible ####
 function galaxyRoleImport() { ansible-galaxy role import --token $(cat ~/.ansible/galaxy_token) bartdorlandt ${PWD##*/}; }
 
+
+### ssh agent ###
+# Location of the SSH environment file
+export SSH_ENV="$HOME/.ssh/environment"
+
+# Check if ssh-agent is already running
+__ssh_agent_is_started() {
+  if [ -f "$SSH_ENV" ] && [ -z "$SSH_AGENT_PID" ]; then
+    source "$SSH_ENV" > /dev/null 2>&1
+  fi
+
+  if [ -z "$SSH_AGENT_PID" ]; then
+    return 1
+  fi
+
+  ps -p "$SSH_AGENT_PID" | grep -q "ssh-agent"
+  return $?
+}
+
+# Start a new ssh-agent and save environment
+__ssh_agent_start() {
+  ssh-agent -c | sed 's/^echo/#echo/' > "$SSH_ENV"
+  chmod 600 "$SSH_ENV"
+  source "$SSH_ENV" > /dev/null 2>&1
+}
+
+# Main wrapper function
+zsh_ssh_agent() {
+  if [ -z "$SSH_ENV" ]; then
+    export SSH_ENV="$HOME/.ssh/environment"
+  fi
+
+  if ! __ssh_agent_is_started; then
+    __ssh_agent_start
+  fi
+}
+
 ### Repo ###
 function gitupfind() {
 	# Start from the current directory
+	local current_dir
 	current_dir=$(pwd)
 	# Loop until we reach the root directory "/"
 	while [ "$current_dir" != "/" ]; do
@@ -137,6 +198,7 @@ function gitupfind() {
 		if [ -f "$current_dir/.git/config" ]; then
 			# If found, print the absolute path and exit
 			echo "$current_dir"
+			return
 		fi
 		# Move up one directory
 		current_dir=$(dirname "$current_dir")
@@ -145,24 +207,112 @@ function gitupfind() {
 	echo ""
 }
 
+function _gitconfigurl() {
+  local GITPATH
+  GITPATH=$(gitupfind)
+
+  if [ -z "$GITPATH" ]; then
+    echo ""
+    return
+  fi
+
+  local URLSTR
+  URLSTR=$(grep -A1 '\[remote "origin"\]' "$GITPATH/.git/config" | grep "url =")
+
+  local URL
+  if [[ "$URLSTR" == *https://* ]]; then
+    URL=$(echo "$URLSTR" | cut -d '=' -f2 | tr -d '[:space:]')
+  else
+    URL="https://$(echo "$URLSTR" | cut -d '@' -f2 | tr ':' '/' | sed -E 's/\.git//')"
+  fi
+
+  echo "$URL"
+}
+
 function web() {
+	local current_dir
 	current_dir=$(pwd)
-	SPECIFIED_PATH=$1
-	local GITPATH=$(gitupfind)
+
+	local SPECIFIED_PATH=$1
+	local GITPATH
+	GITPATH=$(gitupfind)
 	if [ -z $GITPATH ]; then
 		echo "No .git directory found"
 		return 1
 	fi
-	local URL=$(cat $(gitupfind)/.git/config | grep "url =" | cut -d@ -f2 | tr : / | sed -r "s/\.git//")
-	if [ -z $1 ]; then
-		URL=$URL
-	else
-		# calculate path
-		FULLPATH=$(echo $current_dir | sed -r "s@$(gitupfind)@@")/$SPECIFIED_PATH
-		BRANCH=$(git branch --show-current)
-		URLPATH="/-/blob/${BRANCH}/${FULLPATH}?ref_type=heads"
-		URL=$URL$URLPATH
-		# echo $URL
-	fi
-	open -u https://$URL
+
+	local URL=$(_gitconfigurl)
+
+  	if [ -n "$SPECIFIED_PATH" ]; then
+    # calculate path
+    local FULLPATH="$(echo "$current_dir" | sed -E "s@$GITPATH@@")/$SPECIFIED_PATH"
+
+    local BRANCH=$(git branch --show-current)
+
+    local URLPATH
+    if [[ $(_gitconfigurl) == *github* ]]; then
+      URLPATH="/blob/$BRANCH/$FULLPATH"
+    elif [[ $(_gitconfigurl) == *gitlab* ]]; then
+      URLPATH="/-/blob/$BRANCH/$FULLPATH?ref_type=heads"
+    else
+      echo "Git repository not implemented."
+      return 1
+    fi
+
+    URL="${URL}${URLPATH}"
+  fi
+
+  open "$URL"
 }
+
+function webmr() {
+	local current_dir
+	current_dir=$(pwd)
+
+	local GITPATH=$(gitupfind)
+
+	if [ -z "$GITPATH" ]; then
+		echo "No .git directory found"
+		return 1
+	fi
+
+	local URL=$(_gitconfigurl)
+	local BRANCH=$(git branch --show-current)
+
+	if [[ "$BRANCH" == "master" || "$BRANCH" == "main" ]]; then
+		echo "Main/Master branch, skipping"
+		return
+	fi
+
+	local URLPATH
+	if [[ $(_gitconfigurl) == *github* ]]; then
+		URLPATH="/compare/$BRANCH?expand=1"
+	elif [[ $(_gitconfigurl) == *gitlab* ]]; then
+		URLPATH="/-/merge_requests/new?merge_request%5Bsource_branch%5D=$BRANCH"
+	else
+		echo "Git repository not implemented."
+		return
+	fi
+
+	URL="${URL}${URLPATH}"
+
+	echo "Opening: $URL"
+	open "$URL"
+}
+
+# yubikey
+if [ -e /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+
+  if [ -e "$(brew --prefix)/var/run/yubikey-agent.sock" ]; then
+    export SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
+  fi
+
+  if [ -d "$(brew --prefix openssh)/bin" ]; then
+    zsh_add_path "$(brew --prefix openssh)/bin"
+  fi
+fi
+
+# Work
+function JIRA() { open https://onejira.imperva.com/browse/$1 ;}
+
