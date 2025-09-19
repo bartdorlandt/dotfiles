@@ -96,7 +96,7 @@ if [[ -d /usr/local/opt/bzip2/bin && -d /usr/local/opt/bzip2/lib && -d /usr/loca
 fi
 
 # Starship.rs
-eval "$(starship init zsh)"
-eval "$(atuin init zsh --disable-up-arrow)"
-eval "$(direnv hook zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+if command -v starship >/dev/null 2>&1; then eval "$(starship init zsh)"; fi
+if command -v atuin >/dev/null 2>&1; then eval "$(atuin init zsh --disable-up-arrow)"; fi
+if command -v direnv >/dev/null 2>&1; then eval "$(direnv hook zsh)"; fi
+if command -v zoxide >/dev/null 2>&1; then eval "$(zoxide init --cmd cd zsh)"; fi
