@@ -43,6 +43,7 @@ alias o='less'
 
 alias curlo='curl -# -C - -O -J -L'
 alias CON='screen /dev/ttyUSB0 9600'
+alias k='kubectl'
 
 # alias sshlog='$HOME/scripts/ssh-logging.sh'
 alias sno='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
