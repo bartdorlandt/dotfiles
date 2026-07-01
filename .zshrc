@@ -111,12 +111,12 @@ if command -v zoxide >/dev/null 2>&1; then eval "$(zoxide init --cmd cd zsh)"; f
 # if [ -f '/Users/bart.dorlandt/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/bart.dorlandt/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Reuse a single ssh-agent via stable socket
-SSH_AGENT_SOCK="$HOME/.ssh/agent.sock"
-
-if ! ssh-add -q -l &>/dev/null; then
-  pkill -u "$USER" ssh-agent 2>/dev/null
-  ssh-agent -a "$SSH_AGENT_SOCK" > /dev/null
-fi
-
-export SSH_AUTH_SOCK="$SSH_AGENT_SOCK"
+# SSH_AGENT_SOCK="$HOME/.ssh/agent.sock"
+# 
+# if ! ssh-add -q -l &>/dev/null; then
+#   pkill -u "$USER" ssh-agent 2>/dev/null
+#   ssh-agent -a "$SSH_AGENT_SOCK" > /dev/null
+# fi
+# 
+# export SSH_AUTH_SOCK="$SSH_AGENT_SOCK"
 ssh-add -q --apple-use-keychain ~/.ssh/id_ed25519 2>/dev/null
