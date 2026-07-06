@@ -86,7 +86,7 @@ zsh_add_source() {
 }
 
 zsh_add_source "$HOME/.zshrc.server" "$HOME/.shell_aliases" "$HOME/.device_aliases" "${HOME}/.iterm2_shell_integration.zsh" "~/.orbstack/shell/init2.zsh"
-zsh_add_path "$HOME/bin" "$HOME/.local/bin" "$HOME/.poetry/bin" "$HOME/go/bin" "/usr/local/go/bin"
+zsh_add_path "$HOME/bin" "$HOME/.local/bin" "$HOME/.poetry/bin" "$HOME/go/bin" "/usr/local/go/bin" "$HOME/.local/share/uv/tools/molecule/bin/"
 
 # compiler
 if [[ -d /usr/local/opt/bzip2/bin && -d /usr/local/opt/bzip2/lib && -d /usr/local/opt/bzip2/include ]] ; then
@@ -104,19 +104,12 @@ if command -v atuin >/dev/null 2>&1; then eval "$(atuin init zsh --disable-up-ar
 if command -v direnv >/dev/null 2>&1; then eval "$(direnv hook zsh)"; fi
 if command -v zoxide >/dev/null 2>&1; then eval "$(zoxide init --cmd cd zsh)"; fi
 
-# # The next line updates PATH for the Google Cloud SDK.
-# if [ -f '/Users/bart.dorlandt/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/bart.dorlandt/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# # The next line enables shell command completion for gcloud.
-# if [ -f '/Users/bart.dorlandt/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/bart.dorlandt/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-# Reuse a single ssh-agent via stable socket
-# SSH_AGENT_SOCK="$HOME/.ssh/agent.sock"
-# 
-# if ! ssh-add -q -l &>/dev/null; then
-#   pkill -u "$USER" ssh-agent 2>/dev/null
-#   ssh-agent -a "$SSH_AGENT_SOCK" > /dev/null
-# fi
-# 
-# export SSH_AUTH_SOCK="$SSH_AGENT_SOCK"
+# Always add this key to ssh-agent
 ssh-add -q --apple-use-keychain ~/.ssh/id_ed25519 2>/dev/null
+
+# # bun completions
+# [ -s "/Users/bart/.bun/_bun" ] && source "/Users/bart/.bun/_bun"
+# 
+# # bun
+# export BUN_INSTALL="$HOME/.bun"
+# export PATH="$BUN_INSTALL/bin:$PATH"
