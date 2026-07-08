@@ -86,7 +86,7 @@ zsh_add_source() {
 }
 
 zsh_add_source "$HOME/.zshrc.server" "$HOME/.shell_aliases" "$HOME/.device_aliases" "${HOME}/.iterm2_shell_integration.zsh" "~/.orbstack/shell/init2.zsh"
-zsh_add_path "$HOME/bin" "$HOME/.local/bin" "$HOME/.poetry/bin" "$HOME/go/bin" "/usr/local/go/bin" "$HOME/.local/share/uv/tools/molecule/bin/"
+zsh_add_path "$HOME/bin" "$HOME/.local/bin" "$HOME/go/bin" "/usr/local/go/bin" "$HOME/.local/share/uv/tools/molecule/bin/" "$HOME/scripts"
 
 # compiler
 if [[ -d /usr/local/opt/bzip2/bin && -d /usr/local/opt/bzip2/lib && -d /usr/local/opt/bzip2/include ]] ; then
@@ -96,7 +96,7 @@ if [[ -d /usr/local/opt/bzip2/bin && -d /usr/local/opt/bzip2/lib && -d /usr/loca
 fi
 
 # bitwarden auth
-bw-auth() { source ~/bin/bw_auth.sh; }
+bw-auth() { source ~/scripts/bw_auth.sh; }
 
 # taskfile
 if command -v task >/dev/null 2>&1 ; then eval "$(task --completion zsh)"; fi
