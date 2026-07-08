@@ -35,3 +35,13 @@ tasks:
       - curl -sL https://containerlab.dev/setup | sudo -E bash -s "all"
       - curl -sL https://containerlab.dev/setup | sudo -E bash -s "setup-bash-prompt"
       - task: install:uv
+
+  bw:search:
+    desc: "Search Bitwarden vault"
+    cmds:
+      - bw list items --search {{.CLI_ARGS}}
+
+  bw:sync:
+    desc: "Sync Bitwarden vault"
+    cmds:
+      - bw sync
