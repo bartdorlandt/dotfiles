@@ -95,6 +95,9 @@ if [[ -d /usr/local/opt/bzip2/bin && -d /usr/local/opt/bzip2/lib && -d /usr/loca
     export CPPFLAGS="-I/usr/local/opt/bzip2/include"
 fi
 
+# bitwarden auth
+bw-auth() { source ~/bin/bw_auth.sh; }
+
 # taskfile
 if command -v task >/dev/null 2>&1 ; then eval "$(task --completion zsh)"; fi
 
@@ -109,7 +112,7 @@ ssh-add -q --apple-use-keychain ~/.ssh/id_ed25519 2>/dev/null
 
 # # bun completions
 # [ -s "/Users/bart/.bun/_bun" ] && source "/Users/bart/.bun/_bun"
-# 
+#
 # # bun
 # export BUN_INSTALL="$HOME/.bun"
 # export PATH="$BUN_INSTALL/bin:$PATH"

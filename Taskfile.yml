@@ -1,0 +1,37 @@
+version: "3"
+
+### Install task in linux:
+# sudo apt -y install bash-completion; sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/bin; eval "$(~/bin/task --completion bash)"
+
+### Install task in mac:
+# brew install go-task
+# eval "$(task --completion zsh)"
+
+tasks:
+  default: task -l
+
+  envrc:add:uv:
+    desc: "Add uv to .envrc"
+    cmds:
+      - echo "layout uv" >> .envrc
+      - direnv allow .
+    dir: "{{ .USER_WORKING_DIR }}"
+
+  uv:init:
+    desc: "Initialize uv with envrc"
+    cmds:
+      - uv init
+      - task: envrc:add:uv
+    dir: "{{ .USER_WORKING_DIR }}"
+
+  install:uv:
+    desc: "Install uv"
+    cmds:
+      - curl -LsSf https://astral.sh/uv/install.sh | sh
+
+  orb:fresh_install:
+    desc: "Fresh install of tools in orb"
+    cmds:
+      - curl -sL https://containerlab.dev/setup | sudo -E bash -s "all"
+      - curl -sL https://containerlab.dev/setup | sudo -E bash -s "setup-bash-prompt"
+      - task: install:uv
