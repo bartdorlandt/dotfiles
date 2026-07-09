@@ -7,34 +7,35 @@ version: "3"
 # brew install go-task
 # eval "$(task --completion zsh)"
 
+includes:
+  work:
+    taskfile: Taskfile_local.yml
+    optional: true
+    flatten: true
+
 tasks:
   default: task -l
 
-  envrc:add:uv:
-    desc: "Add uv to .envrc"
+  direnv:add:uv:
+    desc: "Add layout uv to the .envrc file"
     cmds:
       - echo "layout uv" >> .envrc
       - direnv allow .
-    dir: "{{ .USER_WORKING_DIR }}"
+    dir: "{{.USER_WORKING_DIR}}"
+
+  direnv:add:poetry:
+    desc: "Add layout poetry to the .envrc file"
+    cmds:
+      - echo "layout poetry" >> .envrc
+      - direnv allow .
+    dir: "{{.USER_WORKING_DIR}}"
 
   uv:init:
     desc: "Initialize uv with envrc"
     cmds:
       - uv init
-      - task: envrc:add:uv
+      - task: direnv:add:uv
     dir: "{{ .USER_WORKING_DIR }}"
-
-  install:uv:
-    desc: "Install uv"
-    cmds:
-      - curl -LsSf https://astral.sh/uv/install.sh | sh
-
-  orb:fresh_install:
-    desc: "Fresh install of tools in orb"
-    cmds:
-      - curl -sL https://containerlab.dev/setup | sudo -E bash -s "all"
-      - curl -sL https://containerlab.dev/setup | sudo -E bash -s "setup-bash-prompt"
-      - task: install:uv
 
   bw:search:
     desc: "Search Bitwarden vault"
