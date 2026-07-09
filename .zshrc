@@ -107,12 +107,18 @@ if command -v atuin >/dev/null 2>&1; then eval "$(atuin init zsh --disable-up-ar
 if command -v direnv >/dev/null 2>&1; then eval "$(direnv hook zsh)"; fi
 if command -v zoxide >/dev/null 2>&1; then eval "$(zoxide init --cmd cd zsh)"; fi
 
-# Always add this key to ssh-agent
-ssh-add -q --apple-use-keychain ~/.ssh/id_ed25519 2>/dev/null
-
 # # bun completions
 # [ -s "/Users/bart/.bun/_bun" ] && source "/Users/bart/.bun/_bun"
 #
 # # bun
 # export BUN_INSTALL="$HOME/.bun"
 # export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Always add this key to ssh-agent
+if [[ "$(uname)" == "Darwin" ]]; then
+    SSH_MAC_FLAG="--apple-use-keychain"
+else
+    SSH_MAC_FLAG=""
+fi
+ssh-add -l &>/dev/null || ssh-add -q ${SSH_MAC_FLAG} ~/.ssh/id_ed25519 2>/dev/null
+unset SSH_MAC_FLAG
